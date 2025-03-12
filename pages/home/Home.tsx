@@ -1,8 +1,11 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 // ----------------------------------------------------------------------
 
 const Home: React.FC = () => {
-  return <div>Home</div>;
+  const t = useTranslations();
+
+  return <div>{t("HomePage.title")}</div>;
 };
 export default Home;

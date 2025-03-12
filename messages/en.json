@@ -2,5 +2,19 @@
   "HomePage": {
     "title": "Chào",
     "about": "Go to the about page"
+  },
+  "user": {
+    "balance": "Số dư",
+    "totalSubscriberCodes": "Tổng số code đã thuê",
+    "lastRental": "Lần cuối thuê",
+    "accountInformation": "Thông tin tài khoản",
+    "updateInformation": "Cập nhật thông tin",
+    "fullname": "Họ tên",
+    "username": "Tên đăng nhập",
+    "email": "E-mail",
+    "phoneNumber": "Số điện thoại",
+    "telegram": "Telegram",
+    "connectTelegram": "Kết nối telegram",
+    "copy":"Copy"
   }
 }
