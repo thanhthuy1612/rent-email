@@ -9,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { routing, usePathname, useRouter } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { languages } from "@/i18n/locale";
 
@@ -37,7 +38,7 @@ const LocaleSwitcherSelect: React.FC<Props> = ({ defaultValue, label }) => {
   return (
     <Select defaultValue={defaultValue} onValueChange={onSelectChange}>
       <SelectTrigger
-        className="w-[180px] h-8 border-none bg-transparent focus:ring-0 focus:ring-offset-0"
+        className=" w-[180px] h-8 border-none bg-sky-900 text-white focus:ring-0 focus:ring-offset-0"
         aria-label={label}
       >
         <SelectValue />

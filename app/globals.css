@@ -5,6 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-nav-body: var(--nav-body);
+  --color-nav-header: var(--nav-header);
+  --color-nav-text: var(--nav-text);
+  --color-nav-label: var(--nav-label);
+  --color-nav-item-background-active: var(--nav-item-background-active);
+  --color-nav-item-active: var(--nav-item-active);
+  --color-layout-user-bg: var(--layout-user-bg);
+  --color-layout-user-amount: var(--layout-user-amount);
   --color-landing: var(--landing);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -47,6 +55,14 @@
 }
 
 :root {
+  --nav-body: #1e1e2d;
+  --nav-header:#1a1a27;
+  --nav-text:#9899ac;
+  --nav-label:#4c4e6f;
+  --nav-item-background-active: #1b1b28;
+  --nav-item-active: #fff;
+  --layout-user-bg: #efefef;
+  --layout-user-amount: #509DE3;
   --landing: #13263c;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -124,6 +140,28 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+ 
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -205,4 +243,13 @@
     -webkit-transform: scale3D(0, 0, 1);
             transform: scale3D(0, 0, 1);
   } 
+}
+
+/* nav */
+.icon-gradient {
+  color: #494b74;
+}
+
+.icon-gradient:hover {
+  color: #a1a5b7;
 }
