@@ -1,4 +1,11 @@
 {
+  "global": {
+    "pickADate": "Chọn ngày",
+    "time": "Thời gian",
+    "amount": "Số tiền",
+    "balanceAfterTransfer": "Số dư sau biến động",
+    "content": "Nội dung"
+  },
   "HomePage": {
     "title": "Chào",
     "about": "Go to the about page"
@@ -15,6 +22,14 @@
     "phoneNumber": "Số điện thoại",
     "telegram": "Telegram",
     "connectTelegram": "Kết nối telegram",
-    "copy":"Copy"
+    "copy": "Copy"
+  },
+  "recharge": {
+    "scanHere": "Nạp tiền qua quét mã QR",
+    "fromDate": "Từ ngày",
+    "toDate": "Đến ngày",
+    "type": "Loại",
+    "historyRecharge": "Lịch sử nạp tiền",
+    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất"
   }
 }
