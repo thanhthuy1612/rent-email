@@ -6,6 +6,7 @@ import { useTranslations } from "use-intl";
 import dayjs from "dayjs";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { log } from "console";
 // ----------------------------------------------------------------------
 const User: React.FC = () => {
   const t = useTranslations();
@@ -23,8 +24,9 @@ const User: React.FC = () => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(state.token);
+      toast({ title: "Copy successful!" });
     } catch (err) {
-      console.error("Copy failed!", err);
+      toast({ title: "Copy failed!", variant: "destructive" });
     }
   };
   return (
