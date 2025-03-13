@@ -5,6 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-auth-color: var(--auth-color)
   --color-nav-body: var(--nav-body);
   --color-nav-header: var(--nav-header);
   --color-nav-text: var(--nav-text);
@@ -55,6 +56,7 @@
 }
 
 :root {
+  --auth-color: #181c32;
   --nav-body: #1e1e2d;
   --nav-header:#1a1a27;
   --nav-text:#9899ac;

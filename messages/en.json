@@ -6,6 +6,9 @@
     "balanceAfterTransfer": "Số dư sau biến động",
     "content": "Nội dung"
   },
+  "login": {
+    "title": "Login"
+  },
   "HomePage": {
     "title": "Chào",
     "about": "Go to the about page"
