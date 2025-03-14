@@ -17,6 +17,11 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Eye, EyeClosed } from "lucide-react";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +37,9 @@ const Login: React.FC = () => {
     password: z.string().min(1, {
       message: t("login.password.request"),
     }),
+    captcha: z.string().min(1, {
+      message: t("login.captcha.request"),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,10 +47,20 @@ const Login: React.FC = () => {
     defaultValues: {
       username: "",
       password: "",
+      captcha: "",
     },
   });
 
+  const handleCaptcha = async () => {
+    loadCaptchaEnginge(6, "#0e7490", "white");
+  };
+  React.useEffect(() => {
+    handleCaptcha();
+  }, []);
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    validateCaptcha(values.captcha);
+    console.log(validateCaptcha(values.captcha));
     console.log(values);
   };
   return (
@@ -81,7 +99,7 @@ const Login: React.FC = () => {
               <FormControl>
                 <div className="relative">
                   <Input
-                    placeholder={t("register.password.placeholder")}
+                    placeholder={t("login.password.placeholder")}
                     {...field}
                     type={showPassword ? "text" : "password"}
                   />
@@ -95,6 +113,31 @@ const Login: React.FC = () => {
                   >
                     {showPassword ? <Eye /> : <EyeClosed />}
                   </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="captcha"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("login.captcha.title")}</FormLabel>
+              <FormControl>
+                <div className="flex gap-3">
+                  <Input
+                    placeholder={t("login.captcha.placeholder")}
+                    className="flex-1/2 max-w-1/2"
+                    {...field}
+                  />
+                  <div
+                    onClick={handleCaptcha}
+                    className="border max-w-1/2 cursor-pointer bg-cyan-700 flex-1/2 h-[36px] flex justify-center items-center rounded-md"
+                  >
+                    <LoadCanvasTemplateNoReload reloadColor="red" />
+                  </div>
                 </div>
               </FormControl>
               <FormMessage />
