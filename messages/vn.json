@@ -12,6 +12,11 @@
       "placeholder": "Nhập mật khẩu",
       "request": "Mật khẩu bắt buộc",
       "forgot": "Quên mật khẩu?"
+    },
+    "captcha": {
+      "title": "Captcha",
+      "placeholder": "Nhập captcha",
+      "request": "Captcha bắt buộc"
     }
   },
   "register": {
