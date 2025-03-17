@@ -4,7 +4,14 @@
     "time": "Thời gian",
     "amount": "Số tiền",
     "balanceAfterTransfer": "Số dư sau biến động",
-    "content": "Nội dung"
+    "content": "Nội dung",
+    "server": "Server",
+    "service": "Dịch vụ",
+    "price": "Giá",
+    "phoneNumber": "Số điện thoại",
+    "code": "Code",
+    "status": "Trạng thái",
+    "message": "Tin nhắn"
   },
   "login": {
     "title": "Login"
@@ -34,5 +41,15 @@
     "type": "Loại",
     "historyRecharge": "Lịch sử nạp tiền",
     "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất"
+  },
+  "rent": {
+    "rentService": "Dịch vụ thuê",
+    "rentNow": "Thuê số ngay",
+    "requestNewService": "Yêu cầu thêm dịch vụ mới",
+    "waitList":"Danh sách các số đang chờ tin nhắn"
+  },
+  "rentHistory":{
+    "latest100Record":"Danh sách 100 số gần nhất đã thuê",
+    "rentHistory":"Lịch sử thuê số"
   }
 }

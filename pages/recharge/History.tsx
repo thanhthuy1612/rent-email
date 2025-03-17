@@ -1,22 +1,19 @@
 import CustomDatePicker from "@/components/datepicker/CustomDataPicker";
 import CustomSelect from "@/components/select/CustomSelect";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import { SIZE_LIST } from "@/contants/page";
+import { SIZE_LIST } from "@/constants/page";
 import useObjectState from "@/hooks/use-object-state";
 import dayjs from "dayjs";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React from "react";
 
 interface RechargeType {
   value: string;
@@ -41,7 +38,7 @@ interface HistoryState {
   params: {
     fromDate: dayjs.Dayjs;
     toDate: dayjs.Dayjs;
-    type: dayjs.Dayjs;
+    type: number;
     page: number;
     size: number;
   };
@@ -98,7 +95,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
     params: {
       fromDate: dayjs(),
       toDate: dayjs(),
-      type: dayjs(),
+      type: 0,
       page: 0,
       size: 50,
     },
@@ -122,13 +119,13 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
     <div>
       <div className="flex gap-5">
         <div>
-          <CustomDatePicker title={t("recharge.fromDate")} className="h-10" />
+          <CustomDatePicker title={t("recharge.fromDate")} className="h-10 bg-[#f5f8fa]" />
         </div>
         <div>
-          <CustomDatePicker title={t("recharge.toDate")} className="h-10" />
+          <CustomDatePicker title={t("recharge.toDate")} className="h-10 bg-[#f5f8fa]" />
         </div>
         <div>
-          <CustomSelect
+        <CustomSelect
             title={t("recharge.type")}
             onChange={() => {}}
             value="1"
@@ -157,8 +154,8 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
           </Button>
         </div>
       </div>
-      <hr className="border-t-2 border-gray-400 border-dashed my-4" />
-      <div>
+      {/* <hr className="border-t-1 border-gray-400 my-4" /> */}
+      <div className="mt-5">
         <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
         <p className="text-[#a1a5b7] text-sm">
           {t("recharge.latest200RecordSuccess")}

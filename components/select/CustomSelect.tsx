@@ -22,6 +22,7 @@ const CustomSelect: React.FC<SelectProps> = ({
 
       <div className={`relative w-full ${className}`}>
         <select
+        
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="block w-full p-2 pr-10 border border-gray-300 rounded-md shadow-sm appearance-none focus:ring-blue-500 focus:border-blue-500"
