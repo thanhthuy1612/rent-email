@@ -152,9 +152,9 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="#ffffff"
-                  stroke-width="3"
-                  stroke-linecap="butt"
-                  stroke-linejoin="arcs"
+                  strokeWidth="3"
+                  strokeLinecap="butt"
+                  strokeLinejoin="round"
                 >
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>

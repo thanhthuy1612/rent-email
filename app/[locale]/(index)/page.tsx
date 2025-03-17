@@ -1,9 +1,9 @@
-import Home from "@/pages/home/Home";
+import Landing from "@/pages/landing/Landing";
 import React from "react";
 
 // ----------------------------------------------------------------------
 
 const Page: React.FC = () => {
-  return <Home />;
+  return <Landing />;
 };
 export default Page;

@@ -7,7 +7,7 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from "@/components/ui/table";
 import { SIZE_LIST } from "@/constants/page";
 import useObjectState from "@/hooks/use-object-state";
@@ -119,13 +119,19 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
     <div>
       <div className="flex gap-5">
         <div>
-          <CustomDatePicker title={t("recharge.fromDate")} className="h-10 bg-[#f5f8fa]" />
+          <CustomDatePicker
+            title={t("recharge.fromDate")}
+            className="h-10 bg-[#f5f8fa]"
+          />
         </div>
         <div>
-          <CustomDatePicker title={t("recharge.toDate")} className="h-10 bg-[#f5f8fa]" />
+          <CustomDatePicker
+            title={t("recharge.toDate")}
+            className="h-10 bg-[#f5f8fa]"
+          />
         </div>
         <div>
-        <CustomSelect
+          <CustomSelect
             title={t("recharge.type")}
             onChange={() => {}}
             value="1"
@@ -143,9 +149,9 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#ffffff"
-                stroke-width="3"
-                stroke-linecap="butt"
-                stroke-linejoin="arcs"
+                strokeWidth="3"
+                strokeLinecap="butt"
+                strokeLinejoin="round"
               >
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
