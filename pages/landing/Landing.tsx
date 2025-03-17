@@ -1,11 +1,16 @@
+import Home from "@/pages/landing/components/Home";
 import { useTranslations } from "next-intl";
 import React from "react";
 
 // ----------------------------------------------------------------------
 
-const Home: React.FC = () => {
+const Landing: React.FC = () => {
   const t = useTranslations();
 
-  return <div>{t("HomePage.title")}</div>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 };
-export default Home;
+export default Landing;
