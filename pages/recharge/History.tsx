@@ -140,7 +140,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
           />
         </div>
         <div className="flex items-end">
-          <Button className="bg-[#009ef7] w-15 h-10">
+          <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-15 h-10">
             <span className="svg-icon svg-icon-4 ms-1 me-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

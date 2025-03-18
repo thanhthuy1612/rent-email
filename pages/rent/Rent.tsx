@@ -16,6 +16,16 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import PhoneCopyComponent from "./components/InfoBar";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +99,7 @@ const Rent: React.FC = () => {
   return (
     <div className="max-w-[1120px] m-auto">
       <Card className="p-7 mb-8">
-        <div className="flex gap-5">
+        <div className="flex flex-row gap-5">
           <div className="flex items-end">
             <CustomSelect
               onChange={handleChangeServer}

@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import React from "react";
 
 // ----------------------------------------------------------------------
+export interface IHome {
+  ref: React.Ref<HTMLDivElement> | undefined;
+}
 
-const Home: React.FC = () => {
-  const t = useTranslations();
-
+const Home: React.FC<IHome> = ({ ref }) => {
   return (
-    <div>
+    <div ref={ref}>
       <div
         className="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom bg-landing"
         style={{ backgroundImage: "url('/imgs/landing.svg')" }}

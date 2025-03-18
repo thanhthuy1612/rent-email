@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useTranslations } from "next-intl";
+import { Label } from "@/components/ui/label";
 
 interface CustomDatePickerProps {
   value?: Date;
@@ -39,7 +40,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
 
   return (
     <div>
-      <label>{title}</label>
+      <Label className="mb-1.5 ml-1">{title}</Label>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -54,7 +55,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
             {selectedDate ? (
               format(selectedDate, "PPP")
             ) : (
-              <span>{placeHolder||t("global.pickADate")}</span>
+              <span>{placeHolder || t("global.pickADate")}</span>
             )}
           </Button>
         </PopoverTrigger>

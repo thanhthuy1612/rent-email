@@ -110,40 +110,31 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
   return (
     <div className="max-w-[1120px] m-auto">
       <Card className="p-5 mb-8">
-        {" "}
         <div className="flex gap-5">
-          <div>
-            <CustomDatePicker
-              title={t("recharge.fromDate")}
-              className="h-10 bg-[#f5f8fa]"
-            />
-          </div>
-          <div>
-            <CustomDatePicker
-              title={t("recharge.toDate")}
-              className="h-10 bg-[#f5f8fa]"
-            />
-          </div>
-          <div>
-            <CustomSelect
-              title={t("global.service")}
-              onChange={() => {}}
-              value="1"
-              options={SERVER_LIST}
-              className="bg-[#f5f8fa] h-10"
-            />
-          </div>
-          <div>
-            <CustomSelect
-              title={t("global.service")}
-              onChange={() => {}}
-              value="1"
-              options={STATUS_LIST}
-              className="bg-[#f5f8fa] h-10"
-            />
-          </div>
+          <CustomDatePicker
+            title={t("recharge.fromDate")}
+            className="h-10 bg-[#f5f8fa]"
+          />
+          <CustomDatePicker
+            title={t("recharge.toDate")}
+            className="h-10 bg-[#f5f8fa]"
+          />
+          <CustomSelect
+            title={t("global.service")}
+            onChange={() => {}}
+            value="1"
+            options={SERVER_LIST}
+            className="bg-[#f5f8fa] h-10"
+          />
+          <CustomSelect
+            title={t("global.service")}
+            onChange={() => {}}
+            value="1"
+            options={STATUS_LIST}
+            className="bg-[#f5f8fa] h-10"
+          />
           <div className="flex items-end">
-            <Button className="bg-[#009ef7] w-15 h-10">
+            <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer shadow-md mb-1">
               <span className="svg-icon svg-icon-4 ms-1 me-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
