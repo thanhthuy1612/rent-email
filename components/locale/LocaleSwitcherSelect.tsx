@@ -17,9 +17,16 @@ import { languages } from "@/i18n/locale";
 type Props = {
   defaultValue: string;
   label: string;
+  colorWhite?: boolean;
+  value: string;
 };
 
-const LocaleSwitcherSelect: React.FC<Props> = ({ defaultValue, label }) => {
+const LocaleSwitcherSelect: React.FC<Props> = ({
+  defaultValue,
+  label,
+  colorWhite,
+  value,
+}) => {
   const router = useRouter();
 
   const pathname = usePathname();
@@ -36,12 +43,22 @@ const LocaleSwitcherSelect: React.FC<Props> = ({ defaultValue, label }) => {
   }
 
   return (
-    <Select defaultValue={defaultValue} onValueChange={onSelectChange}>
+    <Select
+      value={value}
+      defaultValue={defaultValue}
+      onValueChange={onSelectChange}
+    >
       <SelectTrigger
-        className=" w-[180px] h-8 border-none bg-sky-900 text-white focus:ring-0 focus:ring-offset-0"
+        className={`w-fit h-8 border-none ${colorWhite ? "bg-transparent text-black opacity-70" : "bg-sky-900 text-white"} focus:ring-0 focus:ring-offset-0`}
         aria-label={label}
       >
-        <SelectValue />
+        <SelectValue>
+          <Image
+            src={languages.find((item) => item.key === value)?.img}
+            alt="flag"
+            className="object-cover w-[22px] h-[22px] rounded-full"
+          />
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {routing.locales.map((locale) => (
