@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { contact, policy } from "@/constants/landing";
 import { Link } from "@/i18n/navigation";
-import PolicyContract from "@/pages/landing/components/PolicyContact";
+import PolicyContract from "@/components-page/landing/components/PolicyContact";
 import React from "react";
 
 export interface IPolicy {

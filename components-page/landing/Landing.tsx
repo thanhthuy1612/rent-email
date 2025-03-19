@@ -9,11 +9,11 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import Footer from "@/pages/landing/components/Footer";
-import Home from "@/pages/landing/components/Home";
-import Introduce from "@/pages/landing/components/Introduce";
-import Policy from "@/pages/landing/components/Policy";
-import Service from "@/pages/landing/components/Service";
+import Footer from "@/components-page/landing/components/Footer";
+import Home from "@/components-page/landing/components/Home";
+import Introduce from "@/components-page/landing/components/Introduce";
+import Policy from "@/components-page/landing/components/Policy";
+import Service from "@/components-page/landing/components/Service";
 import { MoveUp } from "lucide-react";
 import React from "react";
 

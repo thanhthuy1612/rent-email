@@ -1,5 +1,5 @@
 import { service } from "@/constants/landing";
-import ServiceItem from "@/pages/landing/components/ServiceItem";
+import ServiceItem from "@/components-page/landing/components/ServiceItem";
 import React from "react";
 
 export interface IService {

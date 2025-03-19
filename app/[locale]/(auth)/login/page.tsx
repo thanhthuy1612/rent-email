@@ -1,5 +1,5 @@
 import LayoutAuth from "@/layout/auth/LayoutAuth";
-import Login from "@/pages/login/Login";
+import Login from "@/components-page/login/Login";
 import { useTranslations } from "next-intl";
 import React from "react";
 

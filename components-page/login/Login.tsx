@@ -17,11 +17,11 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Eye, EyeClosed } from "lucide-react";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplateNoReload,
-  validateCaptcha,
-} from "react-simple-captcha";
+// import {
+//   loadCaptchaEnginge,
+//   LoadCanvasTemplateNoReload,
+//   validateCaptcha,
+// } from "react-simple-captcha";
 
 // ----------------------------------------------------------------------
 
@@ -51,16 +51,16 @@ const Login: React.FC = () => {
     },
   });
 
-  const handleCaptcha = async () => {
-    loadCaptchaEnginge(6, "#0e7490", "white");
-  };
-  React.useEffect(() => {
-    handleCaptcha();
-  }, []);
+  // const handleCaptcha = async () => {
+  //   loadCaptchaEnginge(6, "#0e7490", "white");
+  // };
+  // React.useEffect(() => {
+  //   handleCaptcha();
+  // }, []);
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    validateCaptcha(values.captcha);
-    console.log(validateCaptcha(values.captcha));
+    // validateCaptcha(values.captcha);
+    // console.log(validateCaptcha(values.captcha));
     console.log(values);
   };
   return (
@@ -132,12 +132,12 @@ const Login: React.FC = () => {
                     className="flex-1/2 max-w-1/2"
                     {...field}
                   />
-                  <div
+                  {/* <div
                     onClick={handleCaptcha}
                     className="border max-w-1/2 cursor-pointer bg-cyan-700 flex-1/2 h-[36px] flex justify-center items-center rounded-md"
                   >
                     <LoadCanvasTemplateNoReload reloadColor="red" />
-                  </div>
+                  </div> */}
                 </div>
               </FormControl>
               <FormMessage />

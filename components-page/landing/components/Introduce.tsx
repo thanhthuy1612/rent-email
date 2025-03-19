@@ -1,7 +1,7 @@
 "use client";
 
 import { introduce } from "@/constants/landing";
-import IntroduceItem from "@/pages/landing/components/IntroduceItem";
+import IntroduceItem from "@/components-page/landing/components/IntroduceItem";
 import React from "react";
 
 import Autoplay from "embla-carousel-autoplay";

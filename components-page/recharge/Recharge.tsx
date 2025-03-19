@@ -1,8 +1,6 @@
 "use client";
+
 import { Card } from "@/components/ui/card";
-import { Select } from "@/components/ui/select";
-import { SelectContent, SelectItem } from "@radix-ui/react-select";
-import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import ShowQR from "./ShowQR";
 import History from "./History";

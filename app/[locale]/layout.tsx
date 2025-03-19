@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import StoreProvider from "@/redux/StoreProvider";
 import { Toaster } from "@/components/ui/toaster";
-import { baseOpenGraph } from "@/app/shared-metadata";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import "../globals.css";
+import { baseOpenGraph } from "@/constants/shared-metadata";
 
 const roboto = Roboto({
   subsets: ["vietnamese", "latin"],

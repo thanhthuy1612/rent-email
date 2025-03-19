@@ -1,4 +1,5 @@
 "use client";
+
 import CustomDatePicker from "@/components/datepicker/CustomDataPicker";
 import CustomSelect from "@/components/select/CustomSelect";
 import { Button } from "@/components/ui/button";
@@ -12,11 +13,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SIZE_LIST } from "@/constants/page";
 import { SERVER_LIST, STATUS_LIST } from "@/constants/select";
 import useObjectState from "@/hooks/use-object-state";
 import dayjs from "dayjs";
-import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -26,7 +25,7 @@ interface RechargeType {
 }
 
 interface HistoryProps {
-  rechargeTypes: RechargeType[];
+  rechargeTypes?: RechargeType[];
 }
 
 interface RentRecord {

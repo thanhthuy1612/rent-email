@@ -1,7 +1,7 @@
 import LayoutAuth from "@/layout/auth/LayoutAuth";
 import React from "react";
 import { useTranslations } from "next-intl";
-import Register from "@/pages/register/Register";
+import Register from "@/components-page/register/Register";
 
 // ----------------------------------------------------------------------
 
