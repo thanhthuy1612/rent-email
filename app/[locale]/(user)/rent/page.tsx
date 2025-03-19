@@ -1,4 +1,4 @@
-import Rent from "@/pages/rent/Rent";
+import Rent from "@/components-page/rent/Rent";
 import React from "react";
 
 // ----------------------------------------------------------------------

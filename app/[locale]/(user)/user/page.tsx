@@ -1,4 +1,4 @@
-import User from "@/pages/user/User";
+import User from "@/components-page/user/User";
 import React from "react";
 
 // ----------------------------------------------------------------------

@@ -1,4 +1,3 @@
-import HeaderHomePage from "@/components/header/HeaderHomePage";
 import React from "react";
 
 // ----------------------------------------------------------------------

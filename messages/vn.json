@@ -19,6 +19,52 @@
       "request": "Captcha bắt buộc"
     }
   },
+  "global": {
+    "pickADate": "Chọn ngày",
+    "time": "Thời gian",
+    "amount": "Số tiền",
+    "balanceAfterTransfer": "Số dư sau biến động",
+    "content": "Nội dung",
+    "server": "Server",
+    "service": "Dịch vụ",
+    "price": "Giá",
+    "phoneNumber": "Số điện thoại",
+    "code": "Code",
+    "status": "Trạng thái",
+    "message": "Tin nhắn"
+  },
+  "user": {
+    "balance": "Số dư",
+    "totalSubscriberCodes": "Tổng số code đã thuê",
+    "lastRental": "Lần cuối thuê",
+    "accountInformation": "Thông tin tài khoản",
+    "updateInformation": "Cập nhật thông tin",
+    "fullname": "Họ tên",
+    "username": "Tên đăng nhập",
+    "email": "E-mail",
+    "phoneNumber": "Số điện thoại",
+    "telegram": "Telegram",
+    "connectTelegram": "Kết nối telegram",
+    "copy": "Copy"
+  },
+  "recharge": {
+    "scanHere": "Nạp tiền qua quét mã QR",
+    "fromDate": "Từ ngày",
+    "toDate": "Đến ngày",
+    "type": "Loại",
+    "historyRecharge": "Lịch sử nạp tiền",
+    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất"
+  },
+  "rent": {
+    "rentService": "Dịch vụ thuê",
+    "rentNow": "Thuê số ngay",
+    "requestNewService": "Yêu cầu thêm dịch vụ mới",
+    "waitList": "Danh sách các số đang chờ tin nhắn"
+  },
+  "rentHistory": {
+    "latest100Record": "Danh sách 100 số gần nhất đã thuê",
+    "rentHistory": "Lịch sử thuê số"
+  },
   "register": {
     "title": "Đăng ký",
     "description": "Đã có tài khoản",
