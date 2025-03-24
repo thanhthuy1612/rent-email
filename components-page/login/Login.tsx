@@ -15,60 +15,113 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { Eye, EyeClosed } from "lucide-react";
-// import {
-//   loadCaptchaEnginge,
-//   LoadCanvasTemplateNoReload,
-//   validateCaptcha,
-// } from "react-simple-captcha";
+import { Link, useRouter } from "@/i18n/navigation";
+import { Eye, EyeClosed, LoaderIcon } from "lucide-react";
+import { loginService } from "@/api/user/login/login.service";
+import Image from "next/image";
+import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { useAppDispatch } from "@/lib/hooks";
+import { updateUser } from "@/lib/features/user";
 
 // ----------------------------------------------------------------------
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [image, setImage] = React.useState<string>();
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   const t = useTranslations();
+  const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   const formSchema = z.object({
-    username: z.string().min(1, {
+    userName: z.string().min(1, {
       message: t("login.username.request"),
     }),
     password: z.string().min(1, {
       message: t("login.password.request"),
     }),
-    captcha: z.string().min(1, {
+    captchaCode: z.string().min(4, {
       message: t("login.captcha.request"),
     }),
+    captchaId: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      userName: "",
       password: "",
-      captcha: "",
+      captchaCode: "",
+      captchaId: "",
     },
   });
 
-  // const handleCaptcha = async () => {
-  //   loadCaptchaEnginge(6, "#0e7490", "white");
-  // };
-  // React.useEffect(() => {
-  //   handleCaptcha();
-  // }, []);
+  const getCaptcha = async () => {
+    try {
+      setIsLoading(true);
+      const res = await loginService.getCaptcha();
+      if (!res.code) {
+        const data = res.data;
+        const imageData = `data:image/jpeg;base64,${data.base64}`;
+        setImage(imageData);
+        form.setValue("captchaId", data.captchaId);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+      form.setValue("captchaCode", "");
+    }
+  };
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // validateCaptcha(values.captcha);
-    // console.log(validateCaptcha(values.captcha));
-    console.log(values);
+  React.useEffect(() => {
+    getCaptcha();
+  }, []);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      const res = await loginService.login(values);
+      if (!res.code) {
+        toast({
+          title: t("alert.success"),
+          description: t("login.alert-success"),
+          duration: 10000,
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          ),
+        });
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        dispatch(updateUser(res.data));
+        router.push("/user");
+      } else {
+        toast({
+          title: t("alert.error"),
+          description: res.message,
+          variant: "destructive",
+          duration: 10000,
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+          ),
+        });
+        getCaptcha();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="userName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("login.username.title")}</FormLabel>
@@ -121,7 +174,7 @@ const Login: React.FC = () => {
         />
         <FormField
           control={form.control}
-          name="captcha"
+          name="captchaCode"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("login.captcha.title")}</FormLabel>
@@ -132,12 +185,24 @@ const Login: React.FC = () => {
                     className="flex-1/2 max-w-1/2"
                     {...field}
                   />
-                  {/* <div
-                    onClick={handleCaptcha}
-                    className="border max-w-1/2 cursor-pointer bg-cyan-700 flex-1/2 h-[36px] flex justify-center items-center rounded-md"
-                  >
-                    <LoadCanvasTemplateNoReload reloadColor="red" />
-                  </div> */}
+                  {image && !isLoading ? (
+                    <div
+                      onClick={getCaptcha}
+                      className="flex-1/2 max-w-1/2 border-1 rounded-md overflow-auto"
+                    >
+                      <Image
+                        src={image}
+                        className="w-full h-[35px]"
+                        alt="captcha"
+                        width={500}
+                        height={36}
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex-1/2 flex justify-center items-center max-w-1/2 border-1 rounded-md overflow-auto bg-neutral-950">
+                      <LoaderIcon className="rotate text-white" />
+                    </div>
+                  )}
                 </div>
               </FormControl>
               <FormMessage />
@@ -148,6 +213,7 @@ const Login: React.FC = () => {
         <Button
           type="submit"
           className="w-full cursor-pointer bg-sky-500 hover:bg-sky-600"
+          disabled={isLoading}
         >
           {t("login.title")}
         </Button>

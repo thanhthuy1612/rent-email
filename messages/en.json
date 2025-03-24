@@ -1,4 +1,24 @@
 {
+  "login": {
+    "title": "Đăng nhập",
+    "description": "Chưa có tài khoản?",
+    "username": {
+      "title": "Tên đăng nhập",
+      "placeholder": "Nhập tên đăng nhập",
+      "request": "Tên đăng nhập bắt buộc"
+    },
+    "password": {
+      "title": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu",
+      "request": "Mật khẩu bắt buộc",
+      "forgot": "Quên mật khẩu?"
+    },
+    "captcha": {
+      "title": "Captcha",
+      "placeholder": "Nhập captcha",
+      "request": "Captcha bắt buộc"
+    }
+  },
   "global": {
     "pickADate": "Chọn ngày",
     "time": "Thời gian",
@@ -12,13 +32,6 @@
     "code": "Code",
     "status": "Trạng thái",
     "message": "Tin nhắn"
-  },
-  "login": {
-    "title": "Login"
-  },
-  "HomePage": {
-    "title": "Chào",
-    "about": "Go to the about page"
   },
   "user": {
     "balance": "Số dư",
@@ -46,10 +59,66 @@
     "rentService": "Dịch vụ thuê",
     "rentNow": "Thuê số ngay",
     "requestNewService": "Yêu cầu thêm dịch vụ mới",
-    "waitList":"Danh sách các số đang chờ tin nhắn"
+    "waitList": "Danh sách các số đang chờ tin nhắn"
   },
-  "rentHistory":{
-    "latest100Record":"Danh sách 100 số gần nhất đã thuê",
-    "rentHistory":"Lịch sử thuê số"
+  "rentHistory": {
+    "latest100Record": "Danh sách 100 số gần nhất đã thuê",
+    "rentHistory": "Lịch sử thuê số"
+  },
+  "register": {
+    "title": "Đăng ký",
+    "description": "Đã có tài khoản",
+    "username": {
+      "title": "Tên đăng nhập",
+      "placeholder": "Nhập tên đăng nhập",
+      "error1": "Tên người dùng phải từ 6 ký tự trở lên.",
+      "error2": "Tên người dùng không được quá 20 ký tự.",
+      "error3": "Tên người dùng chỉ có thể bao gồm chữ cái và chữ số.",
+      "description": "6-20 ký tự, chỉ bao gồm chữ số, chữ thường, hoa."
+    },
+    "email": {
+      "title": "Email",
+      "placeholder": "Nhập email",
+      "error1": "Địa chỉ email không hợp lệ.",
+      "error2": "Email phải ít nhất 5 ký tự.",
+      "description": "Nhập chính xác email."
+    },
+    "password": {
+      "title": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu",
+      "request": "Mật khẩu bắt buộc",
+      "request1": "từ 6 - 18 ký tự",
+      "request2": "ít nhất phải bao gồm cả chữ số, chữ cái.",
+      "request3": "có thể bao gồm ký tự đặc biệt",
+      "error1": "Mật khẩu phải từ 6 ký tự trở lên.",
+      "error2": "Mật khẩu không được quá 18 ký tự.",
+      "error3": "Mật khẩu phải có ít nhất một chữ cái.",
+      "error4": "Mật khẩu phải có ít nhất một chữ số.",
+      "error5": "Mật khẩu có thể bao gồm chữ cái, chữ số và ký tự đặc biệt."
+    },
+    "rePassword": {
+      "title": "Nhập lại Mật khẩu",
+      "placeholder": "Nhập nhập lại mật khẩu",
+      "request": "Nhập lại Mật khẩu bắt buộc",
+      "error1": "Mật khẩu phải từ 6 ký tự trở lên.",
+      "error2": "Mật khẩu không được quá 18 ký tự.",
+      "error3": "Mật khẩu phải có ít nhất một chữ cái.",
+      "error4": "Mật khẩu phải có ít nhất một chữ số.",
+      "error5": "Mật khẩu có thể bao gồm chữ cái, chữ số và ký tự đặc biệt.",
+      "error6": "Mật khẩu không khớp"
+    },
+    "code": {
+      "title": "Mã giới thiệu",
+      "placeholder": "Nhập mã giới thiệu"
+    },
+    "term": {
+      "title": "Tôi đồng ý với",
+      "link": "Điều khoản bảo mật",
+      "error": "Bạn cần đồng ý với các điều khoản."
+    }
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
   }
 }

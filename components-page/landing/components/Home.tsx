@@ -18,7 +18,7 @@ const Home: React.FC<IHome> = ({ ref }) => {
           <div className="text-center mb-5 mb-lg-10 py-10 py-lg-20">
             <h1 className="text-white text-2xl lg:text-5xl leading-8 lg:leading-14 font-bold mb-15">
               Dịch vụ cho thuê sim OTP
-              <br></br>với{" "}
+              <br></br>với
               <span
                 style={{
                   background:

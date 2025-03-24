@@ -20,7 +20,7 @@ export default function PhoneCopyComponent() {
             <path d="M22 11.5A10 10 0 0 0 3.2 7.2M2 12.5a10 10 0 0 0 18.8 4.2"></path>
           </svg>
           <span className="absolute inset-0 w-full h-full animate-ping bg-green-300 opacity-50 rounded-full"></span>
-        </button>{" "}
+        </button>
         để thuê lại số điện thoại
       </div>
     </div>

@@ -16,16 +16,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-import { Eye, EyeClosed } from "lucide-react";
+import { Eye, EyeClosed, LoaderIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import Image from "next/image";
+import { registerService } from "@/api/user/register/register.service";
+import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { useAppDispatch } from "@/lib/hooks";
+import { updateUser } from "@/lib/features/user";
 
 // ----------------------------------------------------------------------
 
 const Register: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [image, setImage] = React.useState<string>();
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   const t = useTranslations();
+  const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   const formSchema = z
     .object({
@@ -36,10 +47,6 @@ const Register: React.FC = () => {
         .regex(/^[a-zA-Z0-9]+$/, {
           message: t("register.username.error3"),
         }),
-      email: z
-        .string()
-        .email({ message: t("register.email.error1") })
-        .min(5, { message: t("register.email.error1") }),
       password: z
         .string()
         .min(6, { message: t("register.password.error1") })
@@ -74,7 +81,10 @@ const Register: React.FC = () => {
             message: t("register.rePassword.error5"),
           }
         ),
-      code: z.string(),
+      captchaCode: z.string().min(4, {
+        message: t("login.captcha.request"),
+      }),
+      captchaId: z.string(),
       term: z.boolean().refine((value) => value === true, {
         message: t("register.term.error"),
       }),
@@ -93,16 +103,75 @@ const Register: React.FC = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: "",
       password: "",
       rePassword: "",
-      code: "",
       term: false,
+      captchaCode: "",
+      captchaId: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const getCaptcha = async () => {
+    try {
+      setIsLoading(true);
+      const res = await registerService.getCaptcha();
+      if (!res.code) {
+        const data = res.data;
+        const imageData = `data:image/jpeg;base64,${data.base64}`;
+        setImage(imageData);
+        form.setValue("captchaId", data.captchaId);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+      form.setValue("captchaCode", "");
+    }
+  };
+
+  React.useEffect(() => {
+    getCaptcha();
+  }, []);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      const res = await registerService.register({
+        userName: values.username,
+        password: values.password,
+        captchaId: values.captchaId,
+        captchaCode: values.captchaCode,
+      });
+      if (!res.code) {
+        toast({
+          title: t("alert.success"),
+          description: t("login.alert-success"),
+          duration: 10000,
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          ),
+        });
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        dispatch(updateUser(res.data));
+        router.push("/user");
+      } else {
+        toast({
+          title: t("alert.error"),
+          description: res.message,
+          variant: "destructive",
+          duration: 10000,
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+          ),
+        });
+        getCaptcha();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <Form {...form}>
@@ -122,25 +191,6 @@ const Register: React.FC = () => {
               <FormMessage />
               <FormDescription>
                 {t("register.username.description")}
-              </FormDescription>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("register.email.title")}</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={t("register.email.placeholder")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-              <FormDescription>
-                {t("register.email.description")}
               </FormDescription>
             </FormItem>
           )}
@@ -212,21 +262,38 @@ const Register: React.FC = () => {
         />
         <FormField
           control={form.control}
-          name="code"
+          name="captchaCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                {t("register.code.title")}{" "}
-                <span className="text-red-600 italic font-light text-[10px]">
-                  * không bắt buộc
-                </span>
-              </FormLabel>
+              <FormLabel>{t("login.captcha.title")}</FormLabel>
               <FormControl>
-                <Input
-                  placeholder={t("register.code.placeholder")}
-                  {...field}
-                />
+                <div className="flex gap-3">
+                  <Input
+                    placeholder={t("login.captcha.placeholder")}
+                    className="flex-1/2 max-w-1/2"
+                    {...field}
+                  />
+                  {image && !isLoading ? (
+                    <div
+                      onClick={getCaptcha}
+                      className="flex-1/2 max-w-1/2 border-1 rounded-md overflow-auto"
+                    >
+                      <Image
+                        src={image}
+                        className="w-full h-[35px]"
+                        alt="captcha"
+                        width={500}
+                        height={36}
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex-1/2 flex justify-center items-center max-w-1/2 border-1 rounded-md overflow-auto bg-neutral-950">
+                      <LoaderIcon className="rotate text-white" />
+                    </div>
+                  )}
+                </div>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

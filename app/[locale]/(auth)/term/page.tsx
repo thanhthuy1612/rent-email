@@ -1,9 +1,8 @@
 import React from "react";
-import Register from "@/components-page/register/Register";
 
 // ----------------------------------------------------------------------
 
 const Page: React.FC = () => {
-  return <Register />;
+  return <>Term</>;
 };
 export default Page;

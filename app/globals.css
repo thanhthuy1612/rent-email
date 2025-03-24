@@ -255,3 +255,11 @@
 .icon-gradient:hover {
   color: #a1a5b7;
 }
+
+.rotate {
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

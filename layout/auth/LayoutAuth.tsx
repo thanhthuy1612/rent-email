@@ -29,7 +29,7 @@ const LayoutAuth: React.FC<Props> = ({
           {title}
         </CardTitle>
         <CardDescription className="flex gap-2 font-medium text-[16.25px] justify-center text-[#b5b5c3]">
-          {description}{" "}
+          {description}
           <Link
             href={href}
             className="text-sky-500 hover:text-sky-600 cursor-pointer"

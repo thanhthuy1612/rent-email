@@ -99,13 +99,13 @@ const Rent: React.FC = () => {
   return (
     <div className="max-w-[1120px] m-auto">
       <Card className="p-7 mb-8">
-        <div className="flex flex-row gap-5">
+        <div className="flex gap-5">
           <div className="flex items-end">
             <CustomSelect
               onChange={handleChangeServer}
               value={params.server}
               options={SERVER_LIST}
-              className="h-10 p-0 !w-40 bg-[#f5f8fa]"
+              className="h-10 p-0 bg-[#f5f8fa]"
               title={t("global.server")}
             />
           </div>
@@ -115,12 +115,12 @@ const Rent: React.FC = () => {
               onChange={handleChangeServer}
               value={params.server}
               options={SERVER_LIST}
-              className="h-10 p-0 !w-50 bg-[#f5f8fa]"
+              className="h-10 p-0 bg-[#f5f8fa]"
               title={t("rent.rentService")}
             />
           </div>
           <div className="flex items-end">
-            <Button className="bg-[#009ef7] w-40 h-10">
+            <Button className="bg-sky-500 hover:bg-sky-600 w-40 h-10">
               {t("rent.rentNow")}
             </Button>
           </div>
@@ -149,7 +149,6 @@ const Rent: React.FC = () => {
       </Card>
 
       <Card className="p-7 mb-8">
-        {" "}
         <div className="gap-5">
           <div className="border-1 border-dashed !border-[#ffc700] bg-[#FFF8DE] p-3 rounded-sm text-sm ">
             <div className="bg-[#ffc700] rounded-sm text-white font-bold inline-block px-5 py-2 ">
@@ -193,7 +192,7 @@ const Rent: React.FC = () => {
                 </span>
                 <span> Chú ý</span>
               </div>
-            </div>{" "}
+            </div>
             <p className="text-[#5e6278] ">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -209,7 +208,6 @@ const Rent: React.FC = () => {
           </div>
 
           <div className="mt-5">
-            {" "}
             <h3 className="font-bold">{t("rent.waitList")}</h3>
           </div>
 
@@ -247,7 +245,7 @@ const Rent: React.FC = () => {
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>{" "}
+            </Table>
           </div>
         </div>
       </Card>

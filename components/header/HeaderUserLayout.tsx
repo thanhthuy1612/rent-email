@@ -10,8 +10,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { navData } from "@/layout/user/nav-data";
+import { useAppSelector } from "@/lib/hooks";
 import { fNumber, getLocale, getPathName } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import React from "react";
 
@@ -19,8 +22,12 @@ import React from "react";
 
 const HeaderUserLayout: React.FC = () => {
   const [breadcrumb, setBreadcrumb] = React.useState<string[]>([]);
+
   const pathname = usePathname() ?? "";
   const local = getLocale(pathname);
+  const t = useTranslations();
+
+  const { balance } = useAppSelector((item) => item.user);
 
   React.useEffect(() => {
     const getBreadcrumb = () => {
@@ -42,11 +49,13 @@ const HeaderUserLayout: React.FC = () => {
   return (
     <div>
       <div className="flex justify-end gap-5 py-3 border-b items-center px-10">
-        <p className="text-layout-user-amount">{fNumber(1000000, local)} ₫</p>
+        <p className="text-layout-user-amount">
+          {fNumber(balance ?? 0, local)} ₫
+        </p>
         <Avatar className="rounded-sm w-10 h-10">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback className="rounded-sm bg-nav-item-background-active text-nav-item-active">
-            CN
+            VN
           </AvatarFallback>
         </Avatar>
       </div>
@@ -65,9 +74,11 @@ const HeaderUserLayout: React.FC = () => {
             ))}
           </BreadcrumbList>
         </Breadcrumb>
-        <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer">
-          Deposit
-        </Button>
+        <Link href="/recharge">
+          <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer">
+            {t("recharge.title")}
+          </Button>
+        </Link>
       </div>
     </div>
   );

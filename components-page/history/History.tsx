@@ -152,7 +152,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
               </span>
             </Button>
           </div>
-        </div>{" "}
+        </div>
       </Card>
       <Card className="p-5 mb-8">
         <div>
@@ -193,10 +193,10 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>{" "}
+            </Table>
           </div>
         </div>
-      </Card>{" "}
+      </Card>
     </div>
   );
 };

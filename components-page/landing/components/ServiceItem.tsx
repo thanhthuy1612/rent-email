@@ -13,7 +13,7 @@ const ServiceItem: React.FC<IServiceItem> = ({ number, title, Icon }) => {
   return (
     <div className="flex justify-center items-center">
       <div
-        className="flex justify-center items-center h-[200px] w-[200px] lg:h-[250px] lg:w-[250px] m-3 bg-no-repeat bg-center bg-origin-content bg-landing"
+        className="flex justify-center items-center h-[250px] w-[250px] m-3 bg-no-repeat bg-center bg-origin-content bg-landing"
         style={{ backgroundImage: "url('/imgs/octagon.svg')" }}
       >
         <div className="flex flex-col gap-1 items-center justify-center">

@@ -1,31 +1,50 @@
 import axios from "axios";
 
-const axiosLocal = axios.create();
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-axiosLocal.interceptors.request.use(async (config: any) => {
-  const accessToken = localStorage.getItem("token");
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  (config.headers = {
+const axiosLocal = axios.create({
+  baseURL: "http://103.171.0.146/api/v1/web",
+  headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
-    ...config.headers,
-  }),
-    config.data;
-
-  return config;
+  },
+  timeout: 10000,
 });
+
+axiosLocal.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 axiosLocal.interceptors.response.use(
   (response) => {
-    if (response?.status === 200 && response?.data) {
-      return response.data;
-    }
-
     return response;
   },
-  (error) => {
-    console.warn(`Lỗi kết nối đến cơ sở dữ liệu, ${error.message}`);
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem("refreshToken");
+      try {
+        const { data } = await axiosLocal.post("/user/refresh-token", {
+          refreshToken,
+        });
+        localStorage.setItem("accessToken", data.data.accessToken);
+        axiosLocal.defaults.headers.common["Authorization"] =
+          `Bearer ${data.data.accessToken}`;
+        return axiosLocal(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("accessToken");
+        delete axiosLocal.defaults.headers.common.Authorization;
+        window.location.href = "/";
+        console.error("Error during token expiration:", error);
+      }
+    }
+    return Promise.reject(error);
   }
 );
 

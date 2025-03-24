@@ -169,7 +169,6 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
         <div className="flex items-center gap-1 mt-5">
           <span>Show</span>
           <span className="w-30">
-            {" "}
             <CustomSelect
               onChange={changeSize}
               value={params.size}
@@ -210,7 +209,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>{" "}
+          </Table>
           <div className="flex gap-5 justify-end">
             <span
               className="text-[#009ef7] text-sm cursor-pointer"
