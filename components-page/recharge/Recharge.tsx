@@ -1,27 +1,13 @@
-"use client";
-
 import { Card } from "@/components/ui/card";
-import React, { useState } from "react";
+import React from "react";
 import ShowQR from "./ShowQR";
 import History from "./History";
 
 // ----------------------------------------------------------------------
 
 const Recharge: React.FC = () => {
-  const [state, setState] = useState({
-    rechargeTypes: [
-      {
-        label: "Momo",
-        value: "momo",
-      },
-      {
-        label: "Bank",
-        value: "bank",
-      },
-    ],
-  });
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mx-10">
+    <div className="grid grid-cols-1 gap-6 mx-10">
       <Card className="p-10 mb-8 col-span-1">
         <ShowQR
           value={
@@ -31,7 +17,7 @@ const Recharge: React.FC = () => {
       </Card>
 
       <Card className="p-10 mb-8 col-span-2">
-        <History rechargeTypes={state.rechargeTypes} />
+        <History />
       </Card>
     </div>
   );

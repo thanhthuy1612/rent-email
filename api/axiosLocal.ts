@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosLocal = axios.create({
-  baseURL: "http://103.171.0.146/api/v1/web",
+  baseURL: "http://103.171.0.146/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
@@ -29,7 +29,7 @@ axiosLocal.interceptors.response.use(
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refreshToken");
       try {
-        const { data } = await axiosLocal.post("/user/refresh-token", {
+        const { data } = await axiosLocal.post("/web/user/refresh-token", {
           refreshToken,
         });
         localStorage.setItem("accessToken", data.data.accessToken);
@@ -41,7 +41,7 @@ axiosLocal.interceptors.response.use(
         localStorage.removeItem("accessToken");
         delete axiosLocal.defaults.headers.common.Authorization;
         window.location.href = "/";
-        console.error("Error during token expiration:", error);
+        console.error("Error during token expiration:", refreshError);
       }
     }
     return Promise.reject(error);

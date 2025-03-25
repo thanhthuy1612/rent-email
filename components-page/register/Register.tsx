@@ -47,6 +47,10 @@ const Register: React.FC = () => {
         .regex(/^[a-zA-Z0-9]+$/, {
           message: t("register.username.error3"),
         }),
+      email: z
+        .string()
+        .email({ message: t("register.email.error1") })
+        .min(5, { message: t("register.email.error1") }),
       password: z
         .string()
         .min(6, { message: t("register.password.error1") })
@@ -108,6 +112,7 @@ const Register: React.FC = () => {
       term: false,
       captchaCode: "",
       captchaId: "",
+      email: "",
     },
   });
 
@@ -141,6 +146,7 @@ const Register: React.FC = () => {
         password: values.password,
         captchaId: values.captchaId,
         captchaCode: values.captchaCode,
+        email: values.email,
       });
       if (!res.code) {
         toast({
@@ -191,6 +197,25 @@ const Register: React.FC = () => {
               <FormMessage />
               <FormDescription>
                 {t("register.username.description")}
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("register.email.title")}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t("register.email.placeholder")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+              <FormDescription>
+                {t("register.email.description")}
               </FormDescription>
             </FormItem>
           )}

@@ -41,7 +41,7 @@
   "user": {
     "balance": "Số dư",
     "totalSubscriberCodes": "Tổng số code đã thuê",
-    "lastRental": "Lần cuối thuê",
+    "lastRental": "Thời gian tạo",
     "accountInformation": "Thông tin tài khoản",
     "updateInformation": "Cập nhật thông tin",
     "fullname": "Họ tên",
@@ -50,7 +50,14 @@
     "phoneNumber": "Số điện thoại",
     "telegram": "Telegram",
     "connectTelegram": "Kết nối telegram",
-    "copy": "Copy"
+    "copy": "Sao chép",
+    "info": "Thông tin người dùng",
+    "changePassword": "Bảo mật",
+    "token": "Api Token",
+    "status": "Trạng thái",
+    "creationDate": "Thời gian tạo",
+    "modificationDate": "Thời gian cập nhật gần nhất",
+    "scopes": "Vai trò"
   },
   "recharge": {
     "title": "Nạp tiền",
@@ -58,9 +65,26 @@
     "fromDate": "Từ ngày",
     "toDate": "Đến ngày",
     "type": "Loại",
+    "choose": "Chọn ngày",
     "historyRecharge": "Lịch sử nạp tiền",
-    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất"
+    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất",
+    "date": {
+      "error1": "Thời gian phải nhỏ hơn hoặc bằng ngày hiện tại"
+    },
+    "types": {
+      "title": "Kiểu",
+      "placeholder": "Chọn kiểu"
+    },
+    "statuses": {
+      "title": "Trạng thái",
+      "placeholder": "Chọn trạng thái"
+    },
+    "key": {
+      "title": "Key",
+      "placeholder": "Nhập key"
+    }
   },
+  "search": "Tìm kiếm",
   "rent": {
     "rentService": "Dịch vụ thuê",
     "rentNow": "Thuê số ngay",
@@ -126,5 +150,14 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "changePassword": {
+    "title": "Thay đổi mật khẩu",
+    "oldPassword": "Mật khẩu cũ",
+    "newPassword": "Mật khẩu mới",
+    "send": "Gửi"
+  },
+  "changeKey": {
+    "title": "Thay đổi api token"
   }
 }

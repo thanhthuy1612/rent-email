@@ -29,22 +29,23 @@ const HeaderUserLayout: React.FC = () => {
 
   const { balance } = useAppSelector((item) => item.user);
 
-  React.useEffect(() => {
-    const getBreadcrumb = () => {
-      const paths = getPathName(pathname);
-      const findUrl = navData.reduce((resultNav: string[], nav) => {
-        return nav.children.reduce((result: string[], item) => {
-          if (item.url === paths) {
-            return [nav.label, item.title];
-          }
-          return result;
-        }, resultNav);
-      }, []);
+  const getBreadcrumb = () => {
+    const paths = getPathName(pathname);
+    const findUrl = navData.reduce((resultNav: string[], nav) => {
+      return nav.children.reduce((result: string[], item) => {
+        if (paths.includes(item.url)) {
+          return [nav.label, item.title];
+        }
+        return result;
+      }, resultNav);
+    }, []);
 
-      setBreadcrumb(findUrl);
-    };
+    setBreadcrumb(findUrl);
+  };
+
+  React.useEffect(() => {
     getBreadcrumb();
-  }, []);
+  }, [pathname]);
 
   return (
     <div>

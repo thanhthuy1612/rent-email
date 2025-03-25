@@ -1,17 +1,16 @@
-import CustomDatePicker from "@/components/datepicker/CustomDataPicker";
-import CustomSelect from "@/components/select/CustomSelect";
+"use client";
+
+import { ITransactionBody, keyService } from "@/api/key/key.service";
+import RechargeForm from "@/components-page/recharge/components/RechargeForm";
+import CustomPagination from "@/components/table/CustomPagination";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { SIZE_LIST } from "@/constants/page";
-import useObjectState from "@/hooks/use-object-state";
-import dayjs from "dayjs";
+import { DataTable } from "@/components/ui/data-table";
+import { toast } from "@/hooks/use-toast";
+import { useAppSelector } from "@/lib/hooks";
+import { dateFormat } from "@/lib/useTime";
+import { cn, fNumber } from "@/lib/utils";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -20,213 +19,169 @@ interface RechargeType {
   label: string;
 }
 
-interface HistoryProps {
-  rechargeTypes: RechargeType[];
+export interface ISearch {
+  from: Date;
+  to: Date;
+  types: number[];
+  statuses: number[];
 }
 
-interface RechargeRecord {
-  index: number;
-  receivedTime: dayjs.Dayjs;
+export interface IData {
+  id: string;
+  userId: string;
+  userName: string;
   amount: number;
-  balanceAfterTransfer: number;
-  content: string;
+  promotion: number;
+  finalAmount: number;
+  balanceBefore: number;
+  balanceAfter: number;
+  type: number;
+  transCode: string;
+  description: string;
+  status: number;
+  creationDate: Date;
+  modificationDate: Date;
 }
 
-interface HistoryState {
-  data: RechargeRecord[];
-  totalElements: number;
-  params: {
-    fromDate: dayjs.Dayjs;
-    toDate: dayjs.Dayjs;
-    type: number;
-    page: number;
-    size: number;
-  };
-}
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
-const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
-  const t = useTranslations();
-  const [state, setState] = useObjectState<HistoryState>({
-    data: [],
-    totalElements: 0,
-    params: {
-      fromDate: dayjs(),
-      toDate: dayjs(),
-      type: 0,
-      page: 0,
-      size: 50,
-    },
+const History: React.FC = () => {
+  const [data, setData] = React.useState<IData[]>([]);
+  const [total, setTotal] = React.useState<number>(0);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isDateAsc, setIsDateAs] = React.useState<boolean>(true);
+  const [pageNumber, setPageNumber] = React.useState<number>(1);
+  const [pageSize, setPageSize] = React.useState<number>(20);
+  const [search, setSearch] = React.useState<ISearch>({
+    from: new Date(new Date().setDate(new Date().getDate() - 7)),
+    to: new Date(),
+    types: [],
+    statuses: [],
   });
+  const t = useTranslations();
+  const { apiToken } = useAppSelector((item) => item.user);
 
-  const { data, totalElements, params } = state;
-
-  const setParams = (newParams: Object) => {
-    setState({ params: { ...params, ...newParams } });
+  const fetchData = async (body?: ITransactionBody) => {
+    try {
+      setIsLoading(true);
+      const newBody = body ?? {
+        pageNumber,
+        pageSize,
+        key: apiToken ?? "",
+        from: search.from,
+        to: search.to,
+        types: search.types,
+        statuses: search.statuses,
+        dateAsc: isDateAsc,
+      };
+      const res = await keyService.getTransaction(newBody);
+      if (!res.code) {
+        setData(res.data.data);
+        setTotal(res.data.total);
+      } else {
+        toast({
+          title: t("alert.error"),
+          description: res.message,
+          variant: "destructive",
+          duration: 10000,
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+          ),
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const changePage = (delta: number) => () => {
-    setParams({ page: params.page + delta });
-  };
+  React.useEffect(() => {
+    fetchData();
+  }, [isDateAsc, pageNumber]);
 
-  const changeSize = (size: number): void => {
-    setParams({ size });
+  React.useEffect(() => {
+    if (pageNumber !== 1) {
+      setPageNumber(1);
+    } else {
+      fetchData();
+    }
+  }, [pageSize]);
+
+  const columns: ColumnDef<IData>[] = [
+    {
+      accessorKey: "userName",
+      header: "Username",
+    },
+    {
+      accessorKey: "type",
+      header: "Type",
+    },
+    {
+      accessorKey: "amount",
+      header: "Amount",
+      cell: ({ row }) => <>{fNumber(row.getValue("amount"), "vn")}</>,
+    },
+    {
+      accessorKey: "balanceBefore",
+      header: "Before",
+      cell: ({ row }) => <>{fNumber(row.getValue("balanceBefore"), "vn")}</>,
+    },
+    {
+      accessorKey: "balanceAfter",
+      header: "After",
+      cell: ({ row }) => <>{fNumber(row.getValue("balanceAfter"), "vn")}</>,
+    },
+    {
+      accessorKey: "description",
+      header: "Description",
+    },
+    {
+      accessorKey: "transCode",
+      header: "Code",
+    },
+    {
+      accessorKey: "creationDate",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => setIsDateAs((pre) => !pre)}>
+            Date
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
+    },
+  ];
+
+  const submitData = async (values: ISearch) => {
+    setSearch(values);
+    fetchData({
+      pageNumber,
+      pageSize,
+      key: apiToken ?? "",
+      ...values,
+      dateAsc: false,
+    });
   };
 
   return (
-    <div>
-      <div className="flex gap-5">
-        <div>
-          <CustomDatePicker
-            title={t("recharge.fromDate")}
-            className="h-10 bg-[#f5f8fa]"
-          />
-        </div>
-        <div>
-          <CustomDatePicker
-            title={t("recharge.toDate")}
-            className="h-10 bg-[#f5f8fa]"
-          />
-        </div>
-        <div>
-          <CustomSelect
-            title={t("recharge.type")}
-            onChange={() => {}}
-            value="1"
-            options={rechargeTypes}
-            className="bg-[#f5f8fa] h-10"
-          />
-        </div>
-        <div className="flex items-end">
-          <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-15 h-10">
-            <span className="svg-icon svg-icon-4 ms-1 me-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="3"
-                strokeLinecap="butt"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </span>
-          </Button>
-        </div>
-      </div>
-      {/* <hr className="border-t-1 border-gray-400 my-4" /> */}
+    <>
+      <RechargeForm value={search} handleSubmit={submitData} />
       <div className="mt-5">
         <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-        <p className="text-[#a1a5b7] text-sm">
-          {t("recharge.latest200RecordSuccess")}
-        </p>
-        <div className="flex items-center gap-1 mt-5">
-          <span>Show</span>
-          <span className="w-30">
-            <CustomSelect
-              onChange={changeSize}
-              value={params.size}
-              options={SIZE_LIST}
-              className="h-10 p-0"
-            />
-          </span>
-          <span>entities</span>
-        </div>
-        <div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>#</TableHead>
-                <TableHead>{t("global.time")}</TableHead>
-                <TableHead className="text-right">
-                  {t("global.amount")}
-                </TableHead>
-                <TableHead className="text-right">
-                  {t("global.balanceAfterTransfer")}
-                </TableHead>
-                <TableHead>{t("global.content")}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {invoices.map((invoice) => (
-                <TableRow key={invoice.invoice}>
-                  <TableCell className="font-medium">
-                    {invoice.invoice}
-                  </TableCell>
-                  <TableCell>{invoice.paymentStatus}</TableCell>
-                  <TableCell className="text-right">
-                    {invoice.paymentMethod}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {invoice.totalAmount}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <div className="flex gap-5 justify-end">
-            <span
-              className="text-[#009ef7] text-sm cursor-pointer"
-              onClick={changePage(-1)}
-            >
-              Previous
-            </span>
-            <span
-              className="text-[#009ef7] text-sm cursor-pointer"
-              onClick={changePage(1)}
-            >
-              Next
-            </span>
-          </div>
-        </div>
       </div>
-    </div>
+      <DataTable columns={columns} data={data} />
+      <CustomPagination
+        total={total}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+      />
+    </>
   );
 };
 

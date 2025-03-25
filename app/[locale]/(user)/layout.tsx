@@ -3,8 +3,9 @@
 import { loginService } from "@/api/user/login/login.service";
 import HeaderUserLayout from "@/components/header/HeaderUserLayout";
 import LoadingScreen from "@/components/loading/LoadingScreen";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { toast } from "@/hooks/use-toast";
+import { useRouter } from "@/i18n/navigation";
 import { AppSidebar } from "@/layout/user/app-sidebar";
 import { updateLoad } from "@/lib/features/load";
 import { updateUser } from "@/lib/features/user";
@@ -26,6 +27,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   const dispatch = useAppDispatch();
   const t = useTranslations();
+  const router = useRouter();
 
   const getUser = async () => {
     try {
@@ -53,7 +55,12 @@ const Layout: React.FC<Props> = ({ children }) => {
     }
   };
   React.useEffect(() => {
-    getUser();
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      getUser();
+    } else {
+      router.push("/login");
+    }
   }, []);
   return (
     <SidebarProvider>
