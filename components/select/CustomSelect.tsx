@@ -28,7 +28,7 @@ const CustomSelect: React.FC<SelectProps> = ({
 }) => {
   return (
     <div>
-      <Label className="mb-1.5 ml-1">{title}</Label>
+      {title && <Label className="mb-1.5 ml-1">{title}</Label>}{" "}
       <div className={`relative w-full ${className}`}>
         <Select onValueChange={onChange} value={value}>
           <SelectTrigger className="w-[180px]">

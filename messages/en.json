@@ -36,7 +36,17 @@
     "phoneNumber": "Số điện thoại",
     "code": "Code",
     "status": "Trạng thái",
-    "message": "Tin nhắn"
+    "message": "Tin nhắn",
+    "userName": "Tên đăng nhập",
+    "balance": "Số dư",
+    "email": "E-mail",
+    "apiToken": "API Token",
+    "scopes": "Phạm vi",
+    "creationDate": "Ngày tạo",
+    "modificationDate": "Ngày sửa đổi",
+    "isDeleted": "Đã xóa",
+    "yes": "Có",
+    "no": "Không"
   },
   "user": {
     "balance": "Số dư",
@@ -136,5 +146,6 @@
   },
   "changePassword": {
     "title": "Thay đổi mật khẩu"
-  }
+  },
+  "manager": {}
 }

@@ -16,4 +16,7 @@ export const endpoints = {
     getRequest: "/key/request/get-history",
     getTransaction: "/key/transaction/get-history",
   },
+  manager: {
+    getAll: "/management/user/get-all",
+  },
 };
