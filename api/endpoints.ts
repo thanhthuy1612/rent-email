@@ -1,13 +1,19 @@
 export const endpoints = {
   user: {
     login: {
-      getCaptcha: "/user/get-captcha",
-      post: "/user/login",
-      profile: "/user/profile",
+      getCaptcha: "/web/user/get-captcha",
+      post: "/web/user/login",
+      profile: "/web/user/profile",
     },
     register: {
-      getCaptcha: "/user/get-captcha",
-      post: "/user/register",
+      getCaptcha: "/web/user/get-captcha",
+      post: "/web/user/register",
     },
+    changePassword: "/web/user/change-password",
+    changeKey: "/web/user/change-key",
+  },
+  key: {
+    getRequest: "/key/request/get-history",
+    getTransaction: "/key/transaction/get-history",
   },
 };

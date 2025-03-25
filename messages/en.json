@@ -1,7 +1,12 @@
 {
+  "alert": {
+    "success": "Thành công",
+    "error": "Thất bại"
+  },
   "login": {
     "title": "Đăng nhập",
     "description": "Chưa có tài khoản?",
+    "alert-success": "Đăng nhập thành công",
     "username": {
       "title": "Tên đăng nhập",
       "placeholder": "Nhập tên đăng nhập",
@@ -36,7 +41,7 @@
   "user": {
     "balance": "Số dư",
     "totalSubscriberCodes": "Tổng số code đã thuê",
-    "lastRental": "Lần cuối thuê",
+    "lastRental": "Thời gian tạo",
     "accountInformation": "Thông tin tài khoản",
     "updateInformation": "Cập nhật thông tin",
     "fullname": "Họ tên",
@@ -45,15 +50,23 @@
     "phoneNumber": "Số điện thoại",
     "telegram": "Telegram",
     "connectTelegram": "Kết nối telegram",
-    "copy": "Copy"
+    "copy": "Sao chép",
+    "info": "Thông tin người dùng",
+    "changePassword": "Bảo mật",
+    "token": "Api Token"
   },
   "recharge": {
+    "title": "Nạp tiền",
     "scanHere": "Nạp tiền qua quét mã QR",
     "fromDate": "Từ ngày",
     "toDate": "Đến ngày",
     "type": "Loại",
+    "choose": "Chọn ngày",
     "historyRecharge": "Lịch sử nạp tiền",
-    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất"
+    "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất",
+    "date": {
+      "error1": "Thời gian phải nhỏ hơn hoặc bằng ngày hiện tại"
+    }
   },
   "rent": {
     "rentService": "Dịch vụ thuê",
@@ -120,5 +133,8 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "changePassword": {
+    "title": "Thay đổi mật khẩu"
   }
 }

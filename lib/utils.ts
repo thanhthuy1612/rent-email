@@ -23,6 +23,19 @@ export const getLocale = (pathName: string) => {
 };
 
 // ----------------------------------------------------------------------
+const sendLocaleToServer = async () => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  await fetch("/api/accessToken", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ accessToken }),
+  });
+};
+
+// ----------------------------------------------------------------------
 export function fNumber(inputValue: number, locale: string) {
   const fm = new Intl.NumberFormat(locale, {
     minimumFractionDigits: 0,

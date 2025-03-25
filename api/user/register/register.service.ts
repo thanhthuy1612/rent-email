@@ -6,6 +6,7 @@ export interface IRegisterBody {
   password: string;
   captchaId: string;
   captchaCode: string;
+  email: string;
 }
 export const registerService = {
   async getCaptcha() {
