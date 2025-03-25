@@ -29,6 +29,11 @@ export const navData = [
         url: "/history",
         icon: Clock,
       },
+      {
+        title: "User",
+        url: "/manager",
+        icon: User,
+      },
     ],
   },
 ];

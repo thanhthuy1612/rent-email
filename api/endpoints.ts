@@ -1,13 +1,16 @@
 export const endpoints = {
   user: {
     login: {
-      getCaptcha: "/user/get-captcha",
-      post: "/user/login",
-      profile: "/user/profile",
+      getCaptcha: "/web/user/get-captcha",
+      post: "/web/user/login",
+      profile: "/web/user/profile",
     },
     register: {
-      getCaptcha: "/user/get-captcha",
-      post: "/user/register",
+      getCaptcha: "/web/user/get-captcha",
+      post: "/web/user/register",
     },
+    manager:{
+      getAll:"/management/user/get-all"
+    }
   },
 };
