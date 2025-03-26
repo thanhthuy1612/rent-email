@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 export interface Props {
@@ -30,6 +31,7 @@ const CustomPagination: React.FC<Props> = ({
   pageNumber,
   setPageNumber,
 }) => {
+  const t = useTranslations();
   const rows = [10, 20, 50];
   const totalPages = Math.ceil(total / pageSize);
 
@@ -39,32 +41,37 @@ const CustomPagination: React.FC<Props> = ({
     }
   };
 
-  console.log(totalPages, pageNumber);
-
   return (
     <div className="flex flex-col md:flex-row items-center gap-5 justify-center md:justify-between">
-      <div>Tổng: {total}</div>
+      <div className="font-semibold text-[14px]">
+        {t("pagination.total")}:{" "}
+        <span className="text-gray-600 font-medium">
+          {total} {t("pagination.item")}
+        </span>
+      </div>
       <div className="flex gap-5 items-center flex-col md:flex-row">
-        <Select
-          value={pageSize.toString()}
-          onValueChange={(value) => setPageSize(Number(value))}
-        >
-          <SelectTrigger className="w-[100px]">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            {rows.map((item) => (
-              <SelectItem key={item} value={item.toString()}>
-                {item}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex items-center gap-3">
+          <p className="w-max">{t("pagination.rows")}</p>
+          <Select
+            value={pageSize.toString()}
+            onValueChange={(value) => setPageSize(Number(value))}
+          >
+            <SelectTrigger className="w-[100px]">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              {rows.map((item) => (
+                <SelectItem key={item} value={item.toString()}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Pagination>
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
-                title=" "
                 onClick={() => {
                   pageNumber !== 1 && handlePageChange(pageNumber - 1);
                 }}

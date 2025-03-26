@@ -3,6 +3,7 @@
 import { ITransactionBody, keyService } from "@/api/key/key.service";
 import RechargeForm from "@/components-page/recharge/components/RechargeForm";
 import CustomPagination from "@/components/table/CustomPagination";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { toast } from "@/hooks/use-toast";
@@ -13,11 +14,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
-
-interface RechargeType {
-  value: string;
-  label: string;
-}
 
 export interface ISearch {
   from: Date;
@@ -95,14 +91,24 @@ const History: React.FC = () => {
   };
 
   React.useEffect(() => {
-    fetchData();
+    if (isLoading) {
+      fetchData();
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!isLoading) {
+      fetchData();
+    }
   }, [isDateAsc, pageNumber]);
 
   React.useEffect(() => {
-    if (pageNumber !== 1) {
-      setPageNumber(1);
-    } else {
-      fetchData();
+    if (!isLoading) {
+      if (pageNumber !== 1) {
+        setPageNumber(1);
+      } else {
+        fetchData();
+      }
     }
   }, [pageSize]);
 
@@ -153,6 +159,9 @@ const History: React.FC = () => {
     {
       accessorKey: "status",
       header: "Status",
+      cell: ({ row }) => (
+        <Badge variant="outline">{row.getValue("status")}</Badge>
+      ),
     },
   ];
 

@@ -1,4 +1,4 @@
-import { CircleDollarSign, Clock, Mail, User } from "lucide-react";
+import { CircleDollarSign, Clock, Mail, User, Users } from "lucide-react";
 
 export const navData = [
   {
@@ -24,15 +24,15 @@ export const navData = [
         url: "/rent",
         icon: Mail,
       },
-      {
-        title: "Rent History",
-        url: "/history",
-        icon: Clock,
-      },
+    ],
+  },
+  {
+    label: "Manager",
+    children: [
       {
         title: "User",
         url: "/manager",
-        icon: User,
+        icon: Users,
       },
     ],
   },

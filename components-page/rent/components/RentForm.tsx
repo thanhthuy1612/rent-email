@@ -29,18 +29,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ISearch } from "@/components-page/recharge/History";
+import { ISearch } from "@/components-page/rent/Rent";
 
 // ----------------------------------------------------------------------
 
-export interface IRechargeFormProps {
+export interface IRentFormProps {
   value: ISearch;
   handleSubmit: (value: ISearch) => void;
 }
-const RechargeForm: React.FC<IRechargeFormProps> = ({
-  value,
-  handleSubmit,
-}) => {
+const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
   const t = useTranslations();
 
   const listType = [
@@ -48,10 +45,10 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
     { id: 2, value: "2" },
     { id: 3, value: "3" },
   ];
-  const listStatus = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
+  const listServices = [
+    { id: "1", value: "1" },
+    { id: "2", value: "2" },
+    { id: "3", value: "3" },
   ];
 
   const formSchema = z
@@ -62,7 +59,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
       dateTo: z.date().max(new Date(), {
         message: t("recharge.date.error1"),
       }),
-      types: z.array(z.number()),
+      services: z.array(z.string()),
       statuses: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
@@ -80,7 +77,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
     defaultValues: {
       dateFrom: value.from,
       dateTo: value.to,
-      types: value.types,
+      services: value.services,
       statuses: value.statuses,
     },
   });
@@ -90,7 +87,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
       handleSubmit({
         from: values.dateFrom,
         to: values.dateTo,
-        types: values.types,
+        services: values.services,
         statuses: values.statuses,
       });
     } catch (error) {
@@ -185,30 +182,30 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
           />
           <FormField
             control={form.control}
-            name="types"
+            name="services"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("recharge.types.title")}</FormLabel>
+                <FormLabel>{t("recharge.services.title")}</FormLabel>
                 <Select
                   onValueChange={(event) => {
-                    const arrays = form.getValues("types");
-                    if (arrays.includes(Number(event))) {
+                    const arrays = form.getValues("services");
+                    if (arrays.includes(event)) {
                       form.setValue(
-                        "types",
-                        arrays.filter((item) => item !== Number(event))
+                        "services",
+                        arrays.filter((item) => item !== event)
                       );
                     } else {
-                      form.setValue("types", [...arrays, Number(event)]);
+                      form.setValue("services", [...arrays, event]);
                     }
                   }}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue
-                        placeholder={t("recharge.types.placeholder")}
+                        placeholder={t("recharge.services.placeholder")}
                       >
                         {field.value.length === 1
-                          ? listStatus.find(
+                          ? listServices.find(
                               (item) => item.id === field.value[0]
                             )?.value
                           : `${field.value.length} ${t("selected")}`}
@@ -216,7 +213,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {listStatus.map((item) => (
+                    {listServices.map((item) => (
                       <SelectItem key={item.id} value={item.id.toString()}>
                         <Checkbox checked={field.value.includes(item.id)} />
                         {item.value}
@@ -284,4 +281,4 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
   );
 };
 
-export default RechargeForm;
+export default RentForm;
