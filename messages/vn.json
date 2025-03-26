@@ -38,6 +38,30 @@
     "status": "Trạng thái",
     "message": "Tin nhắn"
   },
+  "global": {
+    "pickADate": "Chọn ngày",
+    "time": "Thời gian",
+    "amount": "Số tiền",
+    "balanceAfterTransfer": "Số dư sau biến động",
+    "content": "Nội dung",
+    "server": "Server",
+    "service": "Dịch vụ",
+    "price": "Giá",
+    "phoneNumber": "Số điện thoại",
+    "code": "Code",
+    "status": "Trạng thái",
+    "message": "Tin nhắn",
+    "userName": "Tên đăng nhập",
+    "balance": "Số dư",
+    "email": "E-mail",
+    "apiToken": "API Token",
+    "scopes": "Phạm vi",
+    "creationDate": "Ngày tạo",
+    "modificationDate": "Ngày sửa đổi",
+    "isDeleted": "Đã xóa",
+    "yes": "Có",
+    "no": "Không"
+  },
   "user": {
     "balance": "Số dư",
     "totalSubscriberCodes": "Tổng số code đã thuê",
@@ -74,6 +98,10 @@
     "types": {
       "title": "Kiểu",
       "placeholder": "Chọn kiểu"
+    },
+    "services": {
+      "title": "Dịch vụ",
+      "placeholder": "Chọn dịch vụ"
     },
     "statuses": {
       "title": "Trạng thái",
@@ -159,5 +187,11 @@
   },
   "changeKey": {
     "title": "Thay đổi api token"
+  },
+  "selected": "đã chọn",
+  "pagination": {
+    "total": "Tổng",
+    "item": "phần tử",
+    "rows": "Số hàng trên mỗi trang:"
   }
 }

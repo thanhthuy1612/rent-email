@@ -9,10 +9,7 @@ export const getDateTime = (day: Date) => {
   return day.getTime();
 };
 
-export const dateFormat = (
-  date?: Date,
-  formatDate = DateFormatType.FullDate
-) => {
+export const dateFormat = (date?: Date, formatDate = DateFormatType.Date) => {
   if (!date) {
     return "N/A";
   }

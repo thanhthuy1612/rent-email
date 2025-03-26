@@ -13,14 +13,14 @@ export interface ITransactionBody {
 }
 
 export interface IRequestBody {
-  pageNumber: 0;
-  pageSize: 0;
+  pageNumber: number;
+  pageSize: number;
   key: string;
   from: Date;
   to: Date;
   services: string[];
   statuses: number[];
-  dateAsc: true;
+  dateAsc: boolean;
 }
 
 export const keyService = {
