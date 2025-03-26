@@ -2,6 +2,7 @@
 
 import { loginService } from "@/api/user/login/login.service";
 import HeaderUserLayout from "@/components/header/HeaderUserLayout";
+import MobileDrawer from "@/components/header/MobileDrawer";
 import LoadingScreen from "@/components/loading/LoadingScreen";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { toast } from "@/hooks/use-toast";
@@ -62,9 +63,11 @@ const Layout: React.FC<Props> = ({ children }) => {
       router.push("/login");
     }
   }, []);
+
   return (
     <SidebarProvider>
       <AppSidebar />
+      <MobileDrawer />
       <main className="flex flex-col w-full h-screen">
         {loadingPage || loading ? (
           <LoadingScreen />
