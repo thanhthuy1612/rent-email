@@ -1,4 +1,14 @@
-import { CircleDollarSign, Clock, Mail, User, Users } from "lucide-react";
+import {
+  Banknote,
+  CircleDollarSign,
+  Clock,
+  Mail,
+  Menu,
+  Server,
+  User,
+  UserCheck,
+  Users,
+} from "lucide-react";
 
 export const navData = [
   {
@@ -33,6 +43,31 @@ export const navData = [
         title: "User",
         url: "/manager",
         icon: Users,
+      },
+      {
+        title: "Service",
+        url: "/service",
+        icon: Server,
+      },
+      {
+        title: "Partner",
+        url: "/partner",
+        icon: UserCheck,
+      },
+      {
+        title: "Recharge",
+        url: "/admin-recharge",
+        icon: Banknote,
+      },
+      {
+        title: "Request",
+        url: "/admin-request",
+        icon: Menu,
+      },
+      {
+        title: "Discount",
+        url: "/discount",
+        icon: Menu,
       },
     ],
   },

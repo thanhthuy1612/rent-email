@@ -1,10 +1,14 @@
 "use client";
 
-import { ITransactionBody, keyService } from "@/api/key/key.service";
-import RechargeForm from "@/components-page/recharge/components/RechargeForm";
+import {
+  ITransaction,
+  managerService,
+} from "@/api/user/manager/manager.service";
+import RechargeForm from "@/components-page/admin-recharge/components/RechargeForm";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { toast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/lib/hooks";
@@ -39,7 +43,7 @@ export interface IData {
   modificationDate: Date;
 }
 
-const History: React.FC = () => {
+const AdminRecharge: React.FC = () => {
   const [data, setData] = React.useState<IData[]>([]);
   const [total, setTotal] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -53,22 +57,21 @@ const History: React.FC = () => {
     statuses: [],
   });
   const t = useTranslations();
-  const { apiToken } = useAppSelector((item) => item.user);
 
-  const fetchData = async (body?: ITransactionBody) => {
+  const fetchData = async (body?: ITransaction) => {
     try {
       setIsLoading(true);
       const newBody = body ?? {
         pageNumber,
         pageSize,
-        key: apiToken ?? "",
         from: search.from,
         to: search.to,
         types: search.types,
         statuses: search.statuses,
         dateAsc: isDateAsc,
+        userIds: [],
       };
-      const res = await keyService.getTransaction(newBody);
+      const res = await managerService.getTransaction(newBody);
       if (!res.code) {
         setData(res.data.data);
         setTotal(res.data.total);
@@ -177,28 +180,28 @@ const History: React.FC = () => {
     fetchData({
       pageNumber,
       pageSize,
-      key: apiToken ?? "",
       ...values,
       dateAsc: false,
+      userIds: [],
     });
   };
 
   return (
-    <>
-      <RechargeForm value={search} handleSubmit={submitData} />
-      <div className="mt-5">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-      </div>
-      <DataTable columns={columns} data={data} />
-      <CustomPagination
-        total={total}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-      />
-    </>
+    <div className="max-w-[1120px] m-auto">
+      <Card className="p-5 m-5 mb-8">
+        <RechargeForm value={search} handleSubmit={submitData} />
+        <h3 className="font-bold mt-5">{t("recharge.historyRecharge")}</h3>
+        <DataTable columns={columns} data={data} />
+        <CustomPagination
+          total={total}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+        />
+      </Card>
+    </div>
   );
 };
 
-export default History;
+export default AdminRecharge;

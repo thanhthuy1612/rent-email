@@ -1,24 +1,37 @@
 "use client";
 
-import { ITransactionBody, keyService } from "@/api/key/key.service";
-import RechargeForm from "@/components-page/recharge/components/RechargeForm";
-import CustomPagination from "@/components/table/CustomPagination";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table";
-import { toast } from "@/hooks/use-toast";
-import { useAppSelector } from "@/lib/hooks";
-import { dateFormat } from "@/lib/useTime";
-import { cn, fNumber } from "@/lib/utils";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 import React from "react";
+import RentForm from "@/components-page/rent/components/RentForm";
+import { DataTable } from "@/components/ui/data-table";
+import CustomPagination from "@/components/table/CustomPagination";
+import { useAppSelector } from "@/lib/hooks";
+import { IRequestBody, keyService } from "@/api/key/key.service";
+import { toast } from "@/hooks/use-toast";
+import { ColumnDef } from "@tanstack/react-table";
+import { cn, fNumber } from "@/lib/utils";
+import { ArrowUpDown } from "lucide-react";
+import { dateFormat } from "@/lib/useTime";
+import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IRequest, managerService } from "@/api/user/manager/manager.service";
+
+// ----------------------------------------------------------------------
 
 export interface ISearch {
   from: Date;
   to: Date;
-  types: number[];
+  services: string[];
   statuses: number[];
 }
 
@@ -39,7 +52,7 @@ export interface IData {
   modificationDate: Date;
 }
 
-const History: React.FC = () => {
+const AdminRequest: React.FC = () => {
   const [data, setData] = React.useState<IData[]>([]);
   const [total, setTotal] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -49,26 +62,25 @@ const History: React.FC = () => {
   const [search, setSearch] = React.useState<ISearch>({
     from: new Date(new Date().setDate(new Date().getDate() - 7)),
     to: new Date(),
-    types: [],
+    services: [],
     statuses: [],
   });
   const t = useTranslations();
-  const { apiToken } = useAppSelector((item) => item.user);
 
-  const fetchData = async (body?: ITransactionBody) => {
+  const fetchData = async (body?: IRequest) => {
     try {
       setIsLoading(true);
       const newBody = body ?? {
         pageNumber,
         pageSize,
-        key: apiToken ?? "",
         from: search.from,
         to: search.to,
-        types: search.types,
+        services: search.services,
         statuses: search.statuses,
         dateAsc: isDateAsc,
+        userIds: [],
       };
-      const res = await keyService.getTransaction(newBody);
+      const res = await managerService.getRequest(newBody);
       if (!res.code) {
         setData(res.data.data);
         setTotal(res.data.total);
@@ -117,31 +129,31 @@ const History: React.FC = () => {
 
   const columns: ColumnDef<IData>[] = [
     {
+      accessorKey: "email",
+      header: "Email",
+    },
+    {
       accessorKey: "userName",
       header: "Username",
     },
     {
-      accessorKey: "type",
-      header: "Type",
+      accessorKey: "serviceName",
+      header: "Service",
     },
     {
-      accessorKey: "amount",
-      header: "Amount",
-      cell: ({ row }) => <>{fNumber(row.getValue("amount"), "vn")}</>,
+      accessorKey: "originalPrice",
+      header: "Price",
+      cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
     },
     {
-      accessorKey: "balanceBefore",
-      header: "Before",
-      cell: ({ row }) => <>{fNumber(row.getValue("balanceBefore"), "vn")}</>,
+      accessorKey: "discount",
+      header: "Discount",
+      cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     },
     {
-      accessorKey: "balanceAfter",
-      header: "After",
-      cell: ({ row }) => <>{fNumber(row.getValue("balanceAfter"), "vn")}</>,
-    },
-    {
-      accessorKey: "description",
-      header: "Description",
+      accessorKey: "finalPrice",
+      header: "Final Price",
+      cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
     },
     {
       accessorKey: "transCode",
@@ -149,7 +161,7 @@ const History: React.FC = () => {
     },
     {
       accessorKey: "creationDate",
-      header: ({}) => {
+      header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => setIsDateAs((pre) => !pre)}>
             Date
@@ -177,28 +189,29 @@ const History: React.FC = () => {
     fetchData({
       pageNumber,
       pageSize,
-      key: apiToken ?? "",
       ...values,
       dateAsc: false,
+      userIds: [],
     });
   };
 
   return (
-    <>
-      <RechargeForm value={search} handleSubmit={submitData} />
-      <div className="mt-5">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-      </div>
-      <DataTable columns={columns} data={data} />
-      <CustomPagination
-        total={total}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-      />
-    </>
+    <div className="max-w-[1120px] m-auto">
+      <Card className="p-5 m-5 mb-8">
+        <RentForm value={search} handleSubmit={submitData} />
+        <div className="mt-5">
+          <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
+        </div>
+        <DataTable columns={columns} data={data} />
+        <CustomPagination
+          total={total}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+        />
+      </Card>
+    </div>
   );
 };
-
-export default History;
+export default AdminRequest;
