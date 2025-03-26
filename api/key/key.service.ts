@@ -23,6 +23,11 @@ export interface IRequestBody {
   dateAsc: boolean;
 }
 
+export interface INewEmailBody {
+  key: string;
+  serviceName: string;
+}
+
 export const keyService = {
   async getRequest(body: IRequestBody) {
     const { data } = await axiosLocal.post(endpoints.key.getRequest, body);
@@ -30,6 +35,10 @@ export const keyService = {
   },
   async getTransaction(body: ITransactionBody) {
     const { data } = await axiosLocal.post(endpoints.key.getTransaction, body);
+    return data;
+  },
+  async getNewEmail(body: INewEmailBody) {
+    const { data } = await axiosLocal.post(endpoints.key.getNewEmail, body);
     return data;
   },
 };

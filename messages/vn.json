@@ -3,6 +3,24 @@
     "success": "Thành công",
     "error": "Thất bại"
   },
+  "sure": "Bạn chắc chắn?",
+  "update": "Update",
+  "partner": {
+    "name": "Tên",
+    "key": "Key",
+    "baseUrl": "Base Url",
+    "configurations": "Configurations",
+    "priority": "Priority",
+    "isDeleted": "Is Deleted"
+  },
+  "service": {
+    "name": "Name",
+    "price": "Giá",
+    "discount": "Giảm giá",
+    "description": "Mô tả",
+    "partnerName": "Partner Name",
+    "isDeleted": "Is Deleted"
+  },
   "login": {
     "title": "Đăng nhập",
     "description": "Chưa có tài khoản?",
@@ -23,20 +41,6 @@
       "placeholder": "Nhập captcha",
       "request": "Captcha bắt buộc"
     }
-  },
-  "global": {
-    "pickADate": "Chọn ngày",
-    "time": "Thời gian",
-    "amount": "Số tiền",
-    "balanceAfterTransfer": "Số dư sau biến động",
-    "content": "Nội dung",
-    "server": "Server",
-    "service": "Dịch vụ",
-    "price": "Giá",
-    "phoneNumber": "Số điện thoại",
-    "code": "Code",
-    "status": "Trạng thái",
-    "message": "Tin nhắn"
   },
   "global": {
     "pickADate": "Chọn ngày",
@@ -114,6 +118,7 @@
   },
   "search": "Tìm kiếm",
   "rent": {
+    "title": "Mua",
     "rentService": "Dịch vụ thuê",
     "rentNow": "Thuê số ngay",
     "requestNewService": "Yêu cầu thêm dịch vụ mới",
