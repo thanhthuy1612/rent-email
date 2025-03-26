@@ -10,10 +10,11 @@ interface ISearchParams {
 
 export const managerService = {
   async getAll(params: ISearchParams) {
-    const { data } = await axiosLocal.post(
-      endpoints.user.manager.getAll,
-      params
-    );
+    const { data } = await axiosLocal.post(endpoints.manager.getAll, params);
+    return data;
+  },
+  async updateUser(body: any) {
+    const { data } = await axiosLocal.post(endpoints.manager.updateUser, body);
     return data;
   },
 };

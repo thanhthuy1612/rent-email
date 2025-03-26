@@ -60,7 +60,8 @@
     "modificationDate": "Ngày sửa đổi",
     "isDeleted": "Đã xóa",
     "yes": "Có",
-    "no": "Không"
+    "no": "Không",
+    "action": "Hành động"
   },
   "user": {
     "balance": "Số dư",
@@ -193,5 +194,23 @@
     "total": "Tổng",
     "item": "phần tử",
     "rows": "Số hàng trên mỗi trang:"
+  },
+  "updateUser": {
+    "title": "Cập nhật người dùng",
+    "description": "Cập nhật thông tin người dùng",
+    "setPassword": "Đặt mật khẩu",
+    "creditBalance": "Số dư tín dụng",
+    "debitBalance": "Số dư ghi nợ",
+    "setStatus": "Đặt trạng thái",
+    "submit": "Gửi"
+  },
+  "status": {
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "suspended": "Đình chỉ"
+  },
+  "validation": {
+    "required": "bắt buộc",
+    "min": "nhỏ nhất"
   }
 }

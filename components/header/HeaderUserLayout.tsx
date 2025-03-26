@@ -14,14 +14,21 @@ import { Link } from "@/i18n/navigation";
 import { navData } from "@/layout/user/nav-data";
 import { useAppSelector } from "@/lib/hooks";
 import { fNumber, getLocale, getPathName } from "@/lib/utils";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@radix-ui/react-popover";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 
 // ----------------------------------------------------------------------
 
 const HeaderUserLayout: React.FC = () => {
   const [breadcrumb, setBreadcrumb] = React.useState<string[]>([]);
+  const { push } = useRouter();
 
   const pathname = usePathname() ?? "";
   const local = getLocale(pathname);
@@ -47,14 +54,50 @@ const HeaderUserLayout: React.FC = () => {
     getBreadcrumb();
   }, [pathname]);
 
+  const goToLogin = () => {
+    push("/login");
+  };
+
+  const goToUser = () => {
+    push("/user");
+  }
   return (
     <div>
       <div className="flex justify-end gap-5 py-3 border-b items-center px-10">
         <p className="text-layout-user-amount">
           {fNumber(balance ?? 0, local)} ₫
         </p>
-        <Avatar className="rounded-sm w-10 h-10">
-          <AvatarImage src="https://github.com/shadcn.png" />
+        <Avatar className="rounded-sm w-10 h-10 cursor-pointer">
+          <Popover>
+            <PopoverTrigger className="focus:outline-none">
+              <Avatar className="w-10 h-10 cursor-pointer">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="User Avatar"
+                />
+                <AvatarFallback>U</AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent className="w-48 bg-white rounded-lg shadow-lg p-2">
+              <div className="flex flex-col">
+                <Button
+                  variant="ghost"
+                  className="justify-start px-4 py-2 text-left"
+                  onClick={goToUser}
+                >
+                  Profile
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="justify-start px-4 py-2 text-left text-red-500 hover:bg-red-100"
+                  onClick={goToLogin}
+                >
+                  Sign Out
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+
           <AvatarFallback className="rounded-sm bg-nav-item-background-active text-nav-item-active">
             VN
           </AvatarFallback>

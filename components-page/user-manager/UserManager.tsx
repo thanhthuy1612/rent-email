@@ -114,6 +114,7 @@ const UserManager: React.FC = () => {
           total={state.totalElements}
           loading={state.loading}
           onPageChange={handlePageChange}
+          fetchData={fetchData}
         />
       </Card>
     </div>

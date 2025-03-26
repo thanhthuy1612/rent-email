@@ -18,5 +18,6 @@ export const endpoints = {
   },
   manager: {
     getAll: "/management/user/get-all",
+    updateUser: "/management/user/update-user",
   },
 };
