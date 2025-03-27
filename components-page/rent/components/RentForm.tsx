@@ -1,4 +1,8 @@
+import { managerService } from "@/api/user/manager/manager.service";
+import { ISearch } from "@/components-page/rent/Rent";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -12,15 +16,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Select,
   SelectContent,
@@ -28,8 +23,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ISearch } from "@/components-page/rent/Rent";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 // ----------------------------------------------------------------------
 
@@ -39,16 +40,14 @@ export interface IRentFormProps {
 }
 const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
   const t = useTranslations();
+  const [listServices, setListServices] = React.useState<
+    { id: string; value: string }[]
+  >([]);
 
   const listType = [
     { id: 1, value: "1" },
     { id: 2, value: "2" },
     { id: 3, value: "3" },
-  ];
-  const listServices = [
-    { id: "1", value: "1" },
-    { id: "2", value: "2" },
-    { id: "3", value: "3" },
   ];
 
   const formSchema = z
@@ -94,6 +93,25 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
       console.error(error);
     }
   };
+  React.useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await managerService.getService();
+        if (res && res.data) {
+          setListServices(
+            res.data.map((service: any) => ({
+              id: service.name,
+              value: service.name,
+            }))
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      }
+    };
+
+    fetchServices();
+  }, []);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
