@@ -42,7 +42,7 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
     price: z.number().min(1),
     discount: z.number(),
     description: z.string().min(1),
-    partnerName: z.string().min(1),
+    partnerName: z.string(),
     isDeleted: z.boolean(),
   });
 
@@ -53,7 +53,7 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
       price: data.price,
       discount: data.discount,
       description: data.description,
-      partnerName: data.partnerName,
+      partnerName: data.partnerName ?? "",
       isDeleted: data.isDeleted,
     },
   });

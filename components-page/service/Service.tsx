@@ -181,7 +181,7 @@ const Service: React.FC = () => {
                   price: row.getValue("price"),
                   discount: row.getValue("discount"),
                   description: row.getValue("description"),
-                  partnerName: row.getValue("partnerName"),
+                  partnerName: "",
                   isDeleted: row.getValue("isDeleted"),
                 }}
                 handleSubmit={() => {

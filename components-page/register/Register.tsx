@@ -32,6 +32,7 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [image, setImage] = React.useState<string>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(true);
 
   const t = useTranslations();
   const router = useRouter();
@@ -140,7 +141,7 @@ const Register: React.FC = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setIsLoading(true);
+      setIsLoadingSubmit(true);
       const res = await registerService.register({
         userName: values.username,
         password: values.password,
@@ -172,11 +173,10 @@ const Register: React.FC = () => {
           ),
         });
         getCaptcha();
+        setIsLoadingSubmit(false);
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
   return (
@@ -349,6 +349,7 @@ const Register: React.FC = () => {
           )}
         />
         <Button
+          disabled={isLoading || isLoadingSubmit}
           type="submit"
           className="w-full mt-3 cursor-pointer bg-sky-500 hover:bg-sky-600"
         >

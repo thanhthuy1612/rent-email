@@ -55,13 +55,18 @@ const Layout: React.FC<Props> = ({ children }) => {
       setLoading(false);
     }
   };
-  React.useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      getUser();
-    } else {
-      router.push("/login");
-    }
+  React.useLayoutEffect(() => {
+    const checkLogin = () => {
+      dispatch(updateLoad(true));
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        getUser();
+      } else {
+        router.push("/login");
+      }
+      dispatch(updateLoad(false));
+    };
+    checkLogin();
   }, []);
 
   return (

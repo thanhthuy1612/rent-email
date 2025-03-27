@@ -28,10 +28,15 @@ const HeaderUserLayout: React.FC = () => {
   const t = useTranslations();
 
   const { balance } = useAppSelector((item) => item.user);
+  const { scopes } = useAppSelector((item) => item.user);
 
   const getBreadcrumb = () => {
     const paths = getPathName(pathname);
-    const findUrl = navData.reduce((resultNav: string[], nav) => {
+    const navs =
+      scopes === "admin"
+        ? navData
+        : navData.filter((item) => item.label !== "Manager");
+    const findUrl = navs.reduce((resultNav: string[], nav) => {
       return nav.children.reduce((result: string[], item) => {
         if (paths.includes(item.url)) {
           return [nav.label, item.title];

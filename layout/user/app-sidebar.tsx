@@ -18,7 +18,8 @@ import Image from "next/image";
 import logo from "@/public/imgs/logo.webp";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { generateStaticParams, getPathName } from "@/lib/utils";
+import { getPathName } from "@/lib/utils";
+import { useAppSelector } from "@/lib/hooks";
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -28,7 +29,11 @@ export function AppSidebar() {
     toggleSidebar();
   };
   const pathActive = getPathName(pathname);
-
+  const { scopes } = useAppSelector((item) => item.user);
+  const navs =
+    scopes === "admin"
+      ? navData
+      : navData.filter((item) => item.label !== "Manager");
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="bg-nav-header">
@@ -53,7 +58,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent className="bg-nav-body text-nav-text">
-        {navData.map((nav) => (
+        {navs.map((nav) => (
           <SidebarGroup key={nav.label}>
             <SidebarGroupLabel className="text-nav-label text-[0.85rem]">
               {nav.label}

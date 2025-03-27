@@ -5,7 +5,8 @@ import { toast } from "@/hooks/use-toast";
 import { updateApiToken } from "@/lib/features/user";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { dateFormat } from "@/lib/useTime";
-import { cn } from "@/lib/utils";
+import { cn, fNumber } from "@/lib/utils";
+import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -23,7 +24,7 @@ const UserInfo: React.FC = () => {
     { title: t("user.email"), value: user.email },
     { title: t("user.scopes"), value: user.scopes },
     { title: t("user.status"), value: user.status },
-    { title: t("user.balance"), value: user.balance },
+    { title: t("user.balance"), value: fNumber(user.balance ?? 0, "vn") },
     { title: t("user.creationDate"), value: dateFormat(user.creationDate) },
     {
       title: t("user.modificationDate"),
@@ -91,14 +92,17 @@ const UserInfo: React.FC = () => {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4 mb-10">
-          <div className="flex mb-5 bg-[#f1faff] justify-between items-center rounded-2xl p-5 border-dashed border-1 border-[#009ef7]">
-            <div className="flex flex-col gap-1">
-              <h4 className="font-bold">Token</h4>
-              <div
-                onClick={handleCopy}
-                className="text-gray-700 text-sm cursor-pointer"
-              >
-                {user.apiToken}
+          <div className="flex flex-col md:flex-row gap-5 mb-5 bg-[#f1faff] justify-between items-center rounded-2xl p-5 border-dashed border-1 border-[#009ef7]">
+            <div className="flex gap-5 items-center">
+              <Info className="text-blue-500" />
+              <div className="flex flex-col gap-1">
+                <h4 className="font-bold text-blue-500">Api Token</h4>
+                <div
+                  onClick={handleCopy}
+                  className="text-blue-400 text-sm cursor-pointer"
+                >
+                  {user.apiToken}
+                </div>
               </div>
             </div>
             <Button
@@ -109,12 +113,16 @@ const UserInfo: React.FC = () => {
               {t("changeKey.title")}
             </Button>
           </div>
-          {listInfo.map((item) => (
-            <div key={item.title} className="grid grid-cols-2">
-              <label className="text-[#a1a5b7]">{item.title}</label>
-              <span>{item.value}</span>
-            </div>
-          ))}
+          <div className="rounded-2xl p-5 border-dashed border-1">
+            {listInfo.map((item) => (
+              <div key={item.title} className="grid grid-cols-3">
+                <label className="text-[#a1a5b7] font-bold col-span-1">
+                  {item.title}
+                </label>
+                <span className="col-span-2">{item.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>

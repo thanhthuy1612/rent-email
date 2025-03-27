@@ -30,7 +30,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [image, setImage] = React.useState<string>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-
+  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(true);
   const t = useTranslations();
   const router = useRouter();
 
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setIsLoading(true);
+      setIsLoadingSubmit(true);
       const res = await loginService.login(values);
       if (!res.code) {
         toast({
@@ -109,11 +109,10 @@ const Login: React.FC = () => {
           ),
         });
         getCaptcha();
+        setIsLoadingSubmit(false);
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
   return (
@@ -213,7 +212,7 @@ const Login: React.FC = () => {
         <Button
           type="submit"
           className="w-full cursor-pointer bg-sky-500 hover:bg-sky-600"
-          disabled={isLoading}
+          disabled={isLoading || isLoadingSubmit}
         >
           {t("login.title")}
         </Button>

@@ -56,7 +56,7 @@ const User: React.FC = () => {
                   {t("user.balance")}
                 </div>
               </div>
-              <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6">
+              <div className="border hidden md:block border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6">
                 <div className="flex items-center gap-2 mb-2">
                   <Clock className="size-4 text-red-500" />
                   <span className="font-bold">

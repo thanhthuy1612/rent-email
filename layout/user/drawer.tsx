@@ -7,7 +7,13 @@ import logoColor from "@/public/imgs/logo.webp";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { MenuIcon } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { CircleDollarSign, Mail, User, Users } from "lucide-react";
 
 export const navData = [
@@ -35,16 +41,26 @@ export interface IHeaderHomePage {
   className: string;
 }
 
-const CustomDrawer: React.FC<IHeaderHomePage> = ({ colorWhite, showSheet, setShowSheet, className }) => {
+const CustomDrawer: React.FC<IHeaderHomePage> = ({
+  colorWhite,
+  showSheet,
+  setShowSheet,
+  className,
+}) => {
   return (
     <div className={className}>
-      <div className={`${colorWhite ? "bg-white border-b" : "bg-landing"} flex justify-center items-center`}>
+      <div
+        className={`${colorWhite ? "bg-white border-b" : "bg-landing"} flex justify-center items-center`}
+      >
         <div className="w-full max-w-[1190px] flex py-3 px-8 md:px-0 gap-10 justify-between items-center">
           <div className="flex gap-5 items-center">
             <div className="block md:hidden">
               <Sheet onOpenChange={setShowSheet} open={showSheet}>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className={`!bg-transparent ${colorWhite ? "text-black opacity-80" : "text-white"}`}>
+                  <Button
+                    variant="outline"
+                    className={`!bg-transparent ${colorWhite ? "text-black opacity-80" : "text-white"}`}
+                  >
                     <MenuIcon />
                   </Button>
                 </SheetTrigger>
@@ -56,7 +72,11 @@ const CustomDrawer: React.FC<IHeaderHomePage> = ({ colorWhite, showSheet, setSho
                     <div key={index} className="space-y-2 mt-4">
                       <h3 className="text-lg font-semibold">{section.label}</h3>
                       {section.children.map((item, i) => (
-                        <Link key={i} href={item.url} className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-md">
+                        <Link
+                          key={i}
+                          href={item.url}
+                          className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-md"
+                        >
                           <item.icon className="w-5 h-5" />
                           {item.title}
                         </Link>
@@ -67,11 +87,17 @@ const CustomDrawer: React.FC<IHeaderHomePage> = ({ colorWhite, showSheet, setSho
               </Sheet>
             </div>
             <Link href="/">
-              <Image src={colorWhite ? logoColor : logo} alt="Logo" className="w-[50px] object-cover" />
+              <Image
+                src={colorWhite ? logoColor : logo}
+                alt="Logo"
+                className="w-[50px] object-cover"
+              />
             </Link>
           </div>
           <Link href="/login">
-            <Button className="text-white bg-emerald-500 hover:bg-emerald-600">Login</Button>
+            <Button className="text-white bg-emerald-500 hover:bg-emerald-600">
+              Login
+            </Button>
           </Link>
         </div>
       </div>

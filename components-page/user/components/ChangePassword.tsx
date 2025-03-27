@@ -27,28 +27,14 @@ import { z } from "zod";
 const ChangePassword: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(true);
+
   const t = useTranslations();
   const router = useRouter();
 
   const formSchema = z
     .object({
-      oldPassword: z
-        .string()
-        .min(6, { message: t("register.password.error1") })
-        .max(18, { message: t("register.password.error2") })
-        .refine((value) => /[A-Za-z]/.test(value), {
-          message: t("register.password.error3"),
-        })
-        .refine((value) => /\d/.test(value), {
-          message: t("register.password.error4"),
-        })
-        .refine(
-          (value) =>
-            /^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|-]+$/.test(value),
-          {
-            message: t("register.password.error5"),
-          }
-        ),
+      oldPassword: z.string().min(1),
       password: z
         .string()
         .min(6, { message: t("register.password.error1") })
@@ -105,7 +91,7 @@ const ChangePassword: React.FC = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setIsLoading(true);
+      setIsLoadingSubmit(true);
       const res = await changeService.changePassword({
         oldPassword: values.oldPassword,
         newPassword: values.password,
@@ -120,6 +106,10 @@ const ChangePassword: React.FC = () => {
             "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
           ),
         });
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("accessToken");
+        delete axiosLocal.defaults.headers.common.Authorization;
+        router.push("/login");
       } else {
         toast({
           title: t("alert.error"),
@@ -130,15 +120,10 @@ const ChangePassword: React.FC = () => {
             "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
           ),
         });
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("accessToken");
-        delete axiosLocal.defaults.headers.common.Authorization;
-        router.push("/login");
+        setIsLoadingSubmit(false);
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -251,7 +236,7 @@ const ChangePassword: React.FC = () => {
             />
             <Button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isLoadingSubmit}
               className="w-full mt-3 cursor-pointer bg-sky-500 hover:bg-sky-600"
             >
               {t("changePassword.send")}

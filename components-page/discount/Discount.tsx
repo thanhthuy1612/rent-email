@@ -18,7 +18,7 @@ import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, Pen } from "lucide-react";
+import { ArrowUpDown, Pen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -48,7 +48,9 @@ const Discount: React.FC = () => {
       const res = await managerService.getDiscount();
       if (!res.code) {
         setResult(res.data);
-        setData(res.data);
+        setData(
+          res.data.slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
+        );
         setTotal(res.data.length);
       } else {
         toast({
@@ -77,26 +79,6 @@ const Discount: React.FC = () => {
   React.useEffect(() => {
     setData(result.slice((pageNumber - 1) * pageSize, pageNumber * pageSize));
   }, [pageNumber]);
-
-  const handleCopy = async (value: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      toast({
-        title: "Copy successful!",
-        className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-        ),
-      });
-    } catch (err) {
-      toast({
-        title: "Copy failed!",
-        variant: "destructive",
-        className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
-        ),
-      });
-    }
-  };
 
   React.useEffect(() => {
     if (!isLoading) {

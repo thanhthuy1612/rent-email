@@ -13,6 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
@@ -114,6 +120,10 @@ const Partner: React.FC = () => {
     }
   }, [pageSize]);
 
+  const getValue = (value: string) => {
+    return `${value.substring(0, 6)}...${value.slice(-3)}`;
+  };
+
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "name",
@@ -123,17 +133,24 @@ const Partner: React.FC = () => {
       accessorKey: "apiKey",
       header: "Api key",
       cell: ({ row }) => (
-        <Button
-          onClick={() => {
-            handleCopy(row.getValue("apiKey"));
-          }}
-          type="submit"
-          size="sm"
-          className="px-3"
-        >
-          <span className="sr-only">Copy</span>
-          <Copy />
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => {
+                  handleCopy(row.getValue("apiKey"));
+                }}
+                type="submit"
+                size="sm"
+                className="px-3"
+              >
+                <span className="sr-only">Copy</span>
+                <Copy />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{getValue(row.getValue("apiKey"))}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       ),
     },
     {
