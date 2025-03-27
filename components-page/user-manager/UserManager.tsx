@@ -3,12 +3,10 @@ import { managerService } from "@/api/user/manager/manager.service";
 import { Card } from "@/components/ui/card";
 import useObjectState from "@/hooks/use-object-state";
 import { useTranslations } from "next-intl";
-import ManagerUserTable from "./components/ManagerUserTable";
 import { useEffect } from "react";
-import { set } from "date-fns";
-import { Input } from "@/components/ui/input";
-import CustomSelect from "@/components/select/CustomSelect";
-import { STATUS_LIST } from "@/constants/select";
+import ManagerUserTable from "./components/ManagerUserTable";
+import UserManagerForm from "./components/UserManagerForm";
+import CustomPagination from "@/components/table/CustomPagination";
 interface User {
   id: string;
   userName: string;
@@ -52,7 +50,7 @@ const UserManager: React.FC = () => {
 
   const fetchData = () => {
     setState({ loading: true });
-
+    debugger
     managerService
       .getAll(state.params)
       .then((data) => {
@@ -72,12 +70,12 @@ const UserManager: React.FC = () => {
     setState({ params: { ...state.params, pageNumber: page } });
   };
 
-  const handleSelectChange = (value: any) => {
-    setState({ params: { ...state.params, statuses: value } });
-  };
+  const handleSizeChange = (size: number) => {
+    setState({ params: { ...state.params, pageSize: size } });
+  }
 
-  const handleChangeInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ params: { ...state.params, searchUsername: e.target.value } });
+  const handleSelectChange = (values: any) => {
+    setState({ params: { ...state.params, ...values } });
   };
 
   useEffect(() => {
@@ -87,34 +85,20 @@ const UserManager: React.FC = () => {
   return (
     <div className="max-w-[1120px] m-auto">
       <Card className="p-7 mb-8">
-        <div className="grid grid-cols-10 gap-2">
-          <div className="col-span-2">
-            <Input
-              placeholder="Tìm theo tên"
-              onChange={handleChangeInputName}
-            />
-          </div>
-          <div className="col-span-2 h-10">
-            <CustomSelect
-              options={STATUS_LIST}
-              value={state.params.statuses}
-              onChange={handleSelectChange}
-              className="h-10"
-            />
-          </div>
-        </div>
-      </Card>
-      <Card className="p-7 mb-8">
+        <UserManagerForm
+          value={state.params}
+          handleSubmit={handleSelectChange}
+        />
         <ManagerUserTable
           data={state.users}
-          params={{
-            page: state.params.pageNumber,
-            size: state.params.pageSize,
-          }}
-          total={state.totalElements}
-          loading={state.loading}
-          onPageChange={handlePageChange}
           fetchData={fetchData}
+        />
+        <CustomPagination
+          total={state.totalElements}
+          pageSize={state.params.pageSize}
+          setPageSize={handleSizeChange}
+          pageNumber={state.params.pageNumber}
+          setPageNumber={handlePageChange}
         />
       </Card>
     </div>
