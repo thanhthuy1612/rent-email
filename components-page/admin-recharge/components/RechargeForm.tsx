@@ -1,4 +1,7 @@
+import { ISearch } from "@/components-page/recharge/History";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -12,15 +15,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Select,
   SelectContent,
@@ -28,8 +22,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ISearch } from "@/components-page/recharge/History";
+import { TransactionStatus, TransactionType } from "@/enums/enum";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 // ----------------------------------------------------------------------
 
@@ -44,14 +45,14 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
   const t = useTranslations();
 
   const listType = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
+    { id: TransactionType.Credit, value: "Credit" },
+    { id: TransactionType.Debit, value: "Debit" },
   ];
   const listStatus = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
+    { id: TransactionStatus.Timeout, value: "Timeout" },
+    { id: TransactionStatus.Cancel, value: "Cancel" },
+    { id: TransactionStatus.Created, value: "Created" },
+    { id: TransactionStatus.Success, value: "Success" },
   ];
 
   const formSchema = z
@@ -208,7 +209,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         placeholder={t("recharge.types.placeholder")}
                       >
                         {field.value.length === 1
-                          ? listStatus.find(
+                          ? listType.find(
                               (item) => item.id === field.value[0]
                             )?.value
                           : `${field.value.length} ${t("selected")}`}
@@ -216,7 +217,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {listStatus.map((item) => (
+                    {listType.map((item) => (
                       <SelectItem key={item.id} value={item.id.toString()}>
                         <Checkbox checked={field.value.includes(item.id)} />
                         {item.value}
@@ -253,14 +254,14 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         placeholder={t("recharge.statuses.placeholder")}
                       >
                         {field.value.length === 1
-                          ? listType.find((item) => item.id === field.value[0])
+                          ? listStatus.find((item) => item.id === field.value[0])
                               ?.value
                           : `${field.value.length} ${t("selected")}`}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {listType.map((item) => (
+                    {listStatus.map((item) => (
                       <SelectItem key={item.id} value={item.id.toString()}>
                         <Checkbox checked={field.value.includes(item.id)} />
                         {item.value}

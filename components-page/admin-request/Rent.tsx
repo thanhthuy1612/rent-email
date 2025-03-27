@@ -1,30 +1,19 @@
 "use client";
 
+import { IRequest, managerService } from "@/api/user/manager/manager.service";
+import RentForm from "@/components-page/rent/components/RentForm";
+import CustomPagination from "@/components/table/CustomPagination";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useTranslations } from "next-intl";
-import React from "react";
-import RentForm from "@/components-page/rent/components/RentForm";
 import { DataTable } from "@/components/ui/data-table";
-import CustomPagination from "@/components/table/CustomPagination";
-import { useAppSelector } from "@/lib/hooks";
-import { IRequestBody, keyService } from "@/api/key/key.service";
 import { toast } from "@/hooks/use-toast";
-import { ColumnDef } from "@tanstack/react-table";
-import { cn, fNumber } from "@/lib/utils";
-import { ArrowUpDown } from "lucide-react";
 import { dateFormat } from "@/lib/useTime";
-import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { IRequest, managerService } from "@/api/user/manager/manager.service";
+import { cn, fNumber } from "@/lib/utils";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React, { useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -65,6 +54,7 @@ const AdminRequest: React.FC = () => {
     services: [],
     statuses: [],
   });
+
   const t = useTranslations();
 
   const fetchData = async (body?: IRequest) => {
@@ -102,18 +92,6 @@ const AdminRequest: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
-    if (isLoading) {
-      fetchData();
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (!isLoading) {
-      fetchData();
-    }
-  }, [isDateAsc, pageNumber]);
-
   const resetPage = () => {
     if (!isLoading) {
       if (pageNumber !== 1) {
@@ -123,9 +101,6 @@ const AdminRequest: React.FC = () => {
       }
     }
   };
-  React.useEffect(() => {
-    resetPage();
-  }, [pageSize]);
 
   const columns: ColumnDef<IData>[] = [
     {
@@ -195,10 +170,46 @@ const AdminRequest: React.FC = () => {
     });
   };
 
+  const [listServices, setListServices] = React.useState<
+    { id: string; value: string }[]
+  >([]);
+  const fetchServices = useCallback(async () => {
+    try {
+      const res = await managerService.getService();
+      if (res && res.data) {
+        setListServices(
+          res.data.map((service: any) => ({
+            id: service.name,
+            value: service.name,
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch services:", error);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    resetPage();
+  }, [pageSize]);
+
+  React.useEffect(() => {
+    fetchData();
+  }, [isDateAsc, pageNumber]);
+
+  React.useEffect(() => {
+    fetchData();
+    fetchServices();
+  }, []);
+
   return (
     <div className="max-w-[1120px] m-auto">
       <Card className="p-5 m-5 mb-8">
-        <RentForm value={search} handleSubmit={submitData} />
+        <RentForm
+          value={search}
+          handleSubmit={submitData}
+          listServices={listServices}
+        />
         <div className="mt-5">
           <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
         </div>

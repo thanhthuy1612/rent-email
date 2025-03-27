@@ -1,5 +1,3 @@
-import { managerService } from "@/api/user/manager/manager.service";
-import { ISearch } from "@/components-page/rent/Rent";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -23,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { EmailType } from "@/enums/enum";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -35,19 +34,20 @@ import { z } from "zod";
 // ----------------------------------------------------------------------
 
 export interface IRentFormProps {
-  value: ISearch;
-  handleSubmit: (value: ISearch) => void;
+  value: any;
+  handleSubmit: (value: any) => void;
+  listServices: any[];
 }
-const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
+const RentForm: React.FC<IRentFormProps> = ({
+  value,
+  handleSubmit,
+  listServices,
+}) => {
   const t = useTranslations();
-  const [listServices, setListServices] = React.useState<
-    { id: string; value: string }[]
-  >([]);
 
   const listType = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
+    { id: EmailType.Gmail, value: "Gmail" },
+    { id: EmailType.Hotmail, value: "Hotmail" },
   ];
 
   const formSchema = z
@@ -59,7 +59,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
         message: t("recharge.date.error1"),
       }),
       services: z.array(z.string()),
-      statuses: z.array(z.number()),
+      types: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
       if (data.dateTo <= data.dateFrom) {
@@ -76,8 +76,8 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
     defaultValues: {
       dateFrom: value.from,
       dateTo: value.to,
-      services: value.services,
-      statuses: value.statuses,
+      services: value.services || [],
+      types: value.types || [],
     },
   });
 
@@ -87,31 +87,13 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
         from: values.dateFrom,
         to: values.dateTo,
         services: values.services,
-        statuses: values.statuses,
+        types: values.types,
       });
     } catch (error) {
       console.error(error);
     }
   };
-  React.useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const res = await managerService.getService();
-        if (res && res.data) {
-          setListServices(
-            res.data.map((service: any) => ({
-              id: service.name,
-              value: service.name,
-            }))
-          );
-        }
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-      }
-    };
 
-    fetchServices();
-  }, []);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -222,11 +204,12 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
                       <SelectValue
                         placeholder={t("recharge.services.placeholder")}
                       >
-                        {field.value.length === 1
-                          ? listServices.find(
-                              (item) => item.id === field.value[0]
-                            )?.value
-                          : `${field.value.length} ${t("selected")}`}
+                        {field.value.length !== 0 &&
+                          (field.value.length === 1
+                            ? listServices.find(
+                                (item) => item.id === field.value[0]
+                              )?.value
+                            : `${field.value.length} ${t("selected")}`)}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
@@ -245,36 +228,42 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
           />
           <FormField
             control={form.control}
-            name="statuses"
+            name="types"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("recharge.statuses.title")}</FormLabel>
+                <FormLabel>{t("recharge.types.title")}</FormLabel>
                 <Select
                   onValueChange={(event) => {
-                    const arrays = form.getValues("statuses");
+                    const arrays = form.getValues("types");
                     if (arrays.includes(Number(event))) {
                       form.setValue(
-                        "statuses",
+                        "types",
                         arrays.filter((item) => item !== Number(event))
                       );
                     } else {
-                      form.setValue("statuses", [...arrays, Number(event)]);
+                      form.setValue("types", [...arrays, Number(event)]);
                     }
                   }}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue
-                        placeholder={t("recharge.statuses.placeholder")}
+                        placeholder={t("recharge.types.placeholder")}
                       >
-                        {field.value.length === 1
-                          ? listType.find((item) => item.id === field.value[0])
-                              ?.value
-                          : `${field.value.length} ${t("selected")}`}
+                        {form.getValues("types").length === 1
+                          ? listType.find(
+                              (item) => item.id === form.getValues("types")[0]
+                            )?.value
+                          : `${form.getValues("types").length} ${t("selected")}`}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent
+                    onCloseAutoFocus={(e) => {
+                      debugger;
+                      e.preventDefault();
+                    }}
+                  >
                     {listType.map((item) => (
                       <SelectItem key={item.id} value={item.id.toString()}>
                         <Checkbox checked={field.value.includes(item.id)} />

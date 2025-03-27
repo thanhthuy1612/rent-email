@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { UserStatus } from "@/enums/enum";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -35,11 +36,16 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
   const t = useTranslations();
 
   const listType = [
-    { id: 1, value: "1" },
-
-    { id: -1, value: "-1" },
+    {
+      id: UserStatus.Banned,
+      value: "Banned",
+    },
+    {
+      id: UserStatus.Active,
+      value: "Active",
+    },
   ];
-
+  console.log("listType", UserStatus);
   const formSchema = z
     .object({
       searchUsername: z.string(),
@@ -76,11 +82,7 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
               <FormItem>
                 <FormLabel>Tìm theo tên</FormLabel>
                 <FormControl>
-                  <Input
-                    type="number"
-                    placeholder={"Nhập tên"}
-                    {...field}
-                  />
+                  <Input type="number" placeholder={"Nhập tên"} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

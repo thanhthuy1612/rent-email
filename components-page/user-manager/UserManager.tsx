@@ -50,7 +50,6 @@ const UserManager: React.FC = () => {
 
   const fetchData = () => {
     setState({ loading: true });
-    debugger
     managerService
       .getAll(state.params)
       .then((data) => {

@@ -123,7 +123,8 @@
     "rentService": "Dịch vụ thuê",
     "rentNow": "Thuê số ngay",
     "requestNewService": "Yêu cầu thêm dịch vụ mới",
-    "waitList": "Danh sách các số đang chờ tin nhắn"
+    "waitList": "Danh sách các số đang chờ tin nhắn",
+    "type": "Loại dịch vụ"
   },
   "rentHistory": {
     "latest100Record": "Danh sách 100 số gần nhất đã thuê",
