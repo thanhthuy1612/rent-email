@@ -7,7 +7,7 @@ import History from "./History";
 
 const Recharge: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 gap-6 mx-5">
+    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
       <Card className="p-5">
         <ShowQR
           value={
@@ -16,9 +16,7 @@ const Recharge: React.FC = () => {
         />
       </Card>
 
-      <Card className="p-5 mb-8">
-        <History />
-      </Card>
+      <History />
     </div>
   );
 };

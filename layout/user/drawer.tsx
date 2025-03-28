@@ -2,8 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/imgs/logo-landing.webp";
-import logoColor from "@/public/imgs/logo.webp";
+import logo from "@/public/imgs/logo.png";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { MenuIcon } from "lucide-react";
@@ -87,11 +86,7 @@ const CustomDrawer: React.FC<IHeaderHomePage> = ({
               </Sheet>
             </div>
             <Link href="/">
-              <Image
-                src={colorWhite ? logoColor : logo}
-                alt="Logo"
-                className="w-[50px] object-cover"
-              />
+              <Image src={logo} alt="Logo" className="w-[50px] object-cover" />
             </Link>
           </div>
           <Link href="/login">

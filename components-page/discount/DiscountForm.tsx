@@ -55,7 +55,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
       isDeleted: z.boolean(),
     })
     .superRefine((data, ctx) => {
-      if (data.endTime <= data.startTime) {
+      if (data.endTime < data.startTime) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Ngày đến phải lớn hơn ngày từ",

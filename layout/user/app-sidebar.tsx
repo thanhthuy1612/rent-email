@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { navData } from "@/layout/user/nav-data";
 import Image from "next/image";
-import logo from "@/public/imgs/logo.webp";
+import logo from "@/public/imgs/logo.png";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { getPathName } from "@/lib/utils";

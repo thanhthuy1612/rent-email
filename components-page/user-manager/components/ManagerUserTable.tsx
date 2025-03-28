@@ -7,6 +7,7 @@ import { Edit } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import UpdateUserModal from "./UpdateUserModal";
+import { dateFormat } from "@/lib/useTime";
 
 interface User {
   id: string;
@@ -70,15 +71,6 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
 
   const columns: ColumnDef<User>[] = [
     {
-      accessorKey: "action",
-      header: t("global.action"),
-      cell: ({ row }) => (
-        <Button onClick={() => handleEditClick(row.original)}>
-          <Edit />
-        </Button>
-      ),
-    },
-    {
       accessorKey: "userName",
       header: t("global.userName"),
     },
@@ -112,10 +104,24 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
     {
       accessorKey: "creationDate",
       header: t("global.creationDate"),
+      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
     },
     {
       accessorKey: "modificationDate",
       header: t("global.modificationDate"),
+      cell: ({ row }) => <>{dateFormat(row.getValue("modificationDate"))}</>,
+    },
+    {
+      accessorKey: "action",
+      header: t("global.action"),
+      cell: ({ row }) => (
+        <Button
+          className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
+          onClick={() => handleEditClick(row.original)}
+        >
+          <Edit />
+        </Button>
+      ),
     },
   ];
 

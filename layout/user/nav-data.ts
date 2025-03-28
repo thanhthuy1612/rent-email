@@ -4,6 +4,7 @@ import {
   Clock,
   Mail,
   Menu,
+  MoveDown,
   Server,
   User,
   UserCheck,
@@ -67,7 +68,7 @@ export const navData = [
       {
         title: "Discount",
         url: "/discount",
-        icon: Menu,
+        icon: MoveDown,
       },
     ],
   },

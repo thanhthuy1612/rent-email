@@ -71,7 +71,7 @@ const UserManager: React.FC = () => {
 
   const handleSizeChange = (size: number) => {
     setState({ params: { ...state.params, pageSize: size } });
-  }
+  };
 
   const handleSelectChange = (values: any) => {
     setState({ params: { ...state.params, ...values } });
@@ -82,16 +82,15 @@ const UserManager: React.FC = () => {
   }, [state.params]);
 
   return (
-    <div className="max-w-[1120px] m-auto">
-      <Card className="p-7 mb-8">
+    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+      <Card className="p-5">
         <UserManagerForm
           value={state.params}
           handleSubmit={handleSelectChange}
         />
-        <ManagerUserTable
-          data={state.users}
-          fetchData={fetchData}
-        />
+      </Card>
+      <Card className="p-5 mb-8">
+        <ManagerUserTable data={state.users} fetchData={fetchData} />
         <CustomPagination
           total={state.totalElements}
           pageSize={state.params.pageSize}

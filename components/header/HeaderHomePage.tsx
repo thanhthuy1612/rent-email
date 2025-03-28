@@ -2,8 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/imgs/logo-landing.webp";
-import logoColor from "@/public/imgs/logo.webp";
+import logo from "@/public/imgs/logo.png";
 import { Button } from "@/components/ui/button";
 import LocaleSwitcher from "@/components/locale/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
@@ -65,9 +64,9 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
             </div>
             <Link href={"/"}>
               <Image
-                src={colorWhite ? logoColor : logo}
+                src={logo}
                 alt="download-img"
-                className="w-[100%] object-cover max-w-[50px]"
+                className="w-[100%] object-cover max-w-[30px]"
               />
             </Link>
           </div>

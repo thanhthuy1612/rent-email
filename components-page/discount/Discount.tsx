@@ -2,23 +2,21 @@
 
 import { managerService } from "@/api/user/manager/manager.service";
 import DiscountForm from "@/components-page/discount/DiscountForm";
-import CustomPagination from "@/components/table/CustomPagination";
-import { Badge } from "@/components/ui/badge";
+import LoadingScreen from "@/components/loading/LoadingScreen";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { DataTable } from "@/components/ui/data-table";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { DateFormatType } from "@/enums/DateFormatType";
 import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Pen } from "lucide-react";
+import { Pen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -32,12 +30,8 @@ export interface IData {
 }
 
 const Discount: React.FC = () => {
-  const [result, setResult] = React.useState<IData[]>([]);
-  const [data, setData] = React.useState<IData[]>([]);
-  const [total, setTotal] = React.useState<number>(0);
+  const [result, setResult] = React.useState<IData>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [pageNumber, setPageNumber] = React.useState<number>(1);
-  const [pageSize, setPageSize] = React.useState<number>(20);
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   const t = useTranslations();
@@ -48,10 +42,6 @@ const Discount: React.FC = () => {
       const res = await managerService.getDiscount();
       if (!res.code) {
         setResult(res.data);
-        setData(
-          res.data.slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
-        );
-        setTotal(res.data.length);
       } else {
         toast({
           title: t("alert.error"),
@@ -71,120 +61,65 @@ const Discount: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (isLoading) {
-      fetchData();
-    }
+    fetchData();
   }, []);
 
-  React.useEffect(() => {
-    setData(result.slice((pageNumber - 1) * pageSize, pageNumber * pageSize));
-  }, [pageNumber]);
-
-  React.useEffect(() => {
-    if (!isLoading) {
-      if (pageNumber !== 1) {
-        setPageNumber(1);
-      } else {
-        setData(
-          result.slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
-        );
-      }
-    }
-  }, [pageSize]);
-
-  const columns: ColumnDef<IData>[] = [
-    {
-      accessorKey: "promotion",
-      header: "Promotion",
-    },
-    {
-      accessorKey: "startTime",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Start Time
-            <ArrowUpDown />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <>{dateFormat(row.getValue("startTime"))}</>,
-    },
-    {
-      accessorKey: "endTime",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            End Time
-            <ArrowUpDown />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <>{dateFormat(row.getValue("endTime"))}</>,
-    },
-    {
-      accessorKey: "isDeleted",
-      header: "Deleted",
-      cell: ({ row }) => (
-        <Badge
-          className={`${row.getValue("isDeleted") ? "bg-green-500" : "bg-red-500"} opacity-60`}
-        >
-          {row.getValue("isDeleted") ? "true" : "false"}
-        </Badge>
-      ),
-    },
-    {
-      accessorKey: "action",
-      header: "Action",
-      cell: ({ row }) => (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button
-              size="sm"
-              className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
-            >
-              <Pen />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>{t("update")}</DialogTitle>
-              <DiscountForm
-                data={{
-                  promotion: row.getValue("promotion"),
-                  startTime: row.getValue("startTime"),
-                  endTime: row.getValue("endTime"),
-                  isDeleted: row.getValue("isDeleted"),
-                }}
-                handleSubmit={() => {
-                  fetchData();
-                  setIsOpen(false);
-                }}
-              />
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      ),
-    },
-  ];
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
-    <div className="max-w-[1120px] m-auto">
-      <Card className="p-5 m-5 mb-8">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-        <DataTable columns={columns} data={data} />
-        <CustomPagination
-          total={total}
-          pageSize={pageSize}
-          setPageSize={setPageSize}
-          pageNumber={pageNumber}
-          setPageNumber={setPageNumber}
-        />
+    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+      <Card className="p-5 mb-8">
+        <h3 className="font-bold">Discount</h3>
+        <div className=" border-2 p-5 border-dashed rounded-md border-pink-500 bg-pink-200">
+          <div className="grid grid-cols-3">
+            <label className="text-pink-500 font-bold col-span-1">
+              Promotion
+            </label>
+            <span className="col-span-2 text-pink-500">
+              {result?.promotion}
+            </span>
+          </div>
+          <div className="grid grid-cols-3">
+            <label className="text-pink-500 font-bold col-span-1">
+              Deleted
+            </label>
+            <span className="col-span-2 text-pink-500">
+              {result?.isDeleted.toString()}
+            </span>
+          </div>
+          <p className="text-pink-500 text-center my-5 font-bold">
+            {dateFormat(result?.startTime, DateFormatType.FullDate)} -{" "}
+            {dateFormat(result?.endTime, DateFormatType.FullDate)}
+          </p>
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+              <div className="flex justify-center mt-5">
+                <Button className="bg-pink-500 w-1/2 hover:bg-pink-600 cursor-pointer">
+                  <Pen /> Edit
+                </Button>
+              </div>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>{t("update")}</DialogTitle>
+                <DiscountForm
+                  data={{
+                    promotion: result?.promotion ?? 0,
+                    startTime: result?.startTime ?? new Date(),
+                    endTime: result?.endTime ?? new Date(),
+                    isDeleted: result?.isDeleted ?? false,
+                  }}
+                  handleSubmit={() => {
+                    fetchData();
+                    setIsOpen(false);
+                  }}
+                />
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </div>
       </Card>
     </div>
   );

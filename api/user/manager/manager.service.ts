@@ -1,14 +1,14 @@
 import axiosLocal from "@/api/axiosLocal";
 import { endpoints } from "@/api/endpoints";
 
-interface ISearchParams {
+export interface ISearchParams {
   pageNumber: number;
   pageSize: number;
   searchUsername: string;
   statuses: number[];
 }
 
-interface IServiceBody {
+export interface IServiceBody {
   name: string;
   price: number;
   discount: number;
@@ -17,7 +17,7 @@ interface IServiceBody {
   isDeleted: boolean;
 }
 
-interface IPartnerBody {
+export interface IPartnerBody {
   name: string;
   apiKey: string;
   baseUrl: string;

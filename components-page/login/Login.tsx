@@ -30,7 +30,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [image, setImage] = React.useState<string>();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(true);
+  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(false);
   const t = useTranslations();
   const router = useRouter();
 

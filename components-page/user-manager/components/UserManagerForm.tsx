@@ -75,67 +75,71 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <FormField
-            control={form.control}
-            name="searchUsername"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Tìm theo tên</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder={"Nhập tên"} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="statuses"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("recharge.statuses.title")}</FormLabel>
-                <Select
-                  onValueChange={(event) => {
-                    const arrays = form.getValues("statuses");
-                    if (arrays.includes(Number(event))) {
-                      form.setValue(
-                        "statuses",
-                        arrays.filter((item) => item !== Number(event))
-                      );
-                    } else {
-                      form.setValue("statuses", [...arrays, Number(event)]);
-                    }
-                  }}
-                >
+          <div className="col-span-1 md:col-span-2">
+            <FormField
+              control={form.control}
+              name="searchUsername"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tìm theo tên</FormLabel>
                   <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue
-                        placeholder={t("recharge.statuses.placeholder")}
-                      >
-                        {field.value.length === 1
-                          ? listType.find((item) => item.id === field.value[0])
-                              ?.value
-                          : `${field.value.length} ${t("selected")}`}
-                      </SelectValue>
-                    </SelectTrigger>
+                    <Input type="number" placeholder={"Nhập tên"} {...field} />
                   </FormControl>
-                  <SelectContent>
-                    {listType.map((item) => (
-                      <SelectItem key={item.id} value={item.id.toString()}>
-                        <Checkbox checked={field.value.includes(item.id)} />
-                        {item.value}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <FormField
+              control={form.control}
+              name="statuses"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("recharge.statuses.title")}</FormLabel>
+                  <Select
+                    onValueChange={(event) => {
+                      const arrays = form.getValues("statuses");
+                      if (arrays.includes(Number(event))) {
+                        form.setValue(
+                          "statuses",
+                          arrays.filter((item) => item !== Number(event))
+                        );
+                      } else {
+                        form.setValue("statuses", [...arrays, Number(event)]);
+                      }
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue
+                          placeholder={t("recharge.statuses.placeholder")}
+                        >
+                          {field.value.length === 1
+                            ? listType.find(
+                                (item) => item.id === field.value[0]
+                              )?.value
+                            : `${field.value.length} ${t("selected")}`}
+                        </SelectValue>
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {listType.map((item) => (
+                        <SelectItem key={item.id} value={item.id.toString()}>
+                          <Checkbox checked={field.value.includes(item.id)} />
+                          {item.value}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <Button
             type="submit"
-            className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
+            className="w-full mt-5.5 col-span-1 cursor-pointer bg-sky-500 hover:bg-sky-600"
           >
             {t("search")}
           </Button>

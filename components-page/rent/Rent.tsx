@@ -2,21 +2,13 @@
 
 import { IRequestBody, keyService } from "@/api/key/key.service";
 import { managerService } from "@/api/user/manager/manager.service";
+import AddRentForm from "@/components-page/rent/components/AddRent";
 import RentForm from "@/components-page/rent/components/RentForm";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/lib/hooks";
 import { dateFormat } from "@/lib/useTime";
@@ -65,11 +57,13 @@ const Rent: React.FC = () => {
     services: [],
     statuses: [],
   });
-  const t = useTranslations();
-  const { apiToken } = useAppSelector((item) => item.user);
   const [listServices, setListServices] = React.useState<
     { id: string; value: string }[]
   >([]);
+
+  const t = useTranslations();
+  const { apiToken } = useAppSelector((item) => item.user);
+
   const fetchServices = useCallback(async () => {
     try {
       const res = await managerService.getService();
@@ -185,70 +179,6 @@ const Rent: React.FC = () => {
         </Badge>
       ),
     },
-    {
-      accessorKey: "action",
-      header: "Action",
-      cell: ({ row }) => (
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              size="sm"
-              className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
-            >
-              {t("rent.title")}
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>
-                {t("rent.title")} {row.getValue("email")}
-              </DialogTitle>
-              <DialogDescription>{t("sure")}</DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <Button
-                onClick={async () => {
-                  try {
-                    setIsLoading(true);
-                    const res = await keyService.getNewEmail({
-                      serviceName: row.getValue("serviceName"),
-                      key: apiToken ?? "",
-                    });
-                    if (!res.code) {
-                      toast({
-                        title: t("alert.success"),
-                        description: res.message,
-                        duration: 10000,
-                        className: cn(
-                          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-                        ),
-                      });
-                    } else {
-                      toast({
-                        title: t("alert.error"),
-                        description: res.message,
-                        variant: "destructive",
-                        duration: 10000,
-                        className: cn(
-                          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
-                        ),
-                      });
-                    }
-                  } catch (error) {
-                    console.error(error);
-                  } finally {
-                    setIsLoading(false);
-                    resetPage();
-                  }
-                }}
-              >
-                {t("rent.title")}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      ),
-    },
   ];
 
   const submitData = async (values: ISearch) => {
@@ -278,16 +208,20 @@ const Rent: React.FC = () => {
     }
   }, [isDateAsc, pageNumber]);
   return (
-    <div className="max-w-[1120px] m-auto">
-      <Card className="p-5 m-5 mb-8">
+    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+      <Card className="p-5">
+        <h3 className="font-bold">Add new</h3>
+        <AddRentForm resetPage={resetPage} listServices={listServices} />
+      </Card>
+      <Card className="p-5">
         <RentForm
           value={search}
           handleSubmit={submitData}
           listServices={listServices}
         />
-        <div className="mt-5">
-          <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-        </div>
+      </Card>
+      <Card className="p-5 mb-8">
+        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
         <DataTable columns={columns} data={data} />
         <CustomPagination
           total={total}

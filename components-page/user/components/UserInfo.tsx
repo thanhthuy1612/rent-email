@@ -94,12 +94,12 @@ const UserInfo: React.FC = () => {
         <div className="grid gap-4 mb-10">
           <div className="flex flex-col md:flex-row gap-5 mb-5 bg-[#f1faff] justify-between items-center rounded-2xl p-5 border-dashed border-1 border-[#009ef7]">
             <div className="flex gap-5 items-center">
-              <Info className="text-blue-500" />
+              <Info className="text-sky-500" />
               <div className="flex flex-col gap-1">
-                <h4 className="font-bold text-blue-500">Api Token</h4>
+                <h4 className="font-bold text-sky-500">Api Token</h4>
                 <div
                   onClick={handleCopy}
-                  className="text-blue-400 text-sm cursor-pointer"
+                  className="text-sky-400 text-sm cursor-pointer"
                 >
                   {user.apiToken}
                 </div>
@@ -113,7 +113,7 @@ const UserInfo: React.FC = () => {
               {t("changeKey.title")}
             </Button>
           </div>
-          <div className="rounded-2xl p-5 border-dashed border-1">
+          <div className="rounded-2xl p-5 border-dashed border-1 text-[14px]">
             {listInfo.map((item) => (
               <div key={item.title} className="grid grid-cols-3">
                 <label className="text-[#a1a5b7] font-bold col-span-1">

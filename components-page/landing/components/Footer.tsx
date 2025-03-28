@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/imgs/logo-landing.webp";
+import logo from "@/public/imgs/logo.png";
 import { Link } from "@/i18n/navigation";
 
 const Footer: React.FC = () => {

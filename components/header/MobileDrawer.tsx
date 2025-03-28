@@ -9,7 +9,6 @@ import { useAppSelector } from "@/lib/hooks";
 // ----------------------------------------------------------------------
 
 const MobileDrawer: React.FC = () => {
-  const [showHeader, setShowHeader] = React.useState<boolean>(false);
   const [showSheet, setShowSheet] = React.useState<boolean>(false);
   const router = useRouter();
   const { scopes } = useAppSelector((item) => item.user);
@@ -17,7 +16,6 @@ const MobileDrawer: React.FC = () => {
     setShowSheet(false);
     router.push(url);
   };
-  const renderNavLanding = (colorWhite: boolean) => <></>;
 
   const navs =
     scopes === "admin"
@@ -45,20 +43,11 @@ const MobileDrawer: React.FC = () => {
   );
 
   return (
-    <>
-      <MobileHeader
-        navLanding={renderNavLanding(showHeader)}
-        navSheet={renderNavSheet()}
-        showSheet={showSheet}
-        setShowSheet={setShowSheet}
-        className={
-          showHeader
-            ? "landing-header sticky top-0 z-10 transition duration-300"
-            : ""
-        }
-        colorWhite={showHeader}
-      />
-    </>
+    <MobileHeader
+      navSheet={renderNavSheet()}
+      showSheet={showSheet}
+      setShowSheet={setShowSheet}
+    />
   );
 };
 export default MobileDrawer;

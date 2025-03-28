@@ -5,6 +5,7 @@ import RechargeForm from "@/components-page/recharge/components/RechargeForm";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { toast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/lib/hooks";
@@ -185,18 +186,20 @@ const History: React.FC = () => {
 
   return (
     <>
-      <RechargeForm value={search} handleSubmit={submitData} />
-      <div className="mt-5">
+      <Card className="p-5">
+        <RechargeForm value={search} handleSubmit={submitData} />
+      </Card>
+      <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
-      </div>
-      <DataTable columns={columns} data={data} />
-      <CustomPagination
-        total={total}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-      />
+        <DataTable columns={columns} data={data} />
+        <CustomPagination
+          total={total}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+        />
+      </Card>
     </>
   );
 };

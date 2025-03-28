@@ -26,8 +26,7 @@ import { z } from "zod";
 
 const ChangePassword: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(true);
+  const [isLoadingSubmit, setIsLoadingSubmit] = React.useState<boolean>(false);
 
   const t = useTranslations();
   const router = useRouter();
@@ -236,7 +235,7 @@ const ChangePassword: React.FC = () => {
             />
             <Button
               type="submit"
-              disabled={isLoading || isLoadingSubmit}
+              disabled={isLoadingSubmit}
               className="w-full mt-3 cursor-pointer bg-sky-500 hover:bg-sky-600"
             >
               {t("changePassword.send")}
