@@ -119,41 +119,41 @@ const History: React.FC = () => {
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "userName",
-      header: "Username",
+      header: t("user.username"),
     },
     {
       accessorKey: "type",
-      header: "Type",
+      header: t("recharge.type"),
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("global.amount"),
       cell: ({ row }) => <>{fNumber(row.getValue("amount"), "vn")}</>,
     },
     {
       accessorKey: "balanceBefore",
-      header: "Before",
+      header: t("recharge.before"),
       cell: ({ row }) => <>{fNumber(row.getValue("balanceBefore"), "vn")}</>,
     },
     {
       accessorKey: "balanceAfter",
-      header: "After",
+      header: t("recharge.after"),
       cell: ({ row }) => <>{fNumber(row.getValue("balanceAfter"), "vn")}</>,
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: t("global.content"),
     },
     {
       accessorKey: "transCode",
-      header: "Code",
+      header: t("global.code"),
     },
     {
       accessorKey: "creationDate",
       header: ({}) => {
         return (
           <Button variant="ghost" onClick={() => setIsDateAs((pre) => !pre)}>
-            Date
+            {t("global.creationDate")}
             <ArrowUpDown />
           </Button>
         );
@@ -162,10 +162,12 @@ const History: React.FC = () => {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("global.status"),
       cell: ({ row }) => (
         <Badge
-          className={`${row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"} opacity-60`}
+          className={`${
+            row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"
+          } opacity-60`}
         >
           {row.getValue("status")}
         </Badge>

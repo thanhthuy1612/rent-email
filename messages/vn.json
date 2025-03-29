@@ -4,14 +4,17 @@
     "error": "Thất bại"
   },
   "sure": "Bạn chắc chắn?",
-  "update": "Update",
+  "update": "Cập nhật",
   "partner": {
     "name": "Tên",
     "key": "Key",
     "baseUrl": "Base Url",
-    "configurations": "Configurations",
-    "priority": "Priority",
-    "isDeleted": "Is Deleted"
+    "configurations": "Cấu hình",
+    "priority": "Ưu tiên",
+    "isDeleted": "Đã xóa",
+    "copy": "Sao chép",
+    "copySuccess": "Sao chép thành công!",
+    "copyFailed": "Sao chép thất bại!"
   },
   "service": {
     "name": "Name",
@@ -86,40 +89,83 @@
     "status": "Trạng thái",
     "creationDate": "Thời gian tạo",
     "modificationDate": "Thời gian cập nhật gần nhất",
-    "scopes": "Vai trò"
+    "scopes": "Vai trò",
+    "avatarAlt": "Ảnh đại diện",
+    "copySuccess": "Sao chép thành công!",
+    "copyFailed": "Sao chép thất bại!"
   },
   "recharge": {
     "title": "Nạp tiền",
     "scanHere": "Nạp tiền qua quét mã QR",
+    "qrDescription": "Lorem Ipsum là văn bản giả của ngành in ấn và sắp chữ.",
     "fromDate": "Từ ngày",
     "toDate": "Đến ngày",
     "type": "Loại",
+    "before": "Trước",
+    "after": "Sau",
     "choose": "Chọn ngày",
     "historyRecharge": "Lịch sử nạp tiền",
     "latest200RecordSuccess": "Danh sách 200 giao dịch nạp tiền thành công gần nhất",
     "date": {
-      "error1": "Thời gian phải nhỏ hơn hoặc bằng ngày hiện tại"
+      "error1": "Thời gian phải nhỏ hơn hoặc bằng ngày hiện tại",
+      "error2": "Ngày đến phải lớn hơn ngày từ"
     },
     "types": {
-      "title": "Kiểu",
-      "placeholder": "Chọn kiểu"
+      "title": "Loại",
+      "placeholder": "Chọn loại",
+      "credit": "Tín dụng",
+      "debit": "Ghi nợ"
     },
     "services": {
       "title": "Dịch vụ",
-      "placeholder": "Chọn dịch vụ"
+      "placeholder": "Chọn dịch vụ",
+      "service1": "Dịch vụ 1",
+      "service2": "Dịch vụ 2",
+      "service3": "Dịch vụ 3"
     },
     "statuses": {
       "title": "Trạng thái",
-      "placeholder": "Chọn trạng thái"
+      "placeholder": "Chọn trạng thái",
+      "timeout": "Hết giờ",
+      "cancel": "Hủy",
+      "created": "Đã tạo",
+      "success": "Thành công"
     },
     "key": {
       "title": "Key",
       "placeholder": "Nhập key"
     }
   },
+  "adminRecharge": {
+    "username": "Tên đăng nhập",
+    "type": "Loại",
+    "amount": "Số tiền",
+    "before": "Trước",
+    "after": "Sau",
+    "description": "Mô tả",
+    "code": "Mã",
+    "date": "Ngày",
+    "status": "Trạng thái"
+  },
+  "adminRequest": {
+    "email": "Email",
+    "username": "Tên đăng nhập",
+    "service": "Dịch vụ",
+    "price": "Giá",
+    "discount": "Giảm giá",
+    "finalPrice": "Giá cuối cùng",
+    "code": "Mã",
+    "date": "Ngày",
+    "status": "Trạng thái"
+  },
   "search": "Tìm kiếm",
   "rent": {
     "title": "Mua",
+    "addNew": "Thêm mới",
+    "infoBar": {
+      "clickToCopy": "Click vào Số điện thoại Code để copy nhanh",
+      "rentAgain": "để thuê lại số điện thoại"
+    },
     "rentService": "Dịch vụ thuê",
     "rentNow": "Thuê số ngay",
     "requestNewService": "Yêu cầu thêm dịch vụ mới",
@@ -213,7 +259,9 @@
   "status": {
     "active": "Hoạt động",
     "inactive": "Không hoạt động",
-    "suspended": "Đình chỉ"
+    "suspended": "Đình chỉ",
+    "banned": "Bị cấm"
+
   },
   "validation": {
     "required": "bắt buộc",

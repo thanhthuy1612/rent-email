@@ -1,12 +1,12 @@
 "use client";
 import { managerService } from "@/api/user/manager/manager.service";
+import CustomPagination from "@/components/table/CustomPagination";
 import { Card } from "@/components/ui/card";
 import useObjectState from "@/hooks/use-object-state";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import ManagerUserTable from "./components/ManagerUserTable";
 import UserManagerForm from "./components/UserManagerForm";
-import CustomPagination from "@/components/table/CustomPagination";
 interface User {
   id: string;
   userName: string;

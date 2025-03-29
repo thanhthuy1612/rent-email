@@ -173,7 +173,9 @@ const Rent: React.FC = () => {
       header: "Status",
       cell: ({ row }) => (
         <Badge
-          className={`${row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"} opacity-60`}
+          className={`${
+            row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"
+          } opacity-60`}
         >
           {row.getValue("status")}
         </Badge>
@@ -210,7 +212,7 @@ const Rent: React.FC = () => {
   return (
     <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
       <Card className="p-5">
-        <h3 className="font-bold">Add new</h3>
+        <h3 className="font-bold">{t("rent.addNew")}</h3>
         <AddRentForm resetPage={resetPage} listServices={listServices} />
       </Card>
       <Card className="p-5">

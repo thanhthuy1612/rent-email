@@ -105,41 +105,41 @@ const AdminRequest: React.FC = () => {
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("adminRequest.email"),
     },
     {
       accessorKey: "userName",
-      header: "Username",
+      header: t("adminRequest.username"),
     },
     {
       accessorKey: "serviceName",
-      header: "Service",
+      header: t("adminRequest.service"),
     },
     {
       accessorKey: "originalPrice",
-      header: "Price",
+      header: t("adminRequest.price"),
       cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
     },
     {
       accessorKey: "discount",
-      header: "Discount",
+      header: t("adminRequest.discount"),
       cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     },
     {
       accessorKey: "finalPrice",
-      header: "Final Price",
+      header: t("adminRequest.finalPrice"),
       cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
     },
     {
       accessorKey: "transCode",
-      header: "Code",
+      header: t("adminRequest.code"),
     },
     {
       accessorKey: "creationDate",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => setIsDateAs((pre) => !pre)}>
-            Date
+            {t("adminRequest.date")}
             <ArrowUpDown />
           </Button>
         );
@@ -148,10 +148,14 @@ const AdminRequest: React.FC = () => {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("adminRequest.status"),
       cell: ({ row }) => (
         <Badge
-          className={`${row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"} opacity-60`}
+          className={`${
+            row.getValue("status") === t("recharge.statuses.created")
+              ? "bg-green-500"
+              : "bg-red-500"
+          } opacity-60`}
         >
           {row.getValue("status")}
         </Badge>

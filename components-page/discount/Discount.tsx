@@ -71,22 +71,20 @@ const Discount: React.FC = () => {
   return (
     <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
       <Card className="p-5 mb-8">
-        <h3 className="font-bold">Discount</h3>
-        <div className=" border-2 p-5 border-dashed rounded-md border-pink-500 bg-pink-200">
+        <h3 className="font-bold">{t("service.discount")}</h3>
+        <div className="border-2 p-5 border-dashed rounded-md border-pink-500 bg-pink-200">
           <div className="grid grid-cols-3">
             <label className="text-pink-500 font-bold col-span-1">
-              Promotion
+              {t("service.discount")}
             </label>
-            <span className="col-span-2 text-pink-500">
-              {result?.promotion}
-            </span>
+            <span className="col-span-2 text-pink-500">{result?.promotion}</span>
           </div>
           <div className="grid grid-cols-3">
             <label className="text-pink-500 font-bold col-span-1">
-              Deleted
+              {t("service.isDeleted")}
             </label>
             <span className="col-span-2 text-pink-500">
-              {result?.isDeleted.toString()}
+              {result?.isDeleted ? t("global.yes") : t("global.no")}
             </span>
           </div>
           <p className="text-pink-500 text-center my-5 font-bold">
@@ -97,7 +95,7 @@ const Discount: React.FC = () => {
             <DialogTrigger asChild>
               <div className="flex justify-center mt-5">
                 <Button className="bg-pink-500 w-1/2 hover:bg-pink-600 cursor-pointer">
-                  <Pen /> Edit
+                  <Pen /> {t("update")}
                 </Button>
               </div>
             </DialogTrigger>

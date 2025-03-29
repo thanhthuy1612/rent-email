@@ -81,9 +81,9 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
               name="searchUsername"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tìm theo tên</FormLabel>
+                  <FormLabel>{t("search")}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder={"Nhập tên"} {...field} />
+                    <Input type="text" placeholder={t("search")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,7 +127,7 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
                       {listType.map((item) => (
                         <SelectItem key={item.id} value={item.id.toString()}>
                           <Checkbox checked={field.value.includes(item.id)} />
-                          {item.value}
+                          {t(`status.${item.value.toLowerCase()}`)}
                         </SelectItem>
                       ))}
                     </SelectContent>

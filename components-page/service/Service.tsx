@@ -86,14 +86,14 @@ const Service: React.FC = () => {
     try {
       await navigator.clipboard.writeText(value);
       toast({
-        title: "Copy successful!",
+        title: t("global.copySuccess"),
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
         ),
       });
     } catch (err) {
       toast({
-        title: "Copy failed!",
+        title: t("global.copyFailed"),
         variant: "destructive",
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
@@ -117,21 +117,21 @@ const Service: React.FC = () => {
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("service.name"),
     },
     {
       accessorKey: "price",
-      header: "Price",
+      header: t("service.price"),
       cell: ({ row }) => <>{fNumber(row.getValue("price"), "vn")}</>,
     },
     {
       accessorKey: "discount",
-      header: "Discount",
+      header: t("service.discount"),
       cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: t("service.description"),
     },
     {
       accessorKey: "creationDate",
@@ -141,7 +141,7 @@ const Service: React.FC = () => {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Date
+            {t("global.creationDate")}
             <ArrowUpDown />
           </Button>
         );
@@ -150,18 +150,20 @@ const Service: React.FC = () => {
     },
     {
       accessorKey: "isDeleted",
-      header: "Deleted",
+      header: t("global.isDeleted"),
       cell: ({ row }) => (
         <Badge
-          className={`${row.getValue("isDeleted") ? "bg-green-500" : "bg-red-500"} opacity-60`}
+          className={`${
+            row.getValue("isDeleted") ? "bg-green-500" : "bg-red-500"
+          } opacity-60`}
         >
-          {row.getValue("isDeleted") ? "true" : "false"}
+          {row.getValue("isDeleted") ? t("global.yes") : t("global.no")}
         </Badge>
       ),
     },
     {
       accessorKey: "action",
-      header: "Action",
+      header: t("global.action"),
       cell: ({ row }) => (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>

@@ -41,14 +41,14 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
   const t = useTranslations();
 
   const listType = [
-    { id: 1, value: "1" },
-    { id: 2, value: "2" },
-    { id: 3, value: "3" },
+    { id: 1, value: t("recharge.types.credit") },
+    { id: 2, value: t("recharge.types.debit") },
+    { id: 3, value: t("recharge.types.other") },
   ];
   const listServices = [
-    { id: "1", value: "1" },
-    { id: "2", value: "2" },
-    { id: "3", value: "3" },
+    { id: "1", value: t("recharge.services.service1") },
+    { id: "2", value: t("recharge.services.service2") },
+    { id: "3", value: t("recharge.services.service3") },
   ];
 
   const formSchema = z
@@ -66,7 +66,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
       if (data.dateTo <= data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Ngày đến phải lớn hơn ngày từ",
+          message: t("recharge.date.error2"),
           path: ["dateTo"],
         });
       }
@@ -144,7 +144,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
             name="dateTo"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>{t("recharge.fromDate")}</FormLabel>
+                <FormLabel>{t("recharge.toDate")}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>

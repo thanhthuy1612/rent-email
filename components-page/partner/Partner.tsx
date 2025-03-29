@@ -92,14 +92,16 @@ const Partner: React.FC = () => {
     try {
       await navigator.clipboard.writeText(value);
       toast({
-        title: "Copy successful!",
+        title: t("alert.success"),
+        description: t("partner.copySuccess"),
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
         ),
       });
     } catch (err) {
       toast({
-        title: "Copy failed!",
+        title: t("alert.error"),
+        description: t("partner.copyFailed"),
         variant: "destructive",
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
@@ -127,11 +129,11 @@ const Partner: React.FC = () => {
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("partner.name"),
     },
     {
       accessorKey: "apiKey",
-      header: "Api key",
+      header: t("partner.key"),
       cell: ({ row }) => (
         <TooltipProvider>
           <Tooltip>
@@ -144,7 +146,7 @@ const Partner: React.FC = () => {
                 size="sm"
                 className="px-3"
               >
-                <span className="sr-only">Copy</span>
+                <span className="sr-only">{t("partner.copy")}</span>
                 <Copy />
               </Button>
             </TooltipTrigger>
@@ -155,15 +157,15 @@ const Partner: React.FC = () => {
     },
     {
       accessorKey: "baseUrl",
-      header: "Base Url",
+      header: t("partner.baseUrl"),
     },
     {
       accessorKey: "priority",
-      header: "Priority",
+      header: t("partner.priority"),
     },
     {
       accessorKey: "configurations",
-      header: "configurations",
+      header: t("partner.configurations"),
     },
     {
       accessorKey: "creationDate",
@@ -173,7 +175,7 @@ const Partner: React.FC = () => {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Date
+            {t("global.creationDate")}
             <ArrowUpDown />
           </Button>
         );
@@ -182,18 +184,20 @@ const Partner: React.FC = () => {
     },
     {
       accessorKey: "isDeleted",
-      header: "Deleted",
+      header: t("partner.isDeleted"),
       cell: ({ row }) => (
         <Badge
-          className={`${row.getValue("isDeleted") ? "bg-green-500" : "bg-red-500"} opacity-60`}
+          className={`${
+            row.getValue("isDeleted") ? "bg-green-500" : "bg-red-500"
+          } opacity-60`}
         >
-          {row.getValue("isDeleted") ? "true" : "false"}
+          {row.getValue("isDeleted") ? t("global.yes") : t("global.no")}
         </Badge>
       ),
     },
     {
       accessorKey: "action",
-      header: "Action",
+      header: t("global.action"),
       cell: ({ row }) => (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>

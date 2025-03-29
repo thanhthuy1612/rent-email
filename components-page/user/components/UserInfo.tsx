@@ -36,14 +36,14 @@ const UserInfo: React.FC = () => {
     try {
       await navigator.clipboard.writeText(user?.apiToken ?? "");
       toast({
-        title: "Copy successful!",
+        title: t("user.copySuccess"),
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
         ),
       });
     } catch (err) {
       toast({
-        title: "Copy failed!",
+        title: t("user.copyFailed"),
         variant: "destructive",
         className: cn(
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
@@ -96,7 +96,7 @@ const UserInfo: React.FC = () => {
             <div className="flex gap-5 items-center">
               <Info className="text-sky-500" />
               <div className="flex flex-col gap-1">
-                <h4 className="font-bold text-sky-500">Api Token</h4>
+                <h4 className="font-bold text-sky-500">{t("user.token")}</h4>
                 <div
                   onClick={handleCopy}
                   className="text-sky-400 text-sm cursor-pointer"

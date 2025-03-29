@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { toast } from "@/hooks/use-toast";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import UpdateUserModal from "./UpdateUserModal";
@@ -56,14 +55,14 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
       .then(() => {
         handleModalClose();
         toast({
-          title: "Update success!",
+          title: t("alert.success"),
           variant: "default",
         });
         fetchData();
       })
       .catch((error) => {
         toast({
-          title: "Update fail!",
+          title: t("alert.error"),
           variant: "destructive",
         });
       });
@@ -119,7 +118,7 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
           className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
           onClick={() => handleEditClick(row.original)}
         >
-          <Edit />
+          {t("updateUser.title")}
         </Button>
       ),
     },

@@ -1,8 +1,12 @@
+import { useTranslations } from "next-intl";
+
 export default function PhoneCopyComponent() {
+  const t = useTranslations();
+
   return (
     <div className="flex justify-between items-center w-full !border-[#009ef7] border-1 border-dashed rounded-sm px-2 py-1 bg-[#f1faff]">
       <div className="text-gray-700 text-sm ">
-        Click vào Số điện thoại Code để copy nhanh |
+        {t("rent.infoBar.clickToCopy")} |
         <button className="relative ml-2 p-2 bg-green-100 text-green-700 rounded-full shadow-md hover:bg-green-200 transition-transform transform scale-90">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +25,7 @@ export default function PhoneCopyComponent() {
           </svg>
           <span className="absolute inset-0 w-full h-full animate-ping bg-green-300 opacity-50 rounded-full"></span>
         </button>
-        để thuê lại số điện thoại
+        {t("rent.infoBar.rentAgain")}
       </div>
     </div>
   );

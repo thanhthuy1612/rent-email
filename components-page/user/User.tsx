@@ -37,7 +37,7 @@ const User: React.FC = () => {
           <div className="inline-block">
             <Image
               src="/avatar-default.webp"
-              alt="Test"
+              alt={t("user.avatarAlt")}
               width={160}
               height={160}
             />

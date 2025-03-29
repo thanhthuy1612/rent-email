@@ -130,7 +130,7 @@ const AddRentForm: React.FC<IAddRentFormProps> = ({
             disabled={isLoading}
             className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
           >
-            Add new
+            {t("rent.addNew")}
           </Button>
         </div>
       </form>

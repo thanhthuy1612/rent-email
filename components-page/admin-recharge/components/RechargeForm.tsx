@@ -45,14 +45,14 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
   const t = useTranslations();
 
   const listType = [
-    { id: TransactionType.Credit, value: "Credit" },
-    { id: TransactionType.Debit, value: "Debit" },
+    { id: TransactionType.Credit, value: t("recharge.types.credit") },
+    { id: TransactionType.Debit, value: t("recharge.types.debit") },
   ];
   const listStatus = [
-    { id: TransactionStatus.Timeout, value: "Timeout" },
-    { id: TransactionStatus.Cancel, value: "Cancel" },
-    { id: TransactionStatus.Created, value: "Created" },
-    { id: TransactionStatus.Success, value: "Success" },
+    { id: TransactionStatus.Timeout, value: t("recharge.statuses.timeout") },
+    { id: TransactionStatus.Cancel, value: t("recharge.statuses.cancel") },
+    { id: TransactionStatus.Created, value: t("recharge.statuses.created") },
+    { id: TransactionStatus.Success, value: t("recharge.statuses.success") },
   ];
 
   const formSchema = z
@@ -70,7 +70,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
       if (data.dateTo <= data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Ngày đến phải lớn hơn ngày từ",
+          message: t("recharge.date.error2"),
           path: ["dateTo"],
         });
       }

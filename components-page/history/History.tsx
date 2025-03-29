@@ -126,7 +126,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
             className="bg-[#f5f8fa] h-10"
           />
           <CustomSelect
-            title={t("global.service")}
+            title={t("global.status")}
             onChange={() => {}}
             value="1"
             options={STATUS_LIST}
@@ -161,7 +161,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
             {t("rentHistory.latest100Record")}
           </p>
           <div className="flex justify-end">
-            <Input className="w-40" placeholder="Search" />
+            <Input className="w-40" placeholder={t("search")} />
           </div>
           <div>
             <Table>

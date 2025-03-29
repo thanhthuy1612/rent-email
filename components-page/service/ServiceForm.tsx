@@ -38,10 +38,10 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
   const t = useTranslations();
 
   const formSchema = z.object({
-    name: z.string().min(1),
-    price: z.number().min(1),
+    name: z.string().min(1, { message: t("validation.required") }),
+    price: z.number().min(1, { message: t("validation.min") }),
     discount: z.number(),
-    description: z.string().min(1),
+    description: z.string().min(1, { message: t("validation.required") }),
     partnerName: z.string(),
     isDeleted: z.boolean(),
   });
