@@ -216,7 +216,7 @@ const AdminRequest: React.FC = () => {
         />
       </Card>
       <Card className="p-5 mb-8">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
+        <h3 className="font-bold">{t("rent.titleHeader")}</h3>
         <DataTable columns={columns} data={data} />
         <CustomPagination
           total={total}

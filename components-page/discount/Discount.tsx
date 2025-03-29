@@ -71,13 +71,15 @@ const Discount: React.FC = () => {
   return (
     <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
       <Card className="p-5 mb-8">
-        <h3 className="font-bold">{t("service.discount")}</h3>
+        <h3 className="font-bold">{t("discount.title")}</h3>
         <div className="border-2 p-5 border-dashed rounded-md border-pink-500 bg-pink-200">
           <div className="grid grid-cols-3">
             <label className="text-pink-500 font-bold col-span-1">
               {t("service.discount")}
             </label>
-            <span className="col-span-2 text-pink-500">{result?.promotion}</span>
+            <span className="col-span-2 text-pink-500">
+              {result?.promotion}
+            </span>
           </div>
           <div className="grid grid-cols-3">
             <label className="text-pink-500 font-bold col-span-1">

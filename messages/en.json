@@ -17,6 +17,7 @@
     "copyFailed": "Copy failed!"
   },
   "service": {
+    "title": "Service List",
     "name": "Name",
     "price": "Price",
     "discount": "Discount",
@@ -49,46 +50,47 @@
     "pickADate": "Pick a date",
     "time": "Time",
     "amount": "Amount",
-    "balanceAfterTransfer": "Balance after transfer",
+    "balanceAfterTransfer": "Balance after transaction",
     "content": "Content",
     "server": "Server",
     "service": "Service",
     "price": "Price",
-    "phoneNumber": "Phone number",
+    "phoneNumber": "Phone Number",
     "code": "Code",
     "status": "Status",
     "message": "Message",
     "userName": "Username",
     "balance": "Balance",
-    "email": "Email",
+    "email": "E-mail",
     "apiToken": "API Token",
     "scopes": "Scopes",
-    "creationDate": "Creation date",
-    "modificationDate": "Modification date",
+    "creationDate": "Creation Date",
+    "modificationDate": "Modification Date",
     "isDeleted": "Deleted",
     "yes": "Yes",
     "no": "No",
     "action": "Action"
   },
   "user": {
+    "title": "User List",
     "balance": "Balance",
-    "totalSubscriberCodes": "Total rented codes",
-    "lastRental": "Last rental time",
-    "accountInformation": "Account information",
-    "updateInformation": "Update information",
-    "fullname": "Full name",
+    "totalSubscriberCodes": "Total subscribed codes",
+    "lastRental": "Creation Time",
+    "accountInformation": "Account Information",
+    "updateInformation": "Update Information",
+    "fullname": "Full Name",
     "username": "Username",
-    "email": "Email",
-    "phoneNumber": "Phone number",
+    "email": "E-mail",
+    "phoneNumber": "Phone Number",
     "telegram": "Telegram",
     "connectTelegram": "Connect Telegram",
     "copy": "Copy",
-    "info": "User information",
+    "info": "User Information",
     "changePassword": "Security",
     "token": "API Token",
     "status": "Status",
-    "creationDate": "Creation date",
-    "modificationDate": "Last updated time",
+    "creationDate": "Creation Time",
+    "modificationDate": "Last Update Time",
     "scopes": "Roles",
     "avatarAlt": "Avatar",
     "copySuccess": "Copy successful!",
@@ -96,19 +98,19 @@
   },
   "recharge": {
     "title": "Recharge",
-    "scanHere": "Recharge via QR code",
-    "qrDescription": "Lorem Ipsum is placeholder text used in printing and typesetting.",
+    "scanHere": "Recharge via QR code scan",
+    "qrDescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "fromDate": "From date",
     "toDate": "To date",
     "type": "Type",
     "before": "Before",
     "after": "After",
-    "choose": "Choose date",
-    "historyRecharge": "Recharge history",
+    "choose": "Choose a date",
+    "historyRecharge": "Recharge History",
     "latest200RecordSuccess": "List of the latest 200 successful recharge transactions",
     "date": {
-      "error1": "The date must be less than or equal to the current date",
-      "error2": "The end date must be greater than the start date"
+      "error1": "The time must be less than or equal to the current date",
+      "error2": "The to date must be greater than the from date"
     },
     "types": {
       "title": "Type",
@@ -153,28 +155,29 @@
     "service": "Service",
     "price": "Price",
     "discount": "Discount",
-    "finalPrice": "Final price",
+    "finalPrice": "Final Price",
     "code": "Code",
     "date": "Date",
     "status": "Status"
   },
   "search": "Search",
   "rent": {
-    "title": "Rent",
-    "addNew": "Add new",
+    "titleHeader": "List",
+    "title": "Buy",
+    "addNew": "Add New",
     "infoBar": {
-      "clickToCopy": "Click on the phone number or code to copy quickly",
+      "clickToCopy": "Click on the Phone Number Code to copy quickly",
       "rentAgain": "to rent the phone number again"
     },
-    "rentService": "Rent service",
+    "rentService": "Rent Service",
     "rentNow": "Rent now",
-    "requestNewService": "Request a new service",
+    "requestNewService": "Request new service",
     "waitList": "List of numbers waiting for messages",
-    "type": "Service type"
+    "type": "Service Type"
   },
   "rentHistory": {
     "latest100Record": "List of the latest 100 rented numbers",
-    "rentHistory": "Rent history"
+    "rentHistory": "Rent History"
   },
   "register": {
     "title": "Register",
@@ -182,9 +185,9 @@
     "username": {
       "title": "Username",
       "placeholder": "Enter username",
-      "error1": "Username must be at least 6 characters.",
+      "error1": "Username must be at least 6 characters long.",
       "error2": "Username cannot exceed 20 characters.",
-      "error3": "Username can only include letters and numbers.",
+      "error3": "Username can only contain letters and numbers.",
       "description": "6-20 characters, only letters and numbers."
     },
     "email": {
@@ -192,40 +195,40 @@
       "placeholder": "Enter email",
       "error1": "Invalid email address.",
       "error2": "Email must be at least 5 characters.",
-      "description": "Enter a valid email."
+      "description": "Enter the correct email."
     },
     "password": {
       "title": "Password",
       "placeholder": "Enter password",
       "request": "Password is required",
-      "request1": "6-18 characters",
-      "request2": "must include both letters and numbers.",
+      "request1": "6 - 18 characters",
+      "request2": "must include both numbers and letters.",
       "request3": "can include special characters",
-      "error1": "Password must be at least 6 characters.",
+      "error1": "Password must be at least 6 characters long.",
       "error2": "Password cannot exceed 18 characters.",
-      "error3": "Password must include at least one letter.",
-      "error4": "Password must include at least one number.",
+      "error3": "Password must contain at least one letter.",
+      "error4": "Password must contain at least one number.",
       "error5": "Password can include letters, numbers, and special characters."
     },
     "rePassword": {
       "title": "Re-enter Password",
       "placeholder": "Re-enter password",
       "request": "Re-entering password is required",
-      "error1": "Password must be at least 6 characters.",
+      "error1": "Password must be at least 6 characters long.",
       "error2": "Password cannot exceed 18 characters.",
-      "error3": "Password must include at least one letter.",
-      "error4": "Password must include at least one number.",
+      "error3": "Password must contain at least one letter.",
+      "error4": "Password must contain at least one number.",
       "error5": "Password can include letters, numbers, and special characters.",
       "error6": "Passwords do not match"
     },
     "code": {
-      "title": "Referral code",
+      "title": "Referral Code",
       "placeholder": "Enter referral code"
     },
     "term": {
-      "title": "I agree to the",
+      "title": "I agree to",
       "link": "Privacy Policy",
-      "error": "You need to agree to the terms."
+      "error": "You must agree to the terms."
     }
   },
   "HomePage": {
@@ -233,13 +236,13 @@
     "about": "Go to the about page"
   },
   "changePassword": {
-    "title": "Change password",
-    "oldPassword": "Old password",
-    "newPassword": "New password",
+    "title": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
     "send": "Send"
   },
   "changeKey": {
-    "title": "Change API token"
+    "title": "Change API Token"
   },
   "selected": "selected",
   "pagination": {
@@ -248,12 +251,12 @@
     "rows": "Rows per page:"
   },
   "updateUser": {
-    "title": "Update user",
+    "title": "Update User",
     "description": "Update user information",
-    "setPassword": "Set password",
-    "creditBalance": "Credit balance",
-    "debitBalance": "Debit balance",
-    "setStatus": "Set status",
+    "setPassword": "Set Password",
+    "creditBalance": "Credit Balance",
+    "debitBalance": "Debit Balance",
+    "setStatus": "Set Status",
     "submit": "Submit"
   },
   "status": {
@@ -265,5 +268,8 @@
   "validation": {
     "required": "required",
     "min": "minimum"
+  },
+  "discount": {
+    "title": "Discount Code"
   }
 }

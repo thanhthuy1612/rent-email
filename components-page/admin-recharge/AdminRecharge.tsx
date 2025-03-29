@@ -195,7 +195,7 @@ const AdminRecharge: React.FC = () => {
         <RechargeForm value={search} handleSubmit={submitData} />
       </Card>
       <Card className="p-5 mb-8">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
+        <h3 className="font-bold">{t("rent.titleHeader")}</h3>
         <DataTable columns={columns} data={data} />
         <CustomPagination
           total={total}

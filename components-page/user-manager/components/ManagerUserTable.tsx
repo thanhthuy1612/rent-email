@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import UpdateUserModal from "./UpdateUserModal";
 import { dateFormat } from "@/lib/useTime";
+import { Pen } from "lucide-react";
 
 interface User {
   id: string;
@@ -118,7 +119,7 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
           className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
           onClick={() => handleEditClick(row.original)}
         >
-          {t("updateUser.title")}
+          <Pen />
         </Button>
       ),
     },

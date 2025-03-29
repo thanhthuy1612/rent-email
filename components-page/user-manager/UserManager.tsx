@@ -90,6 +90,7 @@ const UserManager: React.FC = () => {
         />
       </Card>
       <Card className="p-5 mb-8">
+        <h3 className="font-bold">{t("user.title")}</h3>
         <ManagerUserTable data={state.users} fetchData={fetchData} />
         <CustomPagination
           total={state.totalElements}

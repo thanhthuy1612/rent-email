@@ -17,6 +17,7 @@
     "copyFailed": "Sao chép thất bại!"
   },
   "service": {
+    "title": "Danh sách dịch vụ",
     "name": "Name",
     "price": "Giá",
     "discount": "Giảm giá",
@@ -71,6 +72,7 @@
     "action": "Hành động"
   },
   "user": {
+    "title": "Danh sách người dùng",
     "balance": "Số dư",
     "totalSubscriberCodes": "Tổng số code đã thuê",
     "lastRental": "Thời gian tạo",
@@ -160,6 +162,7 @@
   },
   "search": "Tìm kiếm",
   "rent": {
+    "titleHeader": "Danh sách",
     "title": "Mua",
     "addNew": "Thêm mới",
     "infoBar": {
@@ -261,10 +264,12 @@
     "inactive": "Không hoạt động",
     "suspended": "Đình chỉ",
     "banned": "Bị cấm"
-
   },
   "validation": {
     "required": "bắt buộc",
     "min": "nhỏ nhất"
+  },
+  "discount": {
+    "title": "Mã giảm giá"
   }
 }

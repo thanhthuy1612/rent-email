@@ -235,7 +235,7 @@ const Partner: React.FC = () => {
   return (
     <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
       <Card className="p-5 mb-8">
-        <h3 className="font-bold">{t("recharge.historyRecharge")}</h3>
+        <h3 className="font-bold">{t("rent.titleHeader")}</h3>
         <DataTable columns={columns} data={data} />
         <CustomPagination
           total={total}
