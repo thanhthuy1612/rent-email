@@ -104,19 +104,19 @@ const Discount: React.FC = () => {
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
                 <DialogTitle>{t("update")}</DialogTitle>
-                <DiscountForm
-                  data={{
-                    promotion: result?.promotion ?? 0,
-                    startTime: result?.startTime ?? new Date(),
-                    endTime: result?.endTime ?? new Date(),
-                    isDeleted: result?.isDeleted ?? false,
-                  }}
-                  handleSubmit={() => {
-                    fetchData();
-                    setIsOpen(false);
-                  }}
-                />
               </DialogHeader>
+              <DiscountForm
+                data={{
+                  promotion: result?.promotion ?? 0,
+                  startTime: result?.startTime ?? new Date(),
+                  endTime: result?.endTime ?? new Date(),
+                  isDeleted: result?.isDeleted ?? false,
+                }}
+                handleSubmit={() => {
+                  fetchData();
+                  setIsOpen(false);
+                }}
+              />
             </DialogContent>
           </Dialog>
         </div>

@@ -99,7 +99,7 @@ const UserInfo: React.FC = () => {
                 <h4 className="font-bold text-sky-500">{t("user.apiToken")}</h4>
                 <div
                   onClick={handleCopy}
-                  className="text-sky-400 text-sm cursor-pointer"
+                  className="text-sky-400 text-sm cursor-pointer truncate w-[200px]"
                 >
                   {user.apiToken}
                 </div>

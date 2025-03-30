@@ -18,7 +18,7 @@ import { dateFormat } from "@/lib/useTime";
 import { cn, fNumber } from "@/lib/utils";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, Pen } from "lucide-react";
+import { ArrowUpDown, Pen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -33,6 +33,7 @@ export interface IData {
   creationDate: Date;
   modificationDate: Date;
   isDeleted: true;
+  partnerName: string;
 }
 
 const Service: React.FC = () => {
@@ -120,6 +121,10 @@ const Service: React.FC = () => {
       header: t("service.name"),
     },
     {
+      accessorKey: "partnerName",
+      header: t("service.partnerName"),
+    },
+    {
       accessorKey: "price",
       header: t("service.price"),
       cell: ({ row }) => <>{fNumber(row.getValue("price"), "vn")}</>,
@@ -177,21 +182,21 @@ const Service: React.FC = () => {
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>{t("update")}</DialogTitle>
-              <ServiceForm
-                data={{
-                  name: row.getValue("name"),
-                  price: row.getValue("price"),
-                  discount: row.getValue("discount"),
-                  description: row.getValue("description"),
-                  partnerName: "",
-                  isDeleted: row.getValue("isDeleted"),
-                }}
-                handleSubmit={() => {
-                  fetchData();
-                  setIsOpen(false);
-                }}
-              />
             </DialogHeader>
+            <ServiceForm
+              data={{
+                name: row.getValue("name"),
+                price: row.getValue("price"),
+                discount: row.getValue("discount"),
+                description: row.getValue("description"),
+                partnerName: row.getValue("partnerName"),
+                isDeleted: row.getValue("isDeleted"),
+              }}
+              handleSubmit={() => {
+                fetchData();
+                setIsOpen(false);
+              }}
+            />
           </DialogContent>
         </Dialog>
       ),

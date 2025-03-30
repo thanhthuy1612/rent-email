@@ -16,6 +16,6 @@ const Layout: React.FC<Props> = ({ children }) => {
       router.push("/error/403");
     }
   }, []);
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 export default Layout;

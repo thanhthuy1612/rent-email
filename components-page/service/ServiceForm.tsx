@@ -53,7 +53,7 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
       price: data.price,
       discount: data.discount,
       description: data.description,
-      partnerName: data.partnerName ?? "",
+      partnerName: data.partnerName,
       isDeleted: data.isDeleted,
     },
   });
@@ -99,7 +99,7 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
             <FormItem>
               <FormLabel>{t("service.name")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("service.name")} {...field} />
+                <Input disabled placeholder={t("service.name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -186,7 +186,7 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
           type="submit"
           className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
         >
-          {t("search")}
+          {t("changePassword.send")}
         </Button>
       </form>
     </Form>

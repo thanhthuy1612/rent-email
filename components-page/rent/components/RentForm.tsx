@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EmailType } from "@/enums/enum";
+import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -97,7 +98,7 @@ const RentForm: React.FC<IRentFormProps> = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <FormField
             control={form.control}
             name="dateFrom"
@@ -115,7 +116,7 @@ const RentForm: React.FC<IRentFormProps> = ({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}
@@ -156,7 +157,7 @@ const RentForm: React.FC<IRentFormProps> = ({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}

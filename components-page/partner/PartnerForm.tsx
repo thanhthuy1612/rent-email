@@ -99,7 +99,7 @@ const PartnerForm: React.FC<IPartnerFormProps> = ({ data, handleSubmit }) => {
             <FormItem>
               <FormLabel>{t("partner.name")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("partner.name")} {...field} />
+                <Input disabled placeholder={t("partner.name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -182,7 +182,7 @@ const PartnerForm: React.FC<IPartnerFormProps> = ({ data, handleSubmit }) => {
           type="submit"
           className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
         >
-          {t("search")}
+          {t("changePassword.send")}
         </Button>
       </form>
     </Form>

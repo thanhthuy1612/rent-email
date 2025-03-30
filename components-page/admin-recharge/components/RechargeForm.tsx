@@ -23,9 +23,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TransactionStatus, TransactionType } from "@/enums/enum";
+import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -101,7 +101,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <FormField
             control={form.control}
             name="dateFrom"
@@ -119,7 +119,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}
@@ -160,7 +160,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}
@@ -209,9 +209,8 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         placeholder={t("recharge.types.placeholder")}
                       >
                         {field.value.length === 1
-                          ? listType.find(
-                              (item) => item.id === field.value[0]
-                            )?.value
+                          ? listType.find((item) => item.id === field.value[0])
+                              ?.value
                           : `${field.value.length} ${t("selected")}`}
                       </SelectValue>
                     </SelectTrigger>
@@ -254,8 +253,9 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
                         placeholder={t("recharge.statuses.placeholder")}
                       >
                         {field.value.length === 1
-                          ? listStatus.find((item) => item.id === field.value[0])
-                              ?.value
+                          ? listStatus.find(
+                              (item) => item.id === field.value[0]
+                            )?.value
                           : `${field.value.length} ${t("selected")}`}
                       </SelectValue>
                     </SelectTrigger>

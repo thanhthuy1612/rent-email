@@ -211,21 +211,21 @@ const Partner: React.FC = () => {
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>{t("update")}</DialogTitle>
-              <PartnerForm
-                data={{
-                  name: row.getValue("name"),
-                  apiKey: row.getValue("apiKey"),
-                  baseUrl: row.getValue("baseUrl"),
-                  configurations: row.getValue("configurations"),
-                  priority: row.getValue("priority"),
-                  isDeleted: row.getValue("isDeleted"),
-                }}
-                handleSubmit={() => {
-                  fetchData();
-                  setIsOpen(false);
-                }}
-              />
             </DialogHeader>
+            <PartnerForm
+              data={{
+                name: row.getValue("name"),
+                apiKey: row.getValue("apiKey"),
+                baseUrl: row.getValue("baseUrl"),
+                configurations: row.getValue("configurations"),
+                priority: row.getValue("priority"),
+                isDeleted: row.getValue("isDeleted"),
+              }}
+              handleSubmit={() => {
+                fetchData();
+                setIsOpen(false);
+              }}
+            />
           </DialogContent>
         </Dialog>
       ),

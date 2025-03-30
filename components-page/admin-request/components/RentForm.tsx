@@ -17,7 +17,6 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ISearch } from "@/components-page/rent/Rent";
+import { dateFormat } from "@/lib/useTime";
 
 // ----------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <FormField
             control={form.control}
             name="dateFrom"
@@ -115,7 +115,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}
@@ -156,7 +156,7 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          dateFormat(field.value)
                         ) : (
                           <span>{t("recharge.choose")}</span>
                         )}

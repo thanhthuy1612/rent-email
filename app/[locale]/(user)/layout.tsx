@@ -54,34 +54,36 @@ const Layout: React.FC<Props> = ({ children }) => {
       setLoading(false);
     }
   };
+
+  const checkLogin = React.useCallback(() => {
+    dispatch(updateLoad(true));
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      getUser();
+    } else {
+      router.push("/login");
+    }
+    dispatch(updateLoad(false));
+  }, []);
+
   React.useLayoutEffect(() => {
-    const checkLogin = () => {
-      dispatch(updateLoad(true));
-      const accessToken = localStorage.getItem("accessToken");
-      if (accessToken) {
-        getUser();
-      } else {
-        router.push("/login");
-      }
-      dispatch(updateLoad(false));
-    };
     checkLogin();
   }, []);
+
+  if (loadingPage || loading) {
+    return (
+      <div className="h-screen flex items-center">
+        <LoadingScreen />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>
       <AppSidebar />
       <main className="flex flex-col w-full h-screen">
-        {loadingPage || loading ? (
-          <LoadingScreen />
-        ) : (
-          <>
-            <HeaderUserLayout />
-            <div className="bg-layout-user-bg w-full flex-1 py-7">
-              {children}
-            </div>
-          </>
-        )}
+        <HeaderUserLayout />
+        <div className="bg-layout-user-bg w-full flex-1 py-7">{children}</div>
       </main>
     </SidebarProvider>
   );

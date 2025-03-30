@@ -25,6 +25,7 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { dateFormat } from "@/lib/useTime";
 
 // ----------------------------------------------------------------------
 
@@ -113,13 +114,9 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
           name="promotion"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("partner.name")}</FormLabel>
+              <FormLabel>Promotion</FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  placeholder={t("partner.name")}
-                  {...field}
-                />
+                <Input type="number" placeholder="Promotion" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -142,7 +139,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        dateFormat(field.value)
                       ) : (
                         <span>{t("recharge.choose")}</span>
                       )}
@@ -183,7 +180,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        dateFormat(field.value)
                       ) : (
                         <span>{t("recharge.choose")}</span>
                       )}
@@ -228,7 +225,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
           type="submit"
           className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
         >
-          {t("search")}
+          {t("changePassword.send")}
         </Button>
       </form>
     </Form>

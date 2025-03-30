@@ -39,7 +39,7 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
       <div
         className={`${colorWhite ? "bg-white border-b" : "bg-landing"} flex justify-center items-center`}
       >
-        <div className=" w-full max-w-[1190px] flex py-3 px-8 md:px-0 gap-10 justify-between items-center">
+        <div className=" w-full max-w-[1120px] flex py-3 px-8 md:px-0 gap-10 justify-between items-center">
           <div className="flex gap-5 items-center">
             <div className="block md:hidden">
               <Sheet onOpenChange={setShowSheet} open={showSheet}>
