@@ -13,7 +13,7 @@ const ShowQR: React.FC = () => {
   const t = useTranslations();
 
   const handleSubmit = (value: IQR) => {
-    const qrUrl = process.env.NEXT_PUBLIC_QR ?? "";
+    const qrUrl = "https://img.vietqr.io/image/MB-3550101013333-qr_only.png";
     setQrCodeUrl(
       `${qrUrl}?amount=${value.amount}&addInfo=${value.description}`
     );

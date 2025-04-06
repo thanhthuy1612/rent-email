@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosLocal = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
+  baseURL: "http://api.ch-otp.top/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
