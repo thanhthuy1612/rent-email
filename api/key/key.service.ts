@@ -16,10 +16,10 @@ export interface IRequestBody {
   pageNumber: number;
   pageSize: number;
   key: string;
-  from: Date;
-  to: Date;
-  services: string[];
-  statuses: number[];
+  from?: Date;
+  to?: Date;
+  services?: string[];
+  statuses?: number[];
   dateAsc: boolean;
 }
 

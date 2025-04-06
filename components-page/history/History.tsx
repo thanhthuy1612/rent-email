@@ -107,7 +107,7 @@ const History: React.FC<HistoryProps> = ({ rechargeTypes }) => {
   };
 
   return (
-    <div className="max-w-[1120px] m-auto">
+    <div className=" m-auto">
       <Card className="p-5 mb-8">
         <div className="flex gap-5">
           <CustomDatePicker

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosLocal = axios.create({
-  baseURL: "http://103.171.0.146/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

@@ -10,9 +10,9 @@ const Recharge: React.FC = () => {
   const t = useTranslations();
 
   return (
-    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+    <div className=" flex flex-col gap-6 mx-5">
       <Card className="p-5">
-        <ShowQR value={t("recharge.qrDescription")} />
+        <ShowQR />
       </Card>
 
       <History />

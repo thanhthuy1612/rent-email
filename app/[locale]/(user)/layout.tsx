@@ -7,7 +7,6 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/navigation";
 import { AppSidebar } from "@/layout/user/app-sidebar";
-import { updateLoad } from "@/lib/features/load";
 import { updateUser } from "@/lib/features/user";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
@@ -23,8 +22,6 @@ export interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const { loadingPage } = useAppSelector((item) => item.load);
-
   const dispatch = useAppDispatch();
   const t = useTranslations();
   const router = useRouter();
@@ -32,7 +29,6 @@ const Layout: React.FC<Props> = ({ children }) => {
   const getUser = async () => {
     try {
       setLoading(true);
-      dispatch(updateLoad(true));
       const res = await loginService.profile();
       if (!res.code) {
         dispatch(updateUser(res.data));
@@ -50,27 +46,24 @@ const Layout: React.FC<Props> = ({ children }) => {
     } catch (error) {
       console.error(error);
     } finally {
-      dispatch(updateLoad(false));
       setLoading(false);
     }
   };
 
   const checkLogin = React.useCallback(() => {
-    dispatch(updateLoad(true));
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       getUser();
     } else {
       router.push("/login");
     }
-    dispatch(updateLoad(false));
   }, []);
 
   React.useLayoutEffect(() => {
     checkLogin();
   }, []);
 
-  if (loadingPage || loading) {
+  if (loading) {
     return (
       <div className="h-screen flex items-center">
         <LoadingScreen />
@@ -81,10 +74,10 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="flex flex-col w-full h-screen">
+      <div className="flex flex-col w-full h-screen">
         <HeaderUserLayout />
         <div className="bg-layout-user-bg w-full flex-1 py-7">{children}</div>
-      </main>
+      </div>
     </SidebarProvider>
   );
 };

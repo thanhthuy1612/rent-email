@@ -1,11 +1,14 @@
 import { z } from "zod";
+import './envConfig.ts'
 
 const configSchema = z.object({
-  DATABASE_URL: z.string(),
+  NEXT_PUBLIC_DATABASE_URL: z.string(),
+  NEXT_PUBLIC_QR: z.string()
 });
 
 const configProject = configSchema.safeParse({
-  DATABASE_URL: process.env.DATABASE_URL,
+  NEXT_PUBLIC_DATABASE_URL: process.env.NEXT_PUBLIC_DATABASE_URL!,
+  NEXT_PUBLIC_QR: process.env.NEXT_PUBLIC_QR!,
 });
 
 if (!configProject.success) {

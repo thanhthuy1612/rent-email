@@ -31,7 +31,7 @@ const User: React.FC = () => {
     }
   };
   return (
-    <div className="max-w-[1120px] m-auto">
+    <div className=" m-auto">
       <Card className="p-5 mx-5 mb-8 pb-0">
         <div className="flex">
           <div className="inline-block">

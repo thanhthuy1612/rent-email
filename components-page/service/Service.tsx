@@ -204,7 +204,7 @@ const Service: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+    <div className=" flex flex-col gap-6 mx-5">
       <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("service.title")}</h3>
         <DataTable columns={columns} data={data} />

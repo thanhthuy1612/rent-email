@@ -3,7 +3,6 @@
 import { IRequestBody, keyService } from "@/api/key/key.service";
 import { managerService } from "@/api/user/manager/manager.service";
 import AddRentForm from "@/components-page/rent/components/AddRent";
-import RentForm from "@/components-page/rent/components/RentForm";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -48,18 +47,14 @@ const Rent: React.FC = () => {
   const [data, setData] = React.useState<IData[]>([]);
   const [total, setTotal] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [isDateAsc, setIsDateAs] = React.useState<boolean>(true);
+  const [isDateAsc, setIsDateAs] = React.useState<boolean>(false);
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
-  const [search, setSearch] = React.useState<ISearch>({
-    from: new Date(new Date().setDate(new Date().getDate() - 7)),
-    to: new Date(),
-    services: [],
-    statuses: [],
-  });
   const [listServices, setListServices] = React.useState<
     { id: string; value: string }[]
   >([]);
+
+  const intervalIdRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const t = useTranslations();
   const { apiToken } = useAppSelector((item) => item.user);
@@ -86,10 +81,6 @@ const Rent: React.FC = () => {
         pageNumber,
         pageSize,
         key: apiToken ?? "",
-        from: search.from,
-        to: search.to,
-        services: search.services,
-        statuses: search.statuses,
         dateAsc: isDateAsc,
       };
       const res = await keyService.getRequest(newBody);
@@ -111,16 +102,6 @@ const Rent: React.FC = () => {
       console.error(error);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const resetPage = () => {
-    if (!isLoading) {
-      if (pageNumber !== 1) {
-        setPageNumber(1);
-      } else {
-        fetchData();
-      }
     }
   };
 
@@ -183,44 +164,59 @@ const Rent: React.FC = () => {
     },
   ];
 
-  const submitData = async (values: ISearch) => {
-    setSearch(values);
-    fetchData({
-      pageNumber,
-      pageSize,
-      key: apiToken ?? "",
-      ...values,
-      dateAsc: false,
-    });
+  React.useEffect(() => {
+    fetchServices();
+    fetchData();
+
+    return () => {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
+  }, []);
+
+  const resetPage = () => {
+    if (!isLoading) {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+      if (pageNumber !== 1) {
+        setPageNumber(1);
+      } else {
+        intervalIdRef.current = setInterval(() => {
+          fetchData();
+        }, 10000);
+      }
+    }
   };
+
   React.useEffect(() => {
     resetPage();
+    return () => {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
   }, [pageSize]);
 
   React.useEffect(() => {
-    if (isLoading) {
+    fetchData();
+    intervalIdRef.current = setInterval(() => {
       fetchData();
-    }
-    fetchServices();
-  }, []);
+    }, 10000);
 
-  React.useEffect(() => {
-    if (!isLoading) {
-      fetchData();
-    }
+    return () => {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
   }, [isDateAsc, pageNumber]);
+
   return (
-    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+    <div className=" flex flex-col gap-6 mx-5">
       <Card className="p-5">
         <h3 className="font-bold">{t("rent.addNew")}</h3>
         <AddRentForm resetPage={resetPage} listServices={listServices} />
-      </Card>
-      <Card className="p-5">
-        <RentForm
-          value={search}
-          handleSubmit={submitData}
-          listServices={listServices}
-        />
       </Card>
       <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("rent.titleHeader")}</h3>

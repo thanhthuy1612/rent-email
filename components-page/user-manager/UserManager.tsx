@@ -82,7 +82,7 @@ const UserManager: React.FC = () => {
   }, [state.params]);
 
   return (
-    <div className="max-w-[1120px] flex flex-col gap-6 mx-5">
+    <div className=" flex flex-col gap-6 mx-5">
       <Card className="p-5">
         <UserManagerForm
           value={state.params}

@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: false
 };
 
 const withNextIntl = createNextIntlPlugin();
