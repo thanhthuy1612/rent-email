@@ -7,8 +7,8 @@ const configSchema = z.object({
 });
 
 const configProject = configSchema.safeParse({
-  NEXT_PUBLIC_DATABASE_URL: process.env.NEXT_PUBLIC_DATABASE_URL!,
-  NEXT_PUBLIC_QR: process.env.NEXT_PUBLIC_QR!,
+  NEXT_PUBLIC_DATABASE_URL: "http://api.ch-otp.top/api/v1",
+  NEXT_PUBLIC_QR: "https://img.vietqr.io/image/MB-3550101013333-qr_only.png",
 });
 
 if (!configProject.success) {
