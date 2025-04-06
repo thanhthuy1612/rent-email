@@ -53,17 +53,23 @@ const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
 
   const formSchema = z
     .object({
-      dateFrom: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      dateTo: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
+      dateFrom: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
+      dateTo: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
       services: z.array(z.string()),
       statuses: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
-      if (data.dateTo <= data.dateFrom) {
+      if (data.dateTo && data.dateFrom && data.dateTo <= data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: t("recharge.date.error2"),

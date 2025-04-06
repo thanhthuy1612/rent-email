@@ -20,8 +20,8 @@ import React, { useCallback } from "react";
 // ----------------------------------------------------------------------
 
 export interface ISearch {
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
   services: string[];
   statuses: number[];
 }

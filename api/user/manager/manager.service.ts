@@ -29,8 +29,8 @@ export interface IPartnerBody {
 export interface IRequest {
   pageNumber: number;
   pageSize: number;
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
   services: string[];
   statuses: number[];
   userIds: string[];
@@ -39,8 +39,8 @@ export interface IRequest {
 export interface ITransaction {
   pageNumber: number;
   pageSize: number;
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
   types: number[];
   statuses: number[];
   userIds: string[];

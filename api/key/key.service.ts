@@ -5,8 +5,8 @@ export interface ITransactionBody {
   pageNumber: number;
   pageSize: number;
   key: string;
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
   types: number[];
   statuses: number[];
   dateAsc: boolean;

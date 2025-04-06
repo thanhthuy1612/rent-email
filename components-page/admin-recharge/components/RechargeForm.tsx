@@ -57,17 +57,23 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
 
   const formSchema = z
     .object({
-      dateFrom: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      dateTo: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
+      dateFrom: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
+      dateTo: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
       types: z.array(z.number()),
       statuses: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
-      if (data.dateTo <= data.dateFrom) {
+      if (data?.dateFrom && data.dateTo && data.dateTo <= data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: t("recharge.date.error2"),

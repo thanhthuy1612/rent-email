@@ -1,7 +1,4 @@
-import { ISearch } from "@/components-page/recharge/History";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -10,172 +7,113 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { TransactionStatus, TransactionType } from "@/enums/enum";
-import { dateFormat } from "@/lib/useTime";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { useAppSelector } from "@/lib/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { IQR } from "../ShowQR";
 
 // ----------------------------------------------------------------------
 
 export interface IQRFormProps {
-  value: ISearch;
-  handleSubmit: (value: ISearch) => void;
+  handleSubmit: (value: IQR) => void;
 }
-const QRForm: React.FC<IQRFormProps> = ({ value, handleSubmit }) => {
+
+const QRForm: React.FC<IQRFormProps> = ({ handleSubmit }) => {
   const t = useTranslations();
 
-  const formSchema = z
-    .object({
-      dateFrom: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      dateTo: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      types: z.array(z.number()),
-      statuses: z.array(z.number()),
-    })
-    .superRefine((data, ctx) => {
-      if (data.dateTo <= data.dateFrom) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: t("recharge.date.error2"),
-          path: ["dateTo"],
-        });
-      }
-    });
+  const { userName } = useAppSelector((item) => item.user);
+  const formSchema = z.object({
+    amount: z.number().min(1, { message: "Số tiền phải lớn hơn 0" }),
+    description: z.string(),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      dateFrom: value.from,
-      dateTo: value.to,
-      types: value.types,
-      statuses: value.statuses,
+      amount: 0,
+      description: `CHOTP ${userName}`,
     },
   });
+
+  const parseCurrency = (currencyString: string) => {
+    const numberString = currencyString.replace(/[₫,.\s]/g, "");
+    return parseFloat(numberString);
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       handleSubmit({
-        from: values.dateFrom,
-        to: values.dateTo,
-        types: values.types,
-        statuses: values.statuses,
+        amount: values.amount,
+        description: values.description,
       });
     } catch (error) {
       console.error(error);
     }
   };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <FormField
-            control={form.control}
-            name="dateFrom"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>{t("recharge.fromDate")}</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          dateFormat(field.value)
-                        ) : (
-                          <span>{t("recharge.choose")}</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
+          <div className=" col-span-1 md:col-span-2">
+            <FormField
+              control={form.control}
+              name="amount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Số tiền</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Số tiền"
+                      value={field.value}
+                      onChange={(e) => {
+                        const value = parseFloat(e.target.value);
+                        field.onChange(isNaN(value) ? "" : value);
+                      }}
                     />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="dateTo"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>{t("recharge.fromDate")}</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          dateFormat(field.value)
-                        ) : (
-                          <span>{t("recharge.choose")}</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className=" col-span-1 md:col-span-2">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nội dung chuyển khoản</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled
+                      placeholder="Nội dung chuyển khoản"
+                      {...field}
                     />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <Button
             type="submit"
             className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
           >
-            {t("submit")}
+            Tạo QR
           </Button>
         </div>
       </form>

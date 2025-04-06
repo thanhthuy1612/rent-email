@@ -116,6 +116,10 @@ const ServiceForm: React.FC<IServiceFormProps> = ({ data, handleSubmit }) => {
                   type="number"
                   placeholder={t("service.price")}
                   {...field}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    field.onChange(isNaN(value) ? "" : value); // Gửi giá trị số, nếu không hợp lệ thì gửi chuỗi rỗng
+                  }}
                 />
               </FormControl>
               <FormMessage />

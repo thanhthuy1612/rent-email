@@ -19,8 +19,8 @@ import { useTranslations } from "next-intl";
 import React from "react";
 
 export interface ISearch {
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
   types: number[];
   statuses: number[];
 }
@@ -50,8 +50,6 @@ const AdminRecharge: React.FC = () => {
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
   const [search, setSearch] = React.useState<ISearch>({
-    from: new Date(new Date().setDate(new Date().getDate() - 7)),
-    to: new Date(),
     types: [],
     statuses: [],
   });
