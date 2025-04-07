@@ -161,7 +161,7 @@ const Landing: React.FC = () => {
       />
       {isVisible && (
         <Button
-          className="fixed bottom-3 opacity-65 z-10 right-3 bg-sky-500 hover:bg-sky-600 cursor-pointer"
+          className="fixed bottom-3 opacity-65 z-10 right-3 button-color"
           onClick={scrollToTop}
         >
           <MoveUp />

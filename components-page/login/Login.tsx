@@ -143,7 +143,7 @@ const Login: React.FC = () => {
                 <FormLabel>{t("login.password.title")}</FormLabel>
                 <Link
                   href="/forgot-password"
-                  className="text-sky-500 hover:text-sky-600 text-end"
+                  className="text-purple-400 hover:text-purple-500 text-end"
                 >
                   {t("login.password.forgot")}
                 </Link>
@@ -211,7 +211,7 @@ const Login: React.FC = () => {
 
         <Button
           type="submit"
-          className="w-full cursor-pointer bg-sky-500 hover:bg-sky-600"
+          className="w-full button-color"
           disabled={isLoading || isLoadingSubmit}
         >
           {t("login.title")}

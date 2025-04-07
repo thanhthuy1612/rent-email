@@ -72,31 +72,31 @@ const Discount: React.FC = () => {
     <div className=" flex flex-col gap-6 mx-5">
       <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("discount.title")}</h3>
-        <div className="border-2 p-5 border-dashed rounded-md border-pink-500 bg-pink-200">
+        <div className="border-2 p-5 border-dashed rounded-md border-purple-400 bg-purple-100">
           <div className="grid grid-cols-3">
-            <label className="text-pink-500 font-bold col-span-1">
+            <label className="text-purple-500 font-bold col-span-1">
               {t("service.discount")}
             </label>
-            <span className="col-span-2 text-pink-500">
+            <span className="col-span-2 text-purple-500">
               {result?.promotion}
             </span>
           </div>
           <div className="grid grid-cols-3">
-            <label className="text-pink-500 font-bold col-span-1">
+            <label className="text-purple-500 font-bold col-span-1">
               {t("service.isDeleted")}
             </label>
-            <span className="col-span-2 text-pink-500">
+            <span className="col-span-2 text-purple-500">
               {result?.isDeleted ? t("global.yes") : t("global.no")}
             </span>
           </div>
-          <p className="text-pink-500 text-center my-5 font-bold">
+          <p className="text-purple-500 text-center my-5 font-bold">
             {dateFormat(result?.startTime, DateFormatType.FullDate)} -{" "}
             {dateFormat(result?.endTime, DateFormatType.FullDate)}
           </p>
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <div className="flex justify-center mt-5">
-                <Button className="bg-pink-500 w-1/2 hover:bg-pink-600 cursor-pointer">
+                <Button className="button-color  w-1/2">
                   <Pen /> {t("update")}
                 </Button>
               </div>

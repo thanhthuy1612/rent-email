@@ -147,7 +147,9 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
               )}
             />
             <DialogFooter>
-              <Button type="submit">{t("updateUser.submit")}</Button>
+              <Button className="w-full mt-5 button-color " type="submit">
+                {t("updateUser.submit")}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

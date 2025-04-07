@@ -10,10 +10,10 @@ const Service: React.FC<IService> = ({ ref }) => {
     <div ref={ref}>
       <div className="bg-landing pt-30">
         <p className="px-10 md:px-0 text-[#fff] text-[2.5rem] text-center mb-4 font-bold">
-          Cung cấp sim không giới hạn
+          Cung cấp email
         </p>
         <p className="px-8 md:px-0 text-[#5e6278] text-[1.15rem] pb-28 text-center w-full">
-          ViOTP có kho sim tại nhiều quốc gia ở Châu Á, phục vụ 24/7, cấp API
+          ViOTP có kho email tại nhiều quốc gia ở Châu Á, phục vụ 24/7, cấp API
           cho khách hàng có nhu cầu sử dụng lớn.
         </p>
         <div className="flex justify-center">
@@ -29,8 +29,9 @@ const Service: React.FC<IService> = ({ ref }) => {
           </div>
         </div>
         <p className="px-8 md:px-0 text-[#a1a5b7] text-[1.5rem] pb-28 text-center w-full">
-          ViOTP - Sim Thuê Không Giới Hạn
+          CHOTP - Cho thuê email
         </p>
+        ạ
       </div>
       <div className="relative text-landing mb-10 mb-lg-20">
         <svg

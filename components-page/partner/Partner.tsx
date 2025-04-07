@@ -144,7 +144,7 @@ const Partner: React.FC = () => {
                 }}
                 type="submit"
                 size="sm"
-                className="px-3"
+                className="px-3 button-color "
               >
                 <span className="sr-only">{t("partner.copy")}</span>
                 <Copy />
@@ -201,10 +201,7 @@ const Partner: React.FC = () => {
       cell: ({ row }) => (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
-            <Button
-              size="sm"
-              className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
-            >
+            <Button size="sm" className="button-color ">
               <Pen />
             </Button>
           </DialogTrigger>

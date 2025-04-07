@@ -263,3 +263,16 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.button-color {
+  background: linear-gradient(90deg, #ff1b65, #5812f7);
+  color: white;
+  cursor: pointer;
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position 0.3s ease;
+}
+
+.button-color:hover {
+  background-position: left;
+}

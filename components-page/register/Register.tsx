@@ -338,7 +338,7 @@ const Register: React.FC = () => {
                   {t("register.term.title")}
                   <Link
                     href="/term"
-                    className="text-sky-500 hover:text-sky-600 cursor-pointer"
+                    className="text-purple-400 hover:text-purple-500 cursor-pointer"
                   >
                     {t("register.term.link")}
                   </Link>
@@ -351,7 +351,7 @@ const Register: React.FC = () => {
         <Button
           disabled={isLoading || isLoadingSubmit}
           type="submit"
-          className="w-full mt-3 cursor-pointer bg-sky-500 hover:bg-sky-600"
+          className="w-full mt-3 button-color"
         >
           {t("register.title")}
         </Button>

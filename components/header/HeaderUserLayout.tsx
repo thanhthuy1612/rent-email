@@ -24,6 +24,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import React from "react";
 import MobileDrawer from "@/components/header/MobileDrawer";
+import axiosLocal from "@/api/axiosLocal";
 
 // ----------------------------------------------------------------------
 
@@ -61,6 +62,9 @@ const HeaderUserLayout: React.FC = () => {
   }, [pathname]);
 
   const goToLogin = () => {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    delete axiosLocal.defaults.headers.common.Authorization;
     push("/login");
   };
 
@@ -97,7 +101,7 @@ const HeaderUserLayout: React.FC = () => {
                   </Button>
                   <Button
                     variant="ghost"
-                    className="justify-start px-4 py-2 text-left text-red-500 hover:bg-red-100"
+                    className="justify-start px-4 py-2 text-left !text-red-500 hover:bg-red-100"
                     onClick={goToLogin}
                   >
                     Sign Out
@@ -128,9 +132,7 @@ const HeaderUserLayout: React.FC = () => {
           </BreadcrumbList>
         </Breadcrumb>
         <Link href="/recharge">
-          <Button className="bg-sky-500 hover:bg-sky-600 cursor-pointer">
-            {t("recharge.title")}
-          </Button>
+          <Button className="button-color ">{t("recharge.title")}</Button>
         </Link>
       </div>
     </>

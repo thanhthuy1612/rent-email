@@ -116,7 +116,7 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
       header: t("global.action"),
       cell: ({ row }) => (
         <Button
-          className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
+          className="button-color "
           onClick={() => handleEditClick(row.original)}
         >
           <Pen />

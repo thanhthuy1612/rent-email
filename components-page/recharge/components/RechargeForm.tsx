@@ -279,10 +279,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
-          >
+          <Button type="submit" className="w-full mt-5.5 button-color ">
             {t("search")}
           </Button>
         </div>

@@ -32,7 +32,7 @@ const LayoutAuth: React.FC<Props> = ({
           {description}
           <Link
             href={href}
-            className="text-sky-500 hover:text-sky-600 cursor-pointer"
+            className="text-purple-400 hover:text-purple-500 cursor-pointer"
           >
             {titleHref}
           </Link>

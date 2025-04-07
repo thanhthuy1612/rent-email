@@ -13,7 +13,7 @@ const PolicyContract: React.FC<IPolicyContract> = ({ title, link }) => {
       <p className="text-[#5e6278] text-[1.25rem]">
         Liên hệ ngay Fanpage CSKH{" "}
         <Link href={link} className="text-[#fff] opacity-50">
-          Fanpage ViOTP
+          Fanpage CHOTP
         </Link>
       </p>
     </div>

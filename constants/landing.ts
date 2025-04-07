@@ -8,21 +8,21 @@ export const introduce = [
     id: 1,
     title: "Đăng ký tài khoản",
     description:
-      "Chỉ với vài thao tác đơn giản khách hàng đã có thể sở hữu tài khoản của ViOTP",
+      "Chỉ với vài thao tác đơn giản khách hàng đã có thể sở hữu tài khoản của CHOTP",
     img: introduce1,
   },
   {
     id: 2,
     title: "Nạp tiền vào tài khoản",
     description:
-      "ViOTP cung cấp 3 phương thức nạp tiền vào tài khoản Internet Banking, Momo, Thẻ cào",
+      "CHOTP cung cấp phương thức nạp tiền vào tài khoản Internet Banking",
     img: introduce2,
   },
   {
     id: 3,
     title: "Sử dụng dịch vụ",
     description:
-      "Chỉ cần vài thao tác khách hàng đã có thể thuê sim và sử dụng ngay",
+      "Chỉ cần vài thao tác khách hàng đã có thể thuê email và sử dụng ngay",
     img: introduce3,
   },
 ];
@@ -48,7 +48,7 @@ export const contact = [
     link: "https://www.facebook.com/vietotp",
   },
   {
-    title: "Email: admin@viotp.com",
+    title: "Email: admin@CHOTP.com",
     link: "https://www.facebook.com/vietotp",
   },
 ];

@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             className="w-[100%] object-cover max-w-[20px]"
           />
         </Link>
-        <p className="text-white opacity-50 ml-3">© 2021 ViOTP</p>
+        <p className="text-white opacity-50 ml-3">© 2021 CHOTP</p>
       </div>
     </div>
   );

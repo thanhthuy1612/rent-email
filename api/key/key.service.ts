@@ -9,7 +9,7 @@ export interface ITransactionBody {
   to?: Date;
   types: number[];
   statuses: number[];
-  dateAsc: boolean;
+  dateAsc?: boolean;
 }
 
 export interface IRequestBody {

@@ -16,6 +16,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
+import RentForm from "./components/RentForm";
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,10 @@ const Rent: React.FC = () => {
   const [listServices, setListServices] = React.useState<
     { id: string; value: string }[]
   >([]);
+  const [search, setSearch] = React.useState<ISearch>({
+    services: [],
+    statuses: [],
+  });
 
   const intervalIdRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -164,6 +169,29 @@ const Rent: React.FC = () => {
     },
   ];
 
+  const submitData = async (values: ISearch) => {
+    setSearch(values);
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+    }
+    fetchData({
+      pageNumber,
+      pageSize,
+      ...values,
+      dateAsc: false,
+      key: apiToken ?? "",
+    });
+    intervalIdRef.current = setInterval(() => {
+      fetchData({
+        pageNumber,
+        pageSize,
+        ...values,
+        dateAsc: false,
+        key: apiToken ?? "",
+      });
+    }, 10000);
+  };
+
   React.useEffect(() => {
     fetchServices();
     fetchData();
@@ -217,6 +245,13 @@ const Rent: React.FC = () => {
       <Card className="p-5">
         <h3 className="font-bold">{t("rent.addNew")}</h3>
         <AddRentForm resetPage={resetPage} listServices={listServices} />
+      </Card>
+      <Card className="p-5">
+        <RentForm
+          value={search}
+          handleSubmit={submitData}
+          listServices={listServices}
+        />
       </Card>
       <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("rent.titleHeader")}</h3>

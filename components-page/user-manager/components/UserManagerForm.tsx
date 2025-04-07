@@ -139,7 +139,7 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
           </div>
           <Button
             type="submit"
-            className="w-full mt-5.5 col-span-1 cursor-pointer bg-sky-500 hover:bg-sky-600"
+            className="w-full mt-5.5 col-span-1 button-color "
           >
             {t("search")}
           </Button>

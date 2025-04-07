@@ -236,7 +236,7 @@ const ChangePassword: React.FC = () => {
             <Button
               type="submit"
               disabled={isLoadingSubmit}
-              className="w-full mt-3 cursor-pointer bg-sky-500 hover:bg-sky-600"
+              className="w-full mt-3 button-color"
             >
               {t("changePassword.send")}
             </Button>

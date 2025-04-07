@@ -53,17 +53,23 @@ const RentForm: React.FC<IRentFormProps> = ({
 
   const formSchema = z
     .object({
-      dateFrom: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      dateTo: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
+      dateFrom: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
+      dateTo: z
+        .date()
+        .max(new Date(), {
+          message: t("recharge.date.error1"),
+        })
+        .optional(),
       services: z.array(z.string()),
       types: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
-      if (data.dateTo <= data.dateFrom) {
+      if (data.dateTo && data.dateFrom && data.dateTo <= data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Ngày đến phải lớn hơn ngày từ",
@@ -277,10 +283,7 @@ const RentForm: React.FC<IRentFormProps> = ({
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
-          >
+          <Button type="submit" className="w-full mt-5.5 button-color ">
             {t("search")}
           </Button>
         </div>

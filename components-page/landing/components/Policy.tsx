@@ -18,9 +18,9 @@ const Policy: React.FC<IPolicy> = ({ ref }) => {
         </p>
         <div className="px-8 md:px-0 flex justify-center">
           <p className="text-[#a1a5b7] text-center w-full max-w-md">
-            ViOTP chia sẻ doanh thu qua kênh Affliate cho các MMOers kênh đại lý
-            bán hàng, kênh đại lý cắm rút sim với phần trăm cao, lợi nhuận trả
-            hàng tuần Chi tiết liên hệ CSKH của ViOTP.
+            CHOTP chia sẻ doanh thu qua kênh Affliate cho các MMOers kênh đại lý
+            bán hàng, kênh đại lý với phần trăm cao, lợi nhuận trả hàng tuần Chi
+            tiết liên hệ CSKH của CHOTP.
           </p>
         </div>
       </div>
@@ -44,7 +44,7 @@ const Policy: React.FC<IPolicy> = ({ ref }) => {
               <div className="flex gap-8 justify-center md:justify-between items-center flex-wrap">
                 <div>
                   <p className="text-white text-[2.25rem] mb-2">
-                    ViOTP - Sim Thuê Không Giới Hạn
+                    CHOTP - Cho thuê Email
                   </p>
                   <p className="text-[#fff] text-[1.15rem]">
                     Hơn 200.000 người dùng mỗi ngày. Đăng Ký Ngay

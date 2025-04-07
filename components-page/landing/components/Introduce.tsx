@@ -13,6 +13,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import img1 from "@/public/imgs/1.webp";
+import img2 from "@/public/imgs/2.png";
+import img3 from "@/public/imgs/3.png";
+import Image from "next/image";
 
 export interface IIntroduce {
   ref: React.Ref<HTMLDivElement> | undefined;
@@ -22,6 +26,8 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
+
+  const listImg = [img1, img2, img3];
 
   return (
     <div ref={ref} className="relative">
@@ -41,12 +47,11 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
       <div className="flex justify-center">
         <div className="pt-11 px-8 w-full max-w-[1190px]">
           <h1 className="text-center text-[#181c32] text-[2.5rem] mb-3 font-bold">
-            ViOTP là gì?
+            CHOTP là gì?
           </h1>
           <p className="text-center mb-20 text-[#a1a5b7] text-[1.15rem]">
-            ViOTP cung cấp cho khách hàng số điện thoại để lấy OTP, Mã Xác Nhận,
-            Code Verify các dịch vụ trên internet. Khách hàng có thể thuê số 1
-            lần, theo tuần, hoặc theo tháng.
+            CHOTP giải pháp Mail Server chuyên nghiệp, hàng đầu dành cho các
+            doanh nghiệp
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-[60px]">
             {introduce.map((item) => (
@@ -68,12 +73,12 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
               onMouseLeave={plugin.current.reset}
             >
               <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
+                {listImg.map((item, index) => (
                   <CarouselItem key={index}>
                     <Card className="w-full h-[500px]">
                       <CardContent className="flex h-[100%] items-center justify-center p-6">
                         <span className="text-4xl font-semibold">
-                          {index + 1}
+                          <Image alt="img" src={item} />
                         </span>
                       </CardContent>
                     </Card>

@@ -172,10 +172,7 @@ const Service: React.FC = () => {
       cell: ({ row }) => (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
-            <Button
-              size="sm"
-              className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
-            >
+            <Button size="sm" className="button-color ">
               <Pen />
             </Button>
           </DialogTrigger>

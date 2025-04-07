@@ -26,8 +26,9 @@ const UserNav: React.FC = () => {
           <NavigationMenuItem key={item.title}>
             <Link href={item.href} legacyBehavior passHref>
               <NavigationMenuLink
-                className={`text-zinc-500 py-5 !bg-transparent rounded-none font-semibold text-[16px] hover:border-b-2 hover:border-sky-500 ${
-                  pathname === item.href && "border-b-2 !border-sky-600 text-zinc-950"
+                className={`text-zinc-500 py-5 !bg-transparent rounded-none font-semibold text-[16px] hover:border-b-2 hover:border-purple-400 ${
+                  pathname === item.href &&
+                  "border-b-2 !border-purple-500 text-zinc-950"
                 }`}
               >
                 {item.title}

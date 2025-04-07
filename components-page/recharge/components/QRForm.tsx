@@ -109,10 +109,7 @@ const QRForm: React.FC<IQRFormProps> = ({ handleSubmit }) => {
               )}
             />
           </div>
-          <Button
-            type="submit"
-            className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
-          >
+          <Button type="submit" className="w-full mt-5.5 button-color ">
             Tạo QR
           </Button>
         </div>

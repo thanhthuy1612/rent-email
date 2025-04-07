@@ -221,10 +221,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="w-full mt-5.5 cursor-pointer bg-sky-500 hover:bg-sky-600"
-        >
+        <Button type="submit" className="w-full mt-5.5 button-color ">
           {t("changePassword.send")}
         </Button>
       </form>

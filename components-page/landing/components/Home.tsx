@@ -17,8 +17,8 @@ const Home: React.FC<IHome> = ({ ref }) => {
         <div className="flex flex-column justify-center items-center min-h-[350px] lg:min-h-[500px] px-9">
           <div className="text-center mb-5 mb-lg-10 py-10 py-lg-20">
             <h1 className="text-white text-2xl lg:text-5xl leading-8 lg:leading-14 font-bold mb-15">
-              Dịch vụ cho thuê sim OTP
-              <br></br>với
+              Chào mừng đến với
+              <br></br>CHOTP{" "}
               <span
                 style={{
                   background:
@@ -32,16 +32,13 @@ const Home: React.FC<IHome> = ({ ref }) => {
                   id="kt_landing_hero_text"
                   className="text-2xl lg:text-5xl font-bold"
                 >
-                  Kho sim khủng nhất châu Á
+                  Dịch vụ cho thuê email
                 </span>
               </span>
             </h1>
-            <Link href="/rent">
-              <Button
-                size="lg"
-                className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
-              >
-                Thuê Ngay
+            <Link href="/login">
+              <Button size="lg" className="button-color">
+                Đăng nhập
               </Button>
             </Link>
           </div>

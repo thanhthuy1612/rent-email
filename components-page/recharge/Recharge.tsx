@@ -14,7 +14,6 @@ const Recharge: React.FC = () => {
       <Card className="p-5">
         <ShowQR />
       </Card>
-
       <History />
     </div>
   );
