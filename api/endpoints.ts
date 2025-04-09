@@ -16,6 +16,7 @@ export const endpoints = {
     getRequest: "/key/request/get-history",
     getTransaction: "/key/transaction/get-history",
     getNewEmail: "/key/request/get-new-email",
+    getService: "/key/service/active-services"
   },
   manager: {
     getService: "/management/service/get-all",

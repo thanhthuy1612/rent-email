@@ -44,7 +44,7 @@ const HeaderUserLayout: React.FC = () => {
     const navs =
       scopes === "admin"
         ? navData
-        : navData.filter((item) => item.label !== "Manager");
+        : navData.filter((item) => item.label !== "Quản lý");
     const findUrl = navs.reduce((resultNav: string[], nav) => {
       return nav.children.reduce((result: string[], item) => {
         if (paths.includes(item.url)) {

@@ -47,7 +47,7 @@ const RentForm: React.FC<IRentFormProps> = ({
   const t = useTranslations();
 
   const listType = [
-    { id: EmailType.Gmail, value: "Gmail" },
+    { id: EmailType.Gmail, value: "Email" },
     { id: EmailType.Hotmail, value: "Hotmail" },
   ];
 

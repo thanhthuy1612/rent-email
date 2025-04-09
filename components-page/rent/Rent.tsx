@@ -66,7 +66,7 @@ const Rent: React.FC = () => {
 
   const fetchServices = useCallback(async () => {
     try {
-      const res = await managerService.getService();
+      const res = await keyService.getService({ key: apiToken ?? "" });
       if (res && res.data) {
         setListServices(
           res.data.map((service: any) => ({

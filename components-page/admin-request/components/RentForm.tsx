@@ -30,25 +30,26 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { ISearch } from "@/components-page/rent/Rent";
 import { dateFormat } from "@/lib/useTime";
+import { EmailType } from "@/enums/enum";
 
 // ----------------------------------------------------------------------
 
 export interface IRentFormProps {
   value: ISearch;
   handleSubmit: (value: ISearch) => void;
+  listServices: any[];
 }
-const RentForm: React.FC<IRentFormProps> = ({ value, handleSubmit }) => {
+
+const RentForm: React.FC<IRentFormProps> = ({
+  value,
+  handleSubmit,
+  listServices,
+}) => {
   const t = useTranslations();
 
   const listType = [
-    { id: 1, value: t("recharge.types.credit") },
-    { id: 2, value: t("recharge.types.debit") },
-    { id: 3, value: t("recharge.types.other") },
-  ];
-  const listServices = [
-    { id: "1", value: t("recharge.services.service1") },
-    { id: "2", value: t("recharge.services.service2") },
-    { id: "3", value: t("recharge.services.service3") },
+    { id: EmailType.Gmail, value: "Emailß" },
+    { id: EmailType.Hotmail, value: "Hotmail" },
   ];
 
   const formSchema = z

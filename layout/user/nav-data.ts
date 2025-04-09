@@ -1,7 +1,6 @@
 import {
   Banknote,
   CircleDollarSign,
-  Clock,
   Mail,
   Menu,
   MoveDown,
@@ -13,60 +12,60 @@ import {
 
 export const navData = [
   {
-    label: "Account",
+    label: "Tài khoản",
     children: [
       {
-        title: "Account Information",
+        title: "Thông tin tài khoản",
         url: "/user",
         icon: User,
       },
       {
-        title: "Recharge",
+        title: "Nạp tiền",
         url: "/recharge",
         icon: CircleDollarSign,
       },
     ],
   },
   {
-    label: "Rent",
+    label: "Cho thuê",
     children: [
       {
-        title: "Rent Gmail",
+        title: "Thuê email",
         url: "/rent",
         icon: Mail,
       },
     ],
   },
   {
-    label: "Manager",
+    label: "Quản lý",
     children: [
       {
-        title: "User",
+        title: "Người dùng",
         url: "/manager",
         icon: Users,
       },
       {
-        title: "Service",
+        title: "Dịch vụ",
         url: "/service",
         icon: Server,
       },
       {
-        title: "Partner",
+        title: "Đối tác",
         url: "/partner",
         icon: UserCheck,
       },
       {
-        title: "Recharge",
+        title: "Nạp tiền",
         url: "/admin-recharge",
         icon: Banknote,
       },
       {
-        title: "Request",
+        title: "Thuê email",
         url: "/admin-request",
         icon: Menu,
       },
       {
-        title: "Discount",
+        title: "Mã giảm giá",
         url: "/discount",
         icon: MoveDown,
       },
