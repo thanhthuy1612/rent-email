@@ -77,7 +77,7 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
             </div>
             <Link href={"/login"}>
               <Button className=" cursor-pointer text-white bg-emerald-500 hover:bg-emerald-600">
-                Login
+                Đăng nhập
               </Button>
             </Link>
             {/* <Link href={"/register"}>

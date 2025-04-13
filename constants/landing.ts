@@ -34,7 +34,7 @@ export const service = [
 ];
 
 export const policy = [
-  { title: "Bạn cần sử dụng API?", link: "https://www.facebook.com/vietotp" },
+  { title: "Bạn cần sử dụng API?", link: "/api-doc" },
   {
     title: "Bạn muốn hợp tác kinh doanh?",
     link: "https://www.facebook.com/vietotp",

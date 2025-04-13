@@ -47,11 +47,10 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
       <div className="flex justify-center">
         <div className="pt-11 px-8 w-full max-w-[1190px]">
           <h1 className="text-center text-[#181c32] text-[2.5rem] mb-3 font-bold">
-            CHOTP là gì?
+            Email bạn cần - CH-OTP có
           </h1>
           <p className="text-center mb-20 text-[#a1a5b7] text-[1.15rem]">
-            CHOTP giải pháp Mail Server chuyên nghiệp, hàng đầu dành cho các
-            doanh nghiệp
+            Thuê mail nhanh - Xài nhanh - Không chờ đợi
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-[60px]">
             {introduce.map((item) => (

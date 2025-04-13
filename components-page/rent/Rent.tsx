@@ -117,25 +117,25 @@ const Rent: React.FC = () => {
     },
     {
       accessorKey: "userName",
-      header: "Username",
+      header: "Tài khoản",
     },
     {
       accessorKey: "serviceName",
-      header: "Service",
+      header: "Dịch vụ",
     },
     {
       accessorKey: "originalPrice",
-      header: "Price",
+      header: "Giá",
       cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
     },
     {
       accessorKey: "discount",
-      header: "Discount",
+      header: "Giảm giá",
       cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     },
     {
       accessorKey: "finalPrice",
-      header: "Final Price",
+      header: "Giá cuối",
       cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
     },
     {
@@ -147,7 +147,7 @@ const Rent: React.FC = () => {
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => setIsDateAs((pre) => !pre)}>
-            Date
+            Ngày tạo
             <ArrowUpDown />
           </Button>
         );
@@ -156,7 +156,7 @@ const Rent: React.FC = () => {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: "Trạng thái",
       cell: ({ row }) => (
         <Badge
           className={`${

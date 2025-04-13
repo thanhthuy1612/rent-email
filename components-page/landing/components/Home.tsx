@@ -17,7 +17,7 @@ const Home: React.FC<IHome> = ({ ref }) => {
         <div className="flex flex-column justify-center items-center min-h-[350px] lg:min-h-[500px] px-9">
           <div className="text-center mb-5 mb-lg-10 py-10 py-lg-20">
             <h1 className="text-white text-2xl lg:text-5xl leading-8 lg:leading-14 font-bold mb-15">
-              Chào mừng đến với
+              Bạn có tiền - chúng tôi có email
               <br></br>CHOTP{" "}
               <span
                 style={{
@@ -32,7 +32,7 @@ const Home: React.FC<IHome> = ({ ref }) => {
                   id="kt_landing_hero_text"
                   className="text-2xl lg:text-5xl font-bold"
                 >
-                  Dịch vụ cho thuê email
+                  Dịch vụ cho thuê email lớn nhất Việt Nam
                 </span>
               </span>
             </h1>
