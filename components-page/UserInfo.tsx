@@ -38,7 +38,7 @@ const UserInfo: React.FC = () => {
       toast({
         title: t("user.copySuccess"),
         className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
         ),
       });
     } catch (err) {
@@ -46,7 +46,7 @@ const UserInfo: React.FC = () => {
         title: t("user.copyFailed"),
         variant: "destructive",
         className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
         ),
       });
     }
@@ -62,7 +62,7 @@ const UserInfo: React.FC = () => {
           description: res.message,
           duration: 10000,
           className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+            "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
           ),
         });
         dispatch(updateApiToken(res.data));
@@ -73,7 +73,7 @@ const UserInfo: React.FC = () => {
           variant: "destructive",
           duration: 10000,
           className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+            "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
           ),
         });
       }

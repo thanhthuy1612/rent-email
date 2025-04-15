@@ -67,7 +67,7 @@ const Partner: React.FC = () => {
           variant: "destructive",
           duration: 10000,
           className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+            "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
           ),
         });
       }
@@ -95,7 +95,7 @@ const Partner: React.FC = () => {
         title: t("alert.success"),
         description: t("partner.copySuccess"),
         className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
         ),
       });
     } catch (err) {
@@ -104,7 +104,7 @@ const Partner: React.FC = () => {
         description: t("partner.copyFailed"),
         variant: "destructive",
         className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
         ),
       });
     }

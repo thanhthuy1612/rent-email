@@ -1,7 +1,6 @@
 "use client";
 
 import { IRequest, managerService } from "@/api/user/manager/manager.service";
-import RentForm from "@/components-page/rent/components/RentForm";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +13,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
+import RentForm from "./components/RentForm";
 
 // ----------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ const AdminRequest: React.FC = () => {
           variant: "destructive",
           duration: 10000,
           className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+            "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
           ),
         });
       }

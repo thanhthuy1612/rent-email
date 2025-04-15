@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           variant: "destructive",
           duration: 10000,
           className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4 text-white"
+            "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4 text-white"
           ),
         });
       }
