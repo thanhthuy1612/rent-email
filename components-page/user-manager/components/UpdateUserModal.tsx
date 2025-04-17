@@ -38,23 +38,7 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
   const t = useTranslations();
 
   const formSchema = z.object({
-    setPassword: z
-      .string()
-      .min(6, { message: t("register.password.error1") })
-      .max(18, { message: t("register.password.error2") })
-      .refine((value) => /[A-Za-z]/.test(value), {
-        message: t("register.password.error3"),
-      })
-      .refine((value) => /\d/.test(value), {
-        message: t("register.password.error4"),
-      })
-      .refine(
-        (value) =>
-          /^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|-]+$/.test(value),
-        {
-          message: t("register.password.error5"),
-        }
-      ),
+    setPassword: z.string(),
     creditBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
     debitBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
     setStatus: z.enum(["1", "2", "3"]),
@@ -72,7 +56,11 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      onSubmit({ userId, ...values });
+      onSubmit({
+        userId,
+        ...values,
+        setPassword: values.setPassword !== "" ? values.setPassword : null,
+      });
     } catch (error) {
       console.error(error);
     }

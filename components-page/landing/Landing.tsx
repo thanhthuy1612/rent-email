@@ -16,6 +16,7 @@ import Policy from "@/components-page/landing/components/Policy";
 import Service from "@/components-page/landing/components/Service";
 import { MoveUp } from "lucide-react";
 import React from "react";
+import { useRouter } from "@/i18n/navigation";
 
 // ----------------------------------------------------------------------
 
@@ -26,10 +27,11 @@ const Landing: React.FC = () => {
   const refPolicy = React.useRef<HTMLDivElement | null>(null);
 
   const navLanding = [
-    { title: "Home", ref: refHome },
-    { title: "Introduce", ref: refIntroduce },
-    { title: "Service", ref: refService },
-    { title: "Policy", ref: refPolicy },
+    { title: "Trang chủ", ref: refHome },
+    { title: "Giới thiệu", ref: refIntroduce },
+    { title: "Dịch vụ", ref: refService },
+    { title: "Chính sách", ref: refPolicy },
+    { title: "Api Key", url: "/api-doc" },
   ];
 
   const [current, setCurrent] = React.useState<string | null>(
@@ -38,6 +40,8 @@ const Landing: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState<boolean>(false);
   const [showSheet, setShowSheet] = React.useState<boolean>(false);
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  const router = useRouter();
 
   const scrollToDiv = (ref: HTMLDivElement | null, title: string) => {
     if (ref) {
@@ -101,6 +105,18 @@ const Landing: React.FC = () => {
     };
   }, []);
 
+  const onHandleClick = (
+    title: string,
+    ref?: HTMLDivElement | null,
+    url?: string
+  ) => {
+    if (ref) {
+      scrollToDiv(ref, title);
+    } else if (url) {
+      router.push(url);
+    }
+  };
+
   const getClassNameNavButton = (colorWhite: boolean, title: string) => {
     if (!colorWhite) {
       return `${title === current ? "!text-white" : "text-white opacity-50"} hover:text-sky-500`;
@@ -115,7 +131,9 @@ const Landing: React.FC = () => {
           <NavigationMenuItem key={item.title}>
             <Button
               className={`border-none shadow-none ${colorWhite ? "!bg-white" : "!bg-landing"} cursor-pointer px-3`}
-              onClick={() => scrollToDiv(item.ref.current, item.title)}
+              onClick={() =>
+                onHandleClick(item.title, item.ref?.current, item.url)
+              }
             >
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} text-[1rem] font-normal !bg-transparent ${getClassNameNavButton(colorWhite, item.title)}`}
@@ -133,9 +151,7 @@ const Landing: React.FC = () => {
     <div className="flex flex-col w-full gap-3">
       {navLanding.map((item) => (
         <div
-          onClick={async () => {
-            scrollToDiv(item.ref.current, item.title);
-          }}
+          onClick={() => onHandleClick(item.title, item.ref?.current, item.url)}
           key={item.title}
           className={`${navigationMenuTriggerStyle()} text-[1rem] font-normal !bg-transparent ${getClassNameNavButton(true, item.title)}`}
         >

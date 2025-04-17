@@ -113,9 +113,9 @@ const UserInfo: React.FC = () => {
               {t("changeKey.title")}
             </Button>
           </div>
-          <div className="rounded-2xl p-5 border-dashed border-1 text-[14px]">
+          <div className="rounded-2xl p-5 border-dashed border-1 text-[14px] flex flex-col gap-3">
             {listInfo.map((item) => (
-              <div key={item.title} className="grid grid-cols-3">
+              <div key={item.title} className="flex flex-col gap-1">
                 <label className="text-[#a1a5b7] font-bold col-span-1">
                   {item.title}
                 </label>

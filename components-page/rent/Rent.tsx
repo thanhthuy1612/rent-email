@@ -174,7 +174,7 @@ const Rent: React.FC = () => {
     if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current);
     }
-    fetchData({
+    await fetchData({
       pageNumber,
       pageSize,
       ...values,

@@ -45,7 +45,7 @@ const AdminRequest: React.FC = () => {
   const [data, setData] = React.useState<IData[]>([]);
   const [total, setTotal] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [isDateAsc, setIsDateAs] = React.useState<boolean>(true);
+  const [isDateAsc, setIsDateAs] = React.useState<boolean>(false);
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
   const [search, setSearch] = React.useState<ISearch>({
@@ -150,9 +150,7 @@ const AdminRequest: React.FC = () => {
       cell: ({ row }) => (
         <Badge
           className={`${
-            row.getValue("status") === t("recharge.statuses.created")
-              ? "bg-green-500"
-              : "bg-red-500"
+            row.getValue("status") === "create" ? "bg-green-500" : "bg-red-500"
           } opacity-60`}
         >
           {row.getValue("status")}

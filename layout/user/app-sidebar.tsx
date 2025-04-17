@@ -33,7 +33,7 @@ export function AppSidebar() {
   const navs =
     scopes === "admin"
       ? navData
-      : navData.filter((item) => item.label !== "Manager");
+      : navData.filter((item) => item.label !== "Quản lý");
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="bg-nav-header">

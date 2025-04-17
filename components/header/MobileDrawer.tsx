@@ -20,7 +20,7 @@ const MobileDrawer: React.FC = () => {
   const navs =
     scopes === "admin"
       ? navData
-      : navData.filter((item) => item.label !== "Manager");
+      : navData.filter((item) => item.label !== "Quản lý");
 
   const renderNavSheet = () => (
     <div className="flex flex-col w-full gap-3 px-4">

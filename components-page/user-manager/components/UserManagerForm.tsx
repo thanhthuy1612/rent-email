@@ -45,7 +45,6 @@ const UserManagerForm: React.FC<IUserManagerFormProps> = ({
       value: "Active",
     },
   ];
-  console.log("listType", UserStatus);
   const formSchema = z
     .object({
       searchUsername: z.string(),
