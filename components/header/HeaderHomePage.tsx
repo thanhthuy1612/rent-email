@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import logo from "@/public/imgs/logo.png";
 import { Button } from "@/components/ui/button";
 import LocaleSwitcher from "@/components/locale/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";

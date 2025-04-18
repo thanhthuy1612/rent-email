@@ -112,12 +112,12 @@ const Rent: React.FC = () => {
 
   const columns: ColumnDef<IData>[] = [
     {
-      accessorKey: "id",
-      header: "Id",
-    },
-    {
       accessorKey: "email",
       header: "Email",
+    },
+    {
+      accessorKey: "id",
+      header: "Id",
     },
     {
       accessorKey: "userName",
@@ -132,20 +132,20 @@ const Rent: React.FC = () => {
       header: "Giá",
       cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
     },
-    {
-      accessorKey: "discount",
-      header: "Giảm giá",
-      cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
-    },
-    {
-      accessorKey: "finalPrice",
-      header: "Giá cuối",
-      cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
-    },
     // {
-    //   accessorKey: "transCode",
-    //   header: "Code",
+    //   accessorKey: "discount",
+    //   header: "Giảm giá",
+    //   cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     // },
+    // {
+    //   accessorKey: "finalPrice",
+    //   header: "Giá cuối",
+    //   cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
+    // },
+    {
+      accessorKey: "code",
+      header: "Code",
+    },
     {
       accessorKey: "creationDate",
       header: ({ column }) => {
@@ -164,7 +164,7 @@ const Rent: React.FC = () => {
       cell: ({ row }) => (
         <Badge
           className={`${
-            row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"
+            row.getValue("status") === "Success" ? "bg-green-500" : "bg-red-500"
           } opacity-60`}
         >
           {row.getValue("status")}

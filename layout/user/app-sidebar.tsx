@@ -14,8 +14,6 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { navData } from "@/layout/user/nav-data";
-import Image from "next/image";
-import logo from "@/public/imgs/logo.png";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { getPathName } from "@/lib/utils";
@@ -41,12 +39,8 @@ export function AppSidebar() {
           className={`flex justify-between h-[65px] items-center ${open && "px-2"}`}
         >
           {open && (
-            <a href="/">
-              <Image
-                src={logo}
-                alt="download-img"
-                className="w-[100%] object-cover max-w-[25px]"
-              />
+            <a href="/" className="text-white font-bold">
+              CH-OTP
             </a>
           )}
           <button

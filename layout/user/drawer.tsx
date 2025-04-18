@@ -85,9 +85,7 @@ const CustomDrawer: React.FC<IHeaderHomePage> = ({
                 </SheetContent>
               </Sheet>
             </div>
-            <Link href="/">
-              <Image src={logo} alt="Logo" className="w-[50px] object-cover" />
-            </Link>
+            <Link href="/">CH-OTP</Link>
           </div>
           <Link href="/login">
             <Button className="text-white bg-emerald-500 hover:bg-emerald-600">
