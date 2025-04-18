@@ -1,7 +1,6 @@
 "use client";
 
 import { IRequestBody, keyService } from "@/api/key/key.service";
-import { managerService } from "@/api/user/manager/manager.service";
 import AddRentForm from "@/components-page/rent/components/AddRent";
 import CustomPagination from "@/components/table/CustomPagination";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +15,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
-import RentForm from "./components/RentForm";
 
 // ----------------------------------------------------------------------
 
@@ -215,6 +213,7 @@ const Rent: React.FC = () => {
       if (pageNumber !== 1) {
         setPageNumber(1);
       } else {
+        fetchData();
         intervalIdRef.current = setInterval(() => {
           fetchData();
         }, 10000);
