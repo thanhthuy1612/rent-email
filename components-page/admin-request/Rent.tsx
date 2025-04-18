@@ -100,6 +100,28 @@ const AdminRequest: React.FC = () => {
     }
   };
 
+  const handleCopy = async (value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      toast({
+        title: t("alert.success"),
+        description: t("partner.copySuccess"),
+        className: cn(
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
+        ),
+      });
+    } catch (err) {
+      toast({
+        title: t("alert.error"),
+        description: t("partner.copyFailed"),
+        variant: "destructive",
+        className: cn(
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
+        ),
+      });
+    }
+  };
+
   const columns: ColumnDef<IData>[] = [
     {
       accessorKey: "email",
@@ -137,7 +159,10 @@ const AdminRequest: React.FC = () => {
       header: "Code",
       cell: ({ row }) => {
         return row.getValue("code") ? (
-          <div className="font-bold px-2 text-sky-700 bg-sky-50 flex justify-center items-center rounded-md border-sky-500 border-1">
+          <div
+            onClick={() => handleCopy(row.getValue("code"))}
+            className="font-bold px-2 cursor-pointer text-sky-700 bg-sky-50 flex justify-center items-center rounded-md border-sky-500 border-1"
+          >
             {row.getValue("code")}
           </div>
         ) : (
