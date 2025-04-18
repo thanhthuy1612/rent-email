@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosLocal = axios.create({
-  baseURL: "http://api.ch-otp.top/api/v1",
+  baseURL: "https://ch-otp.top:50521/api/v1",
   headers: {
     "Content-Type": "application/json",
   },

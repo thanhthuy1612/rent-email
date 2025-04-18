@@ -112,6 +112,10 @@ const Rent: React.FC = () => {
 
   const columns: ColumnDef<IData>[] = [
     {
+      accessorKey: "id",
+      header: "Id",
+    },
+    {
       accessorKey: "email",
       header: "Email",
     },
@@ -138,10 +142,10 @@ const Rent: React.FC = () => {
       header: "Giá cuối",
       cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
     },
-    {
-      accessorKey: "transCode",
-      header: "Code",
-    },
+    // {
+    //   accessorKey: "transCode",
+    //   header: "Code",
+    // },
     {
       accessorKey: "creationDate",
       header: ({ column }) => {
@@ -246,13 +250,13 @@ const Rent: React.FC = () => {
         <h3 className="font-bold">{t("rent.addNew")}</h3>
         <AddRentForm resetPage={resetPage} listServices={listServices} />
       </Card>
-      <Card className="p-5">
+      {/* <Card className="p-5">
         <RentForm
           value={search}
           handleSubmit={submitData}
           listServices={listServices}
         />
-      </Card>
+      </Card> */}
       <Card className="p-5 mb-8">
         <h3 className="font-bold">{t("rent.titleHeader")}</h3>
         <DataTable columns={columns} data={data} />

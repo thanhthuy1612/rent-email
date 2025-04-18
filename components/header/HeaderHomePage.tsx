@@ -40,7 +40,7 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
         className={`${colorWhite ? "bg-white border-b" : "bg-landing"} flex justify-center items-center`}
       >
         <div className=" w-full flex py-3 px-8 md:px-10 gap-10 justify-between items-center">
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-3 items-center">
             <div className="block md:hidden">
               <Sheet onOpenChange={setShowSheet} open={showSheet}>
                 <SheetTrigger asChild>
@@ -62,12 +62,11 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
                 </SheetContent>
               </Sheet>
             </div>
-            <Link href={"/"}>
-              <Image
-                src={logo}
-                alt="download-img"
-                className="w-[100%] object-cover max-w-[30px]"
-              />
+            <Link
+              href={"/"}
+              className={`font-bold text-xl ${colorWhite ? "text-black" : "text-white"}`}
+            >
+              CH-OTP.TOP
             </Link>
           </div>
           <div className="hidden md:block">{navLanding}</div>

@@ -102,6 +102,10 @@ const AdminRequest: React.FC = () => {
 
   const columns: ColumnDef<IData>[] = [
     {
+      accessorKey: "id",
+      header: "Id",
+    },
+    {
       accessorKey: "email",
       header: t("adminRequest.email"),
     },
@@ -128,10 +132,10 @@ const AdminRequest: React.FC = () => {
       header: t("adminRequest.finalPrice"),
       cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
     },
-    {
-      accessorKey: "transCode",
-      header: t("adminRequest.code"),
-    },
+    // {
+    //   accessorKey: "transCode",
+    //   header: t("adminRequest.code"),
+    // },
     {
       accessorKey: "creationDate",
       header: ({ column }) => {

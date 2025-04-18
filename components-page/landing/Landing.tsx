@@ -23,14 +23,14 @@ import { useRouter } from "@/i18n/navigation";
 const Landing: React.FC = () => {
   const refHome = React.useRef<HTMLDivElement | null>(null);
   const refIntroduce = React.useRef<HTMLDivElement | null>(null);
-  const refService = React.useRef<HTMLDivElement | null>(null);
-  const refPolicy = React.useRef<HTMLDivElement | null>(null);
+  // const refService = React.useRef<HTMLDivElement | null>(null);
+  // const refPolicy = React.useRef<HTMLDivElement | null>(null);
 
   const navLanding = [
     { title: "Trang chủ", ref: refHome },
     { title: "Giới thiệu", ref: refIntroduce },
-    { title: "Dịch vụ", ref: refService },
-    { title: "Chính sách", ref: refPolicy },
+    // { title: "Dịch vụ", ref: refService },
+    // { title: "Chính sách", ref: refPolicy },
     { title: "Api Key", url: "/api-doc" },
   ];
 
@@ -71,22 +71,22 @@ const Landing: React.FC = () => {
       min = Math.abs(top);
       value = navLanding[1].title;
     }
-    if (refPolicy.current) {
-      const { top } = refPolicy.current.getBoundingClientRect();
-      const minRef = Math.abs(top);
-      if (minRef < min) {
-        min = minRef;
-        value = navLanding[3].title;
-      }
-    }
-    if (refService.current) {
-      const { top } = refService.current.getBoundingClientRect();
-      const minRef = Math.abs(top);
-      if (minRef < min) {
-        min = minRef;
-        value = navLanding[2].title;
-      }
-    }
+    // if (refPolicy.current) {
+    //   const { top } = refPolicy.current.getBoundingClientRect();
+    //   const minRef = Math.abs(top);
+    //   if (minRef < min) {
+    //     min = minRef;
+    //     value = navLanding[3].title;
+    //   }
+    // }
+    // if (refService.current) {
+    //   const { top } = refService.current.getBoundingClientRect();
+    //   const minRef = Math.abs(top);
+    //   if (minRef < min) {
+    //     min = minRef;
+    //     value = navLanding[2].title;
+    //   }
+    // }
     if (refHome.current) {
       const { top } = refHome.current.getBoundingClientRect();
       const minRef = Math.abs(top);
@@ -185,9 +185,9 @@ const Landing: React.FC = () => {
       )}
       <Home ref={refHome} />
       <Introduce ref={refIntroduce} />
-      <Service ref={refService} />
+      {/* <Service ref={refService} />
       <Policy ref={refPolicy} />
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

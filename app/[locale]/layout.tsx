@@ -16,8 +16,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Rent email",
-    default: "Rent email",
+    template: "%s | CH-OTP",
+    default: "CH-OTP",
   },
   description: "",
   openGraph: baseOpenGraph,

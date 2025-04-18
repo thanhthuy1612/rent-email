@@ -31,7 +31,7 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
 
   return (
     <div ref={ref} className="relative">
-      <div className="absolute bottom-0 text-landing w-[100%]">
+      {/* <div className="absolute bottom-0 text-landing w-[100%]">
         <svg
           viewBox="15 -1 1470 48"
           fill="none"
@@ -43,7 +43,7 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
           ></path>
         </svg>
         <div className="pb-10 lg:pb-15 bg-landing"></div>
-      </div>
+      </div> */}
       <div className="flex justify-center">
         <div className="pt-11 px-8 w-full max-w-[1190px]">
           <h1 className="text-center text-[#181c32] text-[2.5rem] mb-3 font-bold">
@@ -64,7 +64,7 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
               />
             ))}
           </div>
-          <div className="px-10 flex justify-center pt-10">
+          {/* <div className="px-10 flex justify-center pt-10">
             <Carousel
               plugins={[plugin.current]}
               className="w-full h-[500px]"
@@ -87,7 +87,7 @@ const Introduce: React.FC<IIntroduce> = ({ ref }) => {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
