@@ -135,6 +135,15 @@ const AdminRequest: React.FC = () => {
     {
       accessorKey: "code",
       header: "Code",
+      cell: ({ row }) => {
+        return row.getValue("code") ? (
+          <div className="font-bold px-2 text-sky-700 bg-sky-50 flex justify-center items-center rounded-md border-sky-500 border-1">
+            {row.getValue("code")}
+          </div>
+        ) : (
+          <></>
+        );
+      },
     },
     {
       accessorKey: "creationDate",
@@ -154,7 +163,11 @@ const AdminRequest: React.FC = () => {
       cell: ({ row }) => (
         <Badge
           className={`${
-            row.getValue("status") === "Success" ? "bg-green-500" : "bg-red-500"
+            row.getValue("status") === "Success"
+              ? "bg-green-500"
+              : row.getValue("status") === "Created"
+                ? "bg-amber-500"
+                : "bg-red-500"
           } opacity-60`}
         >
           {row.getValue("status")}
