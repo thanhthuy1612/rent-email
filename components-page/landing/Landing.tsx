@@ -31,7 +31,7 @@ const Landing: React.FC = () => {
     { title: "Giới thiệu", ref: refIntroduce },
     // { title: "Dịch vụ", ref: refService },
     // { title: "Chính sách", ref: refPolicy },
-    { title: "Api Key", url: "/api-doc" },
+    { title: "Api Doc", url: "/api-doc" },
   ];
 
   const [current, setCurrent] = React.useState<string | null>(
