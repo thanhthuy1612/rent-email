@@ -128,7 +128,7 @@ const AddRentForm: React.FC<IAddRentFormProps> = ({
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full button-color "
+            className="w-full button-color md:mt-5.5"
           >
             {t("rent.addNew")}
           </Button>

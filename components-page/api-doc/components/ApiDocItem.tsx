@@ -107,7 +107,9 @@ const ApiDocItem: React.FC<Props> = ({
         className="w-full"
       >
         <AccordionItem value={header}>
-          <AccordionTrigger>{header}</AccordionTrigger>
+          <AccordionTrigger className="uppercase font-bold">
+            {header}
+          </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
             <div className="flex items-center gap-4">
               {renderType()}

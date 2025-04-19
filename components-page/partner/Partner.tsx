@@ -23,7 +23,7 @@ import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { ArrowUpDown, Copy, Pen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -48,7 +48,7 @@ const Partner: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<Row<IData> | null>();
 
   const t = useTranslations();
 
@@ -199,32 +199,13 @@ const Partner: React.FC = () => {
       accessorKey: "action",
       header: t("global.action"),
       cell: ({ row }) => (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button size="sm" className="button-color ">
-              <Pen />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>{t("update")}</DialogTitle>
-            </DialogHeader>
-            <PartnerForm
-              data={{
-                name: row.getValue("name"),
-                apiKey: row.getValue("apiKey"),
-                baseUrl: row.getValue("baseUrl"),
-                configurations: row.getValue("configurations"),
-                priority: row.getValue("priority"),
-                isDeleted: row.getValue("isDeleted"),
-              }}
-              handleSubmit={() => {
-                fetchData();
-                setIsOpen(false);
-              }}
-            />
-          </DialogContent>
-        </Dialog>
+        <Button
+          size="sm"
+          className="button-color "
+          onClick={() => setIsOpen(row)}
+        >
+          <Pen />
+        </Button>
       ),
     },
   ];
@@ -242,6 +223,33 @@ const Partner: React.FC = () => {
           setPageNumber={setPageNumber}
         />
       </Card>
+
+      {isOpen && (
+        <Dialog
+          open={!!isOpen}
+          onOpenChange={(open) => setIsOpen(open ? isOpen : null)}
+        >
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>{t("update")}</DialogTitle>
+            </DialogHeader>
+            <PartnerForm
+              data={{
+                name: isOpen.getValue("name"),
+                apiKey: isOpen.getValue("apiKey"),
+                baseUrl: isOpen.getValue("baseUrl"),
+                configurations: isOpen.getValue("configurations"),
+                priority: isOpen.getValue("priority"),
+                isDeleted: isOpen.getValue("isDeleted"),
+              }}
+              handleSubmit={() => {
+                fetchData();
+                setIsOpen(null);
+              }}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

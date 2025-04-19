@@ -17,7 +17,7 @@ import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn, fNumber } from "@/lib/utils";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { ArrowUpDown, Pen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -43,7 +43,7 @@ const Service: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(20);
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<Row<IData> | null>();
 
   const t = useTranslations();
 
@@ -170,32 +170,13 @@ const Service: React.FC = () => {
       accessorKey: "action",
       header: t("global.action"),
       cell: ({ row }) => (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button size="sm" className="button-color ">
-              <Pen />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>{t("update")}</DialogTitle>
-            </DialogHeader>
-            <ServiceForm
-              data={{
-                name: row.getValue("name"),
-                price: row.getValue("price"),
-                discount: row.getValue("discount"),
-                description: row.getValue("description"),
-                partnerName: row.getValue("partnerName"),
-                isDeleted: row.getValue("isDeleted"),
-              }}
-              handleSubmit={() => {
-                fetchData();
-                setIsOpen(false);
-              }}
-            />
-          </DialogContent>
-        </Dialog>
+        <Button
+          size="sm"
+          className="button-color "
+          onClick={() => setIsOpen(row)}
+        >
+          <Pen />
+        </Button>
       ),
     },
   ];
@@ -213,6 +194,33 @@ const Service: React.FC = () => {
           setPageNumber={setPageNumber}
         />
       </Card>
+
+      {isOpen && (
+        <Dialog
+          open={!!isOpen}
+          onOpenChange={(open) => setIsOpen(open ? isOpen : null)}
+        >
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>{t("update")}</DialogTitle>
+            </DialogHeader>
+            <ServiceForm
+              data={{
+                name: isOpen.getValue("name"),
+                price: isOpen.getValue("price"),
+                discount: isOpen.getValue("discount"),
+                description: isOpen.getValue("description"),
+                partnerName: isOpen.getValue("partnerName"),
+                isDeleted: isOpen.getValue("isDeleted"),
+              }}
+              handleSubmit={() => {
+                fetchData();
+                setIsOpen(null);
+              }}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   User,
   UserCheck,
   Users,
+  File
 } from "lucide-react";
 
 export const navData = [
@@ -33,6 +34,11 @@ export const navData = [
         title: "Thuê email",
         url: "/rent",
         icon: Mail,
+      },
+      {
+        title: "API Doc",
+        url: "/api-doc",
+        icon: File,
       },
     ],
   },
