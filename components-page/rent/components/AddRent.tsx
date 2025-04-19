@@ -114,7 +114,7 @@ const AddRentForm: React.FC<IAddRentFormProps> = ({
                     <SelectContent>
                       {listServices.map((item) => (
                         <SelectItem key={item.id} value={item.id.toString()}>
-                          {item.value}
+                          {item.value} ({item.price}đ)
                         </SelectItem>
                       ))}
                     </SelectContent>

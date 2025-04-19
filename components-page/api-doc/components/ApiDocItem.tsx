@@ -116,9 +116,9 @@ const ApiDocItem: React.FC<Props> = ({
               <span className="font-bold">{url}</span>
             </div>
             {description && (
-              <p>
-                Mô tả: <span className="font-bold">{description}</span>
-              </p>
+              <div className="text-red-500">
+                <span className="font-bold">{description}</span>
+              </div>
             )}
             {body && (
               <>

@@ -35,7 +35,8 @@ const ApiDoc: React.FC = () => {
     },
     {
       header: "Thuê email",
-      description: "",
+      description:
+        "Lưu ý: Code không tự đồng bộ từ email về. Bạn cần gọi API này nếu chưa nhận được code (đối với các email có trạng thái là Created). Nếu sau 1 tiếng vẫn chưa nhận code, hệ thống sẽ tự quét lần cuối, nếu không có code thì request sẽ timeout và hoàn tiền.",
       url: "/api/v1/key/request/get-email-code",
       success: `{
   "data": {

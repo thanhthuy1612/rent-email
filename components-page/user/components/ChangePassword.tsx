@@ -144,7 +144,7 @@ const ChangePassword: React.FC = () => {
               name="oldPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("register.password.title")}</FormLabel>
+                  <FormLabel>Mật khẩu cũ</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -173,7 +173,7 @@ const ChangePassword: React.FC = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("register.password.title")}</FormLabel>
+                  <FormLabel>Mật khẩu mới</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -209,7 +209,7 @@ const ChangePassword: React.FC = () => {
               name="rePassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("register.rePassword.title")}</FormLabel>
+                  <FormLabel>Nhập lại mật khẩu</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input

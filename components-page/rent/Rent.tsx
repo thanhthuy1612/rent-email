@@ -11,7 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/lib/hooks";
 import { dateFormat } from "@/lib/useTime";
 import { cn, fNumber } from "@/lib/utils";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
@@ -70,6 +70,7 @@ const Rent: React.FC = () => {
           res.data.map((service: any) => ({
             id: service.name,
             value: service.name,
+            price: service.price,
           }))
         );
       }
@@ -139,10 +140,10 @@ const Rent: React.FC = () => {
       accessorKey: "id",
       header: "Id",
     },
-    {
-      accessorKey: "userName",
-      header: "Tài khoản",
-    },
+    // {
+    //   accessorKey: "userName",
+    //   header: "Tài khoản",
+    // },
     {
       accessorKey: "serviceName",
       header: "Dịch vụ",
@@ -173,6 +174,14 @@ const Rent: React.FC = () => {
           >
             {row.getValue("code")}
           </div>
+        ) : row.getValue("status") === "Created" ? (
+          <Button
+            className="cursor-pointer button-color"
+            onClick={() => handleGetCode(row)}
+            size="sm"
+          >
+            Lấy code
+          </Button>
         ) : (
           <></>
         );
@@ -209,28 +218,28 @@ const Rent: React.FC = () => {
     },
   ];
 
-  const submitData = async (values: ISearch) => {
-    setSearch(values);
-    if (intervalIdRef.current) {
-      clearInterval(intervalIdRef.current);
-    }
-    await fetchData({
-      pageNumber,
-      pageSize,
-      ...values,
-      dateAsc: false,
-      key: apiToken ?? "",
-    });
-    intervalIdRef.current = setInterval(() => {
-      fetchData({
-        pageNumber,
-        pageSize,
-        ...values,
-        dateAsc: false,
-        key: apiToken ?? "",
-      });
-    }, 10000);
-  };
+  // const submitData = async (values: ISearch) => {
+  //   setSearch(values);
+  //   if (intervalIdRef.current) {
+  //     clearInterval(intervalIdRef.current);
+  //   }
+  //   await fetchData({
+  //     pageNumber,
+  //     pageSize,
+  //     ...values,
+  //     dateAsc: false,
+  //     key: apiToken ?? "",
+  //   });
+  //   intervalIdRef.current = setInterval(() => {
+  //     fetchData({
+  //       pageNumber,
+  //       pageSize,
+  //       ...values,
+  //       dateAsc: false,
+  //       key: apiToken ?? "",
+  //     });
+  //   }, 10000);
+  // };
 
   React.useEffect(() => {
     fetchServices();
@@ -256,6 +265,32 @@ const Rent: React.FC = () => {
           fetchData();
         }, 10000);
       }
+    }
+  };
+
+  const handleGetCode = async (row: Row<IData>) => {
+    try {
+      const res = await keyService.getCode({
+        key: apiToken ?? "",
+        requestId: row.getValue("id"),
+      });
+      toast({
+        title: !res.code ? "Thành công" : "Lỗi",
+        description: res.message,
+        className: cn(
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
+        ),
+      });
+      resetPage();
+    } catch (err) {
+      toast({
+        title: t("alert.error"),
+        description: t("partner.copyFailed"),
+        variant: "destructive",
+        className: cn(
+          "top-0 right-0 flex fixed max-w-1/2 md:max-w-[420px] top-4 right-4"
+        ),
+      });
     }
   };
 

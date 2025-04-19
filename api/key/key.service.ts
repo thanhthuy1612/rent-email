@@ -32,9 +32,17 @@ export interface INewEmailBody {
   serviceName: string;
 }
 
+export interface IGetCode{
+  key: string;
+  requestId: string;
+}
 export const keyService = {
   async getRequest(body: IRequestBody) {
     const { data } = await axiosLocal.post(endpoints.key.getRequest, body);
+    return data;
+  },
+  async getCode(body: IGetCode) {
+    const { data } = await axiosLocal.post(endpoints.key.getCode, body);
     return data;
   },
   async getTransaction(body: ITransactionBody) {
