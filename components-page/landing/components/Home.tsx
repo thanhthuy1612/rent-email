@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { useAppSelector } from "@/lib/hooks";
 import React from "react";
 
 // ----------------------------------------------------------------------
@@ -8,6 +9,8 @@ export interface IHome {
 }
 
 const Home: React.FC<IHome> = ({ ref }) => {
+  const { id } = useAppSelector((item) => item.user);
+
   return (
     <div ref={ref}>
       <div
@@ -36,11 +39,19 @@ const Home: React.FC<IHome> = ({ ref }) => {
                 </span>
               </span>
             </h1>
-            <Link href="/login">
-              <Button size="lg" className="button-color">
-                Đăng nhập
-              </Button>
-            </Link>
+            {id ? (
+              <Link href="/login">
+                <Button size="lg" className="button-color">
+                  Đăng nhập
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/rent">
+                <Button size="lg" className="button-color">
+                  Thuê email
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

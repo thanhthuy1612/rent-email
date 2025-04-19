@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import LocaleSwitcher from "@/components/locale/LocaleSwitcher";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { MenuIcon } from "lucide-react";
 import {
   Sheet,
@@ -13,6 +13,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useAppSelector } from "@/lib/hooks";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import axiosLocal from "@/api/axiosLocal";
 
 // ----------------------------------------------------------------------
 export interface IHeaderHomePage {
@@ -32,6 +36,20 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
   setShowSheet,
   className,
 }) => {
+  const { id } = useAppSelector((item) => item.user);
+
+  const router = useRouter();
+  const goToLogin = () => {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    delete axiosLocal.defaults.headers.common.Authorization;
+    router.push("/login");
+  };
+
+  const goToUser = () => {
+    router.push("/user");
+  };
+
   return (
     <div className={className}>
       <div
@@ -72,11 +90,49 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
             <div className="hidden md:block">
               <LocaleSwitcher colorWhite={colorWhite} />
             </div>
-            <Link href={"/login"}>
-              <Button className=" cursor-pointer text-white bg-emerald-500 hover:bg-emerald-600">
-                Đăng nhập
-              </Button>
-            </Link>
+            {id ? (
+              <Link href={"/login"}>
+                <Button className=" cursor-pointer text-white bg-emerald-500 hover:bg-emerald-600">
+                  Đăng nhập
+                </Button>
+              </Link>
+            ) : (
+              <Avatar className="rounded-sm w-10 h-10 cursor-pointer">
+                <Popover>
+                  <PopoverTrigger className="focus:outline-none">
+                    <Avatar className="w-10 h-10 cursor-pointer">
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="User Avatar"
+                      />
+                      <AvatarFallback>U</AvatarFallback>
+                    </Avatar>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-48 bg-white rounded-lg shadow-lg p-2">
+                    <div className="flex flex-col">
+                      <Button
+                        variant="ghost"
+                        className="justify-start px-4 py-2 text-left"
+                        onClick={goToUser}
+                      >
+                        Profile
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="justify-start px-4 py-2 text-left !text-red-500 hover:bg-red-100"
+                        onClick={goToLogin}
+                      >
+                        Sign Out
+                      </Button>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+
+                <AvatarFallback className="rounded-sm bg-nav-item-background-active text-nav-item-active">
+                  VN
+                </AvatarFallback>
+              </Avatar>
+            )}
             {/* <Link href={"/register"}>
             <Button className=" cursor-pointer bg-purple-500 hover:bg-purple-600">
               Register

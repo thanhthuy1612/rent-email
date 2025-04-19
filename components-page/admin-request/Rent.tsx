@@ -126,6 +126,14 @@ const AdminRequest: React.FC = () => {
     {
       accessorKey: "email",
       header: t("adminRequest.email"),
+      cell: ({ row }) => (
+        <div
+          onClick={() => handleCopy(row.getValue("email"))}
+          className="font-bold px-2 cursor-pointer"
+        >
+          {row.getValue("email")}
+        </div>
+      ),
     },
     {
       accessorKey: "id",
@@ -161,7 +169,7 @@ const AdminRequest: React.FC = () => {
         return row.getValue("code") ? (
           <div
             onClick={() => handleCopy(row.getValue("code"))}
-            className="font-bold px-2 cursor-pointer text-sky-700 bg-sky-50 flex justify-center items-center rounded-md border-sky-500 border-1"
+            className="font-bold cursor-pointer text-sky-700"
           >
             {row.getValue("code")}
           </div>
