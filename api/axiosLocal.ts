@@ -33,6 +33,7 @@ axiosLocal.interceptors.response.use(
           refreshToken,
         });
         localStorage.setItem("accessToken", data.data.accessToken);
+        localStorage.setItem("refreshToken", data.data.refreshToken);
         axiosLocal.defaults.headers.common["Authorization"] =
           `Bearer ${data.data.accessToken}`;
         return axiosLocal(originalRequest);
