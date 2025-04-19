@@ -10,26 +10,26 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/request/get-new-email",
       success: `{
-  data: {
-    email: string,
-    serviceName: string,
-    price: number
+  "data": {
+    "email": string,
+    "serviceName": string,
+    "price": number
   },
-  code: number,
-  message" string
+  "code": number,
+  "message" string
 }`,
       fail: `{
-  data: {
-    email: "",
-    serviceName: string,
-    price: 0
+  "data": {
+    "email": "",
+    "serviceName": string,
+    "price": number
   },
-  code: 1,
-  message: string
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  key: string,
-  serviceName: string
+  "key": string,
+  "serviceName": string
 }`,
       type: "POST",
     },
@@ -38,26 +38,26 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/request/get-email-code",
       success: `{
-  data: {
-    email: string,
-    code: string,
-    status: 0
+  "data": {
+    "email": string,
+    "code": string,
+    "status": 0
   },
-  code: number,
-  message: string
+  "code": number,
+  "message": string
 }`,
       fail: `{
-  data: {
-    email: "",
-    code: "",
-    status: "Cancel"
+  "data": {
+    "email": "",
+    "code": "",
+    "status": "Cancel"
   },
-  code: 1,
-  message: string
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  key: string,
-  requestId: string
+  "key": string,
+  "requestId": string
 }`,
       type: "POST",
     },
@@ -66,56 +66,56 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/request/get-history",
       success: `{
-  data: {
-    pageSize: number,
-    pageNumber: number,
-    total: number,
-    hasMore: true,
-    data: [
+  "data": {
+    "pageSize": number,
+    "pageNumber": number,
+    "total": number,
+    "hasMore": true,
+    "data": [
       {
-        id: string,
-        userId: string,
-        userName: string,
-        serviceName: string,
-        originalPrice: number,
-        discount: number,
-        finalPrice: number,
-        refund: true,
-        email: string,
-        code: string,
-        status: number,
-        creationDate: Date,
-        modificationDate: Date
+        "id": string,
+        "userId": string,
+        "userName": string,
+        "serviceName": string,
+        "originalPrice": number,
+        "discount": number,
+        "finalPrice": number,
+        "refund": true,
+        "email": string,
+        "code": string,
+        "status": number,
+        "creationDate": Date,
+        "modificationDate": Date
       }
     ],
-    successCount: number,
-    createdCount: number,
-    timeoutCount: number,
-    cancelCount: number,
-    totalSpent: number,
-    totalRefund: number
+    "successCount": number,
+    "createdCount": number,
+    "timeoutCount": number,
+    "cancelCount": number,
+    "totalSpent": number,
+    "totalRefund": number
   },
-  code: number,
-  message: string
+  "code": number,
+  "message": string
 }`,
       fail: `{
-  data: null,
-  code: 1,
-  message: string
+  "data": null,
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  pageNumber: number,
-  pageSize: number,
-  key: string,
-  from: Date,
-  to: Date,
-  services: [
+  "pageNumber": number,
+  "pageSize": number,
+  "key": string,
+  "from": Date,
+  "to": Date,
+  "services": [
     string
   ],
-  statuses: [
+  "statuses": [
     0
   ],
-  dateAsc: true
+  "dateAsc": true
 }`,
       type: "POST",
     },
@@ -124,17 +124,17 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/user/balance",
       success: `{
-  data: number,
-  code: number,
-  message: string
+  "data": number,
+  "code": number,
+  "message": string
 }`,
       fail: `{
-  data: null,
-  code: 1,
-  message: string
+  "data": null,
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  key: string
+  "key": string
 }`,
       type: "POST",
     },
@@ -143,28 +143,28 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/service/active-services",
       success: `{
-  data: [
+  "data": [
     {
-      name: string,
-      mailType: 1,
-      price: number,
-      discount: number,
-      description: string,
-      creationDate: Date,
-      modificationDate: Date,
-      isDeleted: true
+      "name": string,
+      "mailType": 1,
+      "price": number,
+      "discount": number,
+      "description": string,
+      "creationDate": Date,
+      "modificationDate": Date,
+      "isDeleted": true
     }
   ],
-  code: number,
-  message: string
+  "code": number,
+  "message": string
 }`,
       fail: `{
-  data: null,
-  code: 1,
-  message: string
+  "data": null,
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  key: string
+  "key": string
 }`,
       type: "POST",
     },
@@ -173,53 +173,53 @@ const ApiDoc: React.FC = () => {
       description: "",
       url: "/api/v1/key/transaction/get-history",
       success: `{
-  data: {
-    pageSize: number,
-    pageNumber: number,
-    total: number,
-    hasMore: true,
-    data: [
+  "data": {
+    "pageSize": number,
+    "pageNumber": number,
+    "total": number,
+    "hasMore": true,
+    "data": [
       {
-        id: string,
-        userId: string,
-        userName: string,
-        amount: number,
-        promotion: number,
-        finalAmount: number,
-        balanceBefore: number,
-        balanceAfter: number,
-        type: 1,
-        transCode: string,
-        description: string,
-        status: number,
-        creationDate: Date,
-        modificationDate: Date
+        "id": string,
+        "userId": string,
+        "userName": string,
+        "amount": number,
+        "promotion": number,
+        "finalAmount": number,
+        "balanceBefore": number,
+        "balanceAfter": number,
+        "type": 1,
+        "transCode": string,
+        "description": string,
+        "status": number,
+        "creationDate": Date,
+        "modificationDate": Date
       }
     ],
-    totalDebit: number,
-    totalCredit: 0
+    "totalDebit": number,
+    "totalCredit": 0
   },
-  code: number,
-  message: string
+  "code": number,
+  "message": string
 }`,
       fail: `{
-  data: null,
-  code: 1,
-  message: string
+  "data": null,
+  "code": 1,
+  "message": string
 }`,
       body: `{
-  pageNumber: number,
-  pageSize: number,
-  key: string,
-  from: Date,
-  to: Date,
-  types: [
+  "pageNumber": number,
+  "pageSize": number,
+  "key": string,
+  "from": Date,
+  "to": Date,
+  "types": [
     1
   ],
-  statuses: [
+  "statuses": [
     0
   ],
-  dateAsc: true
+  "dateAsc": true
 }`,
       type: "POST",
     },
