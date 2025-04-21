@@ -19,6 +19,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DateFormatType } from "@/enums/DateFormatType";
 import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
@@ -180,7 +181,9 @@ const Partner: React.FC = () => {
           </Button>
         );
       },
-      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+      cell: ({ row }) => (
+        <>{dateFormat(row.getValue("creationDate"), DateFormatType.FullDate)}</>
+      ),
     },
     {
       accessorKey: "isDeleted",

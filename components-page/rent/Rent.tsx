@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
+import { DateFormatType } from "@/enums/DateFormatType";
 import { toast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/lib/hooks";
 import { dateFormat } from "@/lib/useTime";
@@ -205,7 +206,9 @@ const Rent: React.FC = () => {
           </Button>
         );
       },
-      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+      cell: ({ row }) => (
+        <>{dateFormat(row.getValue("creationDate"), DateFormatType.FullDate)}</>
+      ),
     },
     {
       accessorKey: "status",

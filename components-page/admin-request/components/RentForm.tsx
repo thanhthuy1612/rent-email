@@ -30,7 +30,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { ISearch } from "@/components-page/rent/Rent";
 import { dateFormat } from "@/lib/useTime";
-import { EmailType } from "@/enums/enum";
+import { RequestStatus } from "@/enums/enum";
 
 // ----------------------------------------------------------------------
 
@@ -48,8 +48,10 @@ const RentForm: React.FC<IRentFormProps> = ({
   const t = useTranslations();
 
   const listType = [
-    { id: EmailType.Gmail, value: "Emailß" },
-    { id: EmailType.Hotmail, value: "Hotmail" },
+    { id: RequestStatus.Cancel, value: "Huỷ" },
+    { id: RequestStatus.Timeout, value: "Hết hạn" },
+    { id: RequestStatus.Success, value: "Thành công" },
+    { id: RequestStatus.Created, value: "Dã tạo" },
   ];
 
   const formSchema = z

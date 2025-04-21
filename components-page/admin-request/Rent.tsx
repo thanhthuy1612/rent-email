@@ -14,6 +14,7 @@ import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import RentForm from "./components/RentForm";
+import { DateFormatType } from "@/enums/DateFormatType";
 
 // ----------------------------------------------------------------------
 
@@ -188,7 +189,9 @@ const AdminRequest: React.FC = () => {
           </Button>
         );
       },
-      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+      cell: ({ row }) => (
+        <>{dateFormat(row.getValue("creationDate"), DateFormatType.FullDate)}</>
+      ),
     },
     {
       accessorKey: "status",

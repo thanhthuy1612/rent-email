@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { DateFormatType } from "@/enums/DateFormatType";
 import { toast } from "@/hooks/use-toast";
 import { dateFormat } from "@/lib/useTime";
 import { cn, fNumber } from "@/lib/utils";
@@ -151,7 +152,9 @@ const Service: React.FC = () => {
           </Button>
         );
       },
-      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+      cell: ({ row }) => (
+        <>{dateFormat(row.getValue("creationDate"), DateFormatType.FullDate)}</>
+      ),
     },
     {
       accessorKey: "isDeleted",

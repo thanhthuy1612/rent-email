@@ -9,6 +9,7 @@ import UpdateUserModal from "./UpdateUserModal";
 import { dateFormat } from "@/lib/useTime";
 import { Pen } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DateFormatType } from "@/enums/DateFormatType";
 
 interface User {
   id: string;
@@ -113,7 +114,9 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
     {
       accessorKey: "creationDate",
       header: t("global.creationDate"),
-      cell: ({ row }) => <>{dateFormat(row.getValue("creationDate"))}</>,
+      cell: ({ row }) => (
+        <>{dateFormat(row.getValue("creationDate"), DateFormatType.FullDate)}</>
+      ),
     },
     {
       accessorKey: "modificationDate",
