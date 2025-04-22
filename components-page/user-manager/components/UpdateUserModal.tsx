@@ -41,7 +41,7 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
     setPassword: z.string(),
     creditBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
     debitBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
-    setStatus: z.enum(["1", "2", "3"]),
+    setStatus: z.enum(["-1", "1"]),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -126,8 +126,7 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
                   <FormControl>
                     <select {...field} className="w-full border rounded-md p-2">
                       <option value="1">{t("status.active")}</option>
-                      <option value="2">{t("status.inactive")}</option>
-                      <option value="3">{t("status.suspended")}</option>
+                      <option value="-1">{t("status.inactive")}</option>
                     </select>
                   </FormControl>
                   <FormMessage />
