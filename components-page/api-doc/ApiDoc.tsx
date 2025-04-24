@@ -11,16 +11,18 @@ const ApiDoc: React.FC = () => {
       url: "https://ch-otp.top:50521/api/v1/key/request/get-new-email",
       success: `{
   "data": {
+    "id": string,
     "email": string,
     "serviceName": string,
     "price": number
   },
-  "code": number,
+  "code": 0,
   "message" string
 }`,
       fail: `{
   "data": {
-    "email": "",
+    "id": string,
+    "email": string,
     "serviceName": string,
     "price": number
   },
@@ -42,16 +44,16 @@ const ApiDoc: React.FC = () => {
   "data": {
     "email": string,
     "code": string,
-    "status": 0
+    "status": string
   },
-  "code": number,
+  "code": 0,
   "message": string
 }`,
       fail: `{
   "data": {
-    "email": "",
-    "code": "",
-    "status": "Cancel"
+    "email": string,
+    "code": string,
+    "status": string
   },
   "code": 1,
   "message": string
@@ -96,7 +98,7 @@ const ApiDoc: React.FC = () => {
     "totalSpent": number,
     "totalRefund": number
   },
-  "code": number,
+  "code": 0,
   "message": string
 }`,
       fail: `{
@@ -126,7 +128,7 @@ const ApiDoc: React.FC = () => {
       url: "https://ch-otp.top:50521/api/v1/key/user/balance",
       success: `{
   "data": number,
-  "code": number,
+  "code": 0,
   "message": string
 }`,
       fail: `{
@@ -156,7 +158,7 @@ const ApiDoc: React.FC = () => {
       "isDeleted": true
     }
   ],
-  "code": number,
+  "code": 0,
   "message": string
 }`,
       fail: `{
@@ -200,7 +202,7 @@ const ApiDoc: React.FC = () => {
     "totalDebit": number,
     "totalCredit": 0
   },
-  "code": number,
+  "code": 0,
   "message": string
 }`,
       fail: `{
