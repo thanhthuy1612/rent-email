@@ -48,10 +48,10 @@ export interface ITransaction {
 }
 
 interface TDiscount {
-  promotion: number;
-  startTime: Date;
-  endTime: Date;
-  isDeleted: boolean;
+  promotion?: number;
+  startTime?: Date;
+  endTime?: Date;
+  isDeleted?: boolean;
 }
 
 export const managerService = {

@@ -108,8 +108,12 @@ const Discount: React.FC = () => {
               <DiscountForm
                 data={{
                   promotion: result?.promotion ?? 0,
-                  startTime: result?.startTime ?? new Date(),
-                  endTime: result?.endTime ?? new Date(),
+                  startTime: result?.startTime
+                    ? new Date(result?.startTime)
+                    : new Date(),
+                  endTime: result?.endTime
+                    ? new Date(result?.endTime)
+                    : new Date(),
                   isDeleted: result?.isDeleted ?? false,
                 }}
                 handleSubmit={() => {

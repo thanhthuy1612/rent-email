@@ -23,7 +23,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { dateFormat } from "@/lib/useTime";
 
@@ -47,20 +46,16 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
   const formSchema = z
     .object({
       promotion: z.number(),
-      startTime: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
-      endTime: z.date().max(new Date(), {
-        message: t("recharge.date.error1"),
-      }),
+      startTime: z.date().optional(),
+      endTime: z.date().optional(),
       isDeleted: z.boolean(),
     })
     .superRefine((data, ctx) => {
-      if (data.endTime < data.startTime) {
+      if (data?.startTime && data.endTime && data.endTime < data.startTime) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Ngày đến phải lớn hơn ngày từ",
-          path: ["dateTo"],
+          path: ["endTime"],
         });
       }
     });
@@ -78,7 +73,18 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const res = await managerService.updateDiscount(values);
+      let fromDate = undefined;
+      let toDate = undefined;
+      if (values.startTime) {
+        fromDate = new Date(values.startTime);
+        fromDate.setHours(0, 0, 0, 0);
+      }
+      if (values.endTime) {
+        toDate = new Date(values.endTime);
+        toDate.setHours(11, 59, 59, 59);
+      }
+      const currentValues = { ...values, startTime: fromDate, endTime: toDate };
+      const res = await managerService.updateDiscount(currentValues);
       if (!res.code) {
         toast({
           title: t("alert.success"),
@@ -168,7 +174,7 @@ const DiscountForm: React.FC<IDiscountFormProps> = ({ data, handleSubmit }) => {
           name="endTime"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>{t("recharge.fromDate")}</FormLabel>
+              <FormLabel>Đến ngày</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>

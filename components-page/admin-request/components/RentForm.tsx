@@ -122,7 +122,7 @@ const RentForm: React.FC<IRentFormProps> = ({
       userIds: z.array(z.string()),
     })
     .superRefine((data, ctx) => {
-      if (data.dateTo && data.dateFrom && data.dateTo <= data.dateFrom) {
+      if (data.dateTo && data.dateFrom && data.dateTo < data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: t("recharge.date.error2"),
@@ -144,9 +144,19 @@ const RentForm: React.FC<IRentFormProps> = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      let fromDate = undefined;
+      let toDate = undefined;
+      if (values.dateFrom) {
+        fromDate = new Date(values.dateFrom);
+        fromDate.setHours(0, 0, 0, 0);
+      }
+      if (values.dateTo) {
+        toDate = new Date(values.dateTo);
+        toDate.setHours(11, 59, 59, 59);
+      }
       handleSubmit({
-        from: values.dateFrom,
-        to: values.dateTo,
+        from: fromDate,
+        to: toDate,
         services: values.services,
         statuses: values.statuses,
         userIds: values.userIds,

@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DateFormatType } from "@/enums/DateFormatType";
 import { TransactionStatus, TransactionType } from "@/enums/enum";
 import { dateFormat } from "@/lib/useTime";
 import { cn } from "@/lib/utils";
@@ -73,7 +74,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
       statuses: z.array(z.number()),
     })
     .superRefine((data, ctx) => {
-      if (data?.dateFrom && data.dateTo && data.dateTo <= data.dateFrom) {
+      if (data?.dateFrom && data.dateTo && data.dateTo < data.dateFrom) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: t("recharge.date.error2"),
@@ -94,9 +95,19 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      let fromDate = undefined;
+      let toDate = undefined;
+      if (values.dateFrom) {
+        fromDate = new Date(values.dateFrom);
+        fromDate.setHours(0, 0, 0, 0);
+      }
+      if (values.dateTo) {
+        toDate = new Date(values.dateTo);
+        toDate.setHours(11, 59, 59, 59);
+      }
       handleSubmit({
-        from: values.dateFrom,
-        to: values.dateTo,
+        from: fromDate,
+        to: toDate,
         types: values.types,
         statuses: values.statuses,
       });
