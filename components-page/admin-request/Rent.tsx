@@ -275,7 +275,7 @@ const AdminRequest: React.FC = () => {
         </Card>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
-        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-rose-50 border-rose-500 text-rose-500">
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-stone-50 border-stone-500 text-stone-500">
           Hoàn lại tiền<p>{fNumber(res.totalRefund, "vn")}</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-blue-50 border-blue-500 text-blue-500">
