@@ -23,6 +23,7 @@ export interface ISearch {
   to?: Date;
   services: string[];
   statuses: number[];
+  userIds: string[];
 }
 
 export interface IData {
@@ -52,7 +53,9 @@ const AdminRequest: React.FC = () => {
   const [search, setSearch] = React.useState<ISearch>({
     services: [],
     statuses: [],
+    userIds: [],
   });
+  const [res, setRes] = React.useState<any>();
 
   const t = useTranslations();
 
@@ -67,12 +70,13 @@ const AdminRequest: React.FC = () => {
         services: search.services,
         statuses: search.statuses,
         dateAsc: isDateAsc,
-        userIds: [],
+        userIds: search.userIds,
       };
       const res = await managerService.getRequest(newBody);
       if (!res.code) {
         setData(res.data.data);
         setTotal(res.data.total);
+        setRes(res.data);
       } else {
         toast({
           title: t("alert.error"),
@@ -219,7 +223,6 @@ const AdminRequest: React.FC = () => {
       pageSize,
       ...values,
       dateAsc: false,
-      userIds: [],
     });
   };
 
@@ -257,6 +260,28 @@ const AdminRequest: React.FC = () => {
 
   return (
     <div className=" flex flex-col gap-6 mx-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-violet-50 border-violet-500 text-violet-500">
+          Huỷ <p>{res.cancelCount}</p>
+        </Card>
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-yellow-50 border-yellow-500 text-yellow-500">
+          Tạo <p>{res.createdCount}</p>
+        </Card>
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-green-50 border-green-500 text-green-500">
+          Thành công <p>{res.successCount}</p>
+        </Card>
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-red-50 border-red-500 text-red-500">
+          Hết giờ <p>{res.timeoutCount}</p>
+        </Card>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-rose-50 border-rose-500 text-rose-500">
+          Hoàn lại tiền<p>{fNumber(res.totalRefund, "vn")}</p>
+        </Card>
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-blue-50 border-blue-500 text-blue-500">
+          Tổng chi tiêu<p>{fNumber(res.totalSpent, "vn")}</p>
+        </Card>
+      </div>
       <Card className="p-5">
         <RentForm
           value={search}

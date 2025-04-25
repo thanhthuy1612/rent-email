@@ -163,11 +163,15 @@ const History: React.FC = () => {
     },
     {
       accessorKey: "status",
-      header: t("global.status"),
+      header: t("adminRequest.status"),
       cell: ({ row }) => (
         <Badge
           className={`${
-            row.getValue("status") === "Created" ? "bg-green-500" : "bg-red-500"
+            row.getValue("status") === "Success"
+              ? "bg-green-500"
+              : row.getValue("status") === "Created"
+                ? "bg-amber-500"
+                : "bg-red-500"
           } opacity-60`}
         >
           {row.getValue("status")}

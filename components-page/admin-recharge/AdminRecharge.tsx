@@ -164,13 +164,15 @@ const AdminRecharge: React.FC = () => {
     },
     {
       accessorKey: "status",
-      header: t("adminRecharge.status"),
+      header: t("adminRequest.status"),
       cell: ({ row }) => (
         <Badge
           className={`${
-            row.getValue("status") === t("recharge.statuses.created")
+            row.getValue("status") === "Success"
               ? "bg-green-500"
-              : "bg-red-500"
+              : row.getValue("status") === "Created"
+                ? "bg-amber-500"
+                : "bg-red-500"
           } opacity-60`}
         >
           {row.getValue("status")}

@@ -90,7 +90,7 @@ const HeaderHomePage: React.FC<IHeaderHomePage> = ({
             <div className="hidden md:block">
               <LocaleSwitcher colorWhite={colorWhite} />
             </div>
-            {id ? (
+            {!id ? (
               <Link href={"/login"}>
                 <Button className=" cursor-pointer text-white bg-emerald-500 hover:bg-emerald-600">
                   Đăng nhập

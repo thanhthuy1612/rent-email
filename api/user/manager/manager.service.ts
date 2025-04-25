@@ -2,10 +2,10 @@ import axiosLocal from "@/api/axiosLocal";
 import { endpoints } from "@/api/endpoints";
 
 export interface ISearchParams {
-  pageNumber: number;
-  pageSize: number;
-  searchUsername: string;
-  statuses: number[];
+  pageNumber?: number;
+  pageSize?: number;
+  searchUsername?: string;
+  statuses?: number[];
 }
 
 export interface IServiceBody {
@@ -33,7 +33,7 @@ export interface IRequest {
   to?: Date;
   services: string[];
   statuses: number[];
-  userIds: string[];
+  userIds?: string[];
   dateAsc: boolean;
 }
 export interface ITransaction {
