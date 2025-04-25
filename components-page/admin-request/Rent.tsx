@@ -262,24 +262,24 @@ const AdminRequest: React.FC = () => {
     <div className=" flex flex-col gap-6 mx-5">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-violet-50 border-violet-500 text-violet-500">
-          Huỷ <p>{res.cancelCount}</p>
+          Huỷ <p>{res?.cancelCount}</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-yellow-50 border-yellow-500 text-yellow-500">
-          Tạo <p>{res.createdCount}</p>
+          Tạo <p>{res?.createdCount}</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-green-50 border-green-500 text-green-500">
-          Thành công <p>{res.successCount}</p>
+          Thành công <p>{res?.successCount}</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-red-50 border-red-500 text-red-500">
-          Hết giờ <p>{res.timeoutCount}</p>
+          Hết giờ <p>{res?.timeoutCount}</p>
         </Card>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-stone-50 border-stone-500 text-stone-500">
-          Hoàn lại tiền<p>{fNumber(res.totalRefund, "vn")}</p>
+          Hoàn lại tiền<p>{fNumber(res?.totalRefund, "vn")}</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-blue-50 border-blue-500 text-blue-500">
-          Tổng chi tiêu<p>{fNumber(res.totalSpent, "vn")}</p>
+          Tổng chi tiêu<p>{fNumber(res?.totalSpent, "vn")}</p>
         </Card>
       </div>
       <Card className="p-5">

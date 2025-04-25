@@ -54,6 +54,8 @@ const AdminRecharge: React.FC = () => {
     types: [],
     statuses: [],
   });
+  const [res, setRes] = React.useState<any>();
+
   const t = useTranslations();
 
   const fetchData = async (body?: ITransaction) => {
@@ -73,6 +75,7 @@ const AdminRecharge: React.FC = () => {
       if (!res.code) {
         setData(res.data.data);
         setTotal(res.data.total);
+        setRes(res.data);
       } else {
         toast({
           title: t("alert.error"),
@@ -194,6 +197,14 @@ const AdminRecharge: React.FC = () => {
 
   return (
     <div className=" flex flex-col gap-6 mx-5">
+      <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-red-50 border-red-500 text-red-500">
+          Tổng số nợ<p>{fNumber(res?.totalDebit, "vn")}</p>
+        </Card>
+        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-green-50 border-green-500 text-green-500">
+          Tổng tín dụng<p>{fNumber(res?.totalCredit, "vn")}</p>
+        </Card>
+      </div>
       <Card className="p-5">
         <RechargeForm value={search} handleSubmit={submitData} />
       </Card>
