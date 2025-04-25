@@ -199,10 +199,10 @@ const AdminRecharge: React.FC = () => {
     <div className=" flex flex-col gap-6 mx-5">
       <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-red-50 border-red-500 text-red-500">
-          Tổng số nợ<p>{fNumber(res?.totalDebit, "vn")}</p>
+          Tổng số nợ<p>{fNumber(res?.totalDebit, "vn")} đ</p>
         </Card>
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-green-50 border-green-500 text-green-500">
-          Tổng tín dụng<p>{fNumber(res?.totalCredit, "vn")}</p>
+          Tổng tín dụng<p>{fNumber(res?.totalCredit, "vn")} đ</p>
         </Card>
       </div>
       <Card className="p-5">
