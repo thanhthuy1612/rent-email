@@ -274,10 +274,10 @@ const AdminRequest: React.FC = () => {
           Hết giờ <p>{res?.timeoutCount}</p>
         </Card>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
-        <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-stone-50 border-stone-500 text-stone-500">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+        {/* <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-stone-50 border-stone-500 text-stone-500">
           Hoàn lại tiền<p>{fNumber(res?.totalRefund, "vn")} đ</p>
-        </Card>
+        </Card> */}
         <Card className="p-3 gap-2 flex flex-cols place-items-center justify-center bg-blue-50 border-blue-500 text-blue-500">
           Tổng chi tiêu<p>{fNumber(res?.totalSpent, "vn")} đ</p>
         </Card>
