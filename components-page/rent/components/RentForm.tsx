@@ -161,7 +161,7 @@ const RentForm: React.FC<IRentFormProps> = ({
             name="dateTo"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>{t("recharge.fromDate")}</FormLabel>
+                <FormLabel>{t("recharge.toDate")}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>

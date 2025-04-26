@@ -50,7 +50,7 @@ const AdminRequest: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isDateAsc, setIsDateAs] = React.useState<boolean>(false);
   const [pageNumber, setPageNumber] = React.useState<number>(1);
-  const [pageSize, setPageSize] = React.useState<number>(20);
+  const [pageSize, setPageSize] = React.useState<number>(100);
   const [search, setSearch] = React.useState<ISearch>({
     services: [],
     statuses: [],

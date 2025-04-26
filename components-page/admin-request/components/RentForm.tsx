@@ -102,7 +102,7 @@ const RentForm: React.FC<IRentFormProps> = ({
     { id: RequestStatus.Cancel, value: "Huỷ" },
     { id: RequestStatus.Timeout, value: "Hết hạn" },
     { id: RequestStatus.Success, value: "Thành công" },
-    { id: RequestStatus.Created, value: "Dã tạo" },
+    { id: RequestStatus.Created, value: "Đã tạo" },
   ];
 
   const formSchema = z
@@ -395,7 +395,7 @@ const RentForm: React.FC<IRentFormProps> = ({
             name="partnerNames"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Lọc đối tác</FormLabel>
+                <FormLabel>Đối tác</FormLabel>
                 <Select
                   onValueChange={(event) => {
                     const arrays = form.getValues("partnerNames");
@@ -417,7 +417,7 @@ const RentForm: React.FC<IRentFormProps> = ({
                         {field.value.length === 1
                           ? listPartners.find(
                               (item) => item.name === field.value[0]
-                            )?.value
+                            )?.name
                           : `${field.value.length} ${t("selected")}`}
                       </SelectValue>
                     </SelectTrigger>

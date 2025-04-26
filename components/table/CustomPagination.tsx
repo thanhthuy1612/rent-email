@@ -32,7 +32,7 @@ const CustomPagination: React.FC<Props> = ({
   setPageNumber,
 }) => {
   const t = useTranslations();
-  const rows = [10, 20, 50];
+  const rows = [10, 20, 50, 100, 200, 500, 1000];
   const totalPages = Math.ceil(total / pageSize);
 
   const handlePageChange = (page: number) => {
