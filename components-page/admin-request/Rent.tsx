@@ -24,6 +24,7 @@ export interface ISearch {
   services: string[];
   statuses: number[];
   userIds: string[];
+  partnerNames: string[];
 }
 
 export interface IData {
@@ -54,6 +55,7 @@ const AdminRequest: React.FC = () => {
     services: [],
     statuses: [],
     userIds: [],
+    partnerNames: [],
   });
   const [res, setRes] = React.useState<any>();
 
@@ -71,6 +73,7 @@ const AdminRequest: React.FC = () => {
         statuses: search.statuses,
         dateAsc: isDateAsc,
         userIds: search.userIds,
+        partnerNames: search.partnerNames
       };
       const res = await managerService.getRequest(newBody);
       if (!res.code) {
@@ -245,6 +248,22 @@ const AdminRequest: React.FC = () => {
     }
   }, []);
 
+  const [listPartnerNames, setListPartnerNames] = React.useState<{ name: string }[]>([]);
+  const fetchPartnerNames = useCallback(async () => {
+    try {
+      const res = await managerService.getPartner();
+      if (res && res.data) {
+        setListPartnerNames(
+          res.data.map((partner: any) => ({
+            name: partner.name,
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch partner:", error);
+    }
+  }, []);
+
   React.useEffect(() => {
     resetPage();
   }, [pageSize]);
@@ -256,6 +275,7 @@ const AdminRequest: React.FC = () => {
   React.useEffect(() => {
     fetchData();
     fetchServices();
+    fetchPartnerNames();
   }, []);
 
   return (
@@ -287,6 +307,7 @@ const AdminRequest: React.FC = () => {
           value={search}
           handleSubmit={submitData}
           listServices={listServices}
+          listPartners={listPartnerNames}
         />
       </Card>
       <Card className="p-5 mb-8">

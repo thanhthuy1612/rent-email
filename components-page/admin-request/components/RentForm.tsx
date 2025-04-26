@@ -40,6 +40,7 @@ export interface IRentFormProps {
   value: ISearch;
   handleSubmit: (value: ISearch) => void;
   listServices: any[];
+  listPartners: any[];
 }
 
 export interface IUser {
@@ -63,6 +64,7 @@ const RentForm: React.FC<IRentFormProps> = ({
   value,
   handleSubmit,
   listServices,
+  listPartners,
 }) => {
   const [users, setUser] = React.useState<IUser[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -120,6 +122,7 @@ const RentForm: React.FC<IRentFormProps> = ({
       services: z.array(z.string()),
       statuses: z.array(z.number()),
       userIds: z.array(z.string()),
+      partnerNames: z.array(z.string()),
     })
     .superRefine((data, ctx) => {
       if (data.dateTo && data.dateFrom && data.dateTo < data.dateFrom) {
@@ -139,6 +142,7 @@ const RentForm: React.FC<IRentFormProps> = ({
       services: value.services,
       statuses: value.statuses,
       userIds: value.userIds,
+      partnerNames: value.partnerNames,
     },
   });
 
@@ -160,6 +164,7 @@ const RentForm: React.FC<IRentFormProps> = ({
         services: values.services,
         statuses: values.statuses,
         userIds: values.userIds,
+        partnerNames: values.partnerNames,
       });
     } catch (error) {
       console.error(error);
@@ -168,7 +173,7 @@ const RentForm: React.FC<IRentFormProps> = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <FormField
             control={form.control}
             name="dateFrom"
@@ -296,6 +301,8 @@ const RentForm: React.FC<IRentFormProps> = ({
               </FormItem>
             )}
           />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           <FormField
             control={form.control}
             name="statuses"
@@ -375,6 +382,51 @@ const RentForm: React.FC<IRentFormProps> = ({
                       <SelectItem key={item.id} value={item.id.toString()}>
                         <Checkbox checked={field.value.includes(item.id)} />
                         {item.userName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="partnerNames"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Lọc đối tác</FormLabel>
+                <Select
+                  onValueChange={(event) => {
+                    const arrays = form.getValues("partnerNames");
+                    if (arrays.includes(event)) {
+                      form.setValue(
+                        "partnerNames",
+                        arrays.filter((item) => item !== event)
+                      );
+                    } else {
+                      form.setValue("partnerNames", [...arrays, event]);
+                    }
+                  }}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue
+                        placeholder="Chọn đối tác"
+                      >
+                        {field.value.length === 1
+                          ? listPartners.find(
+                              (item) => item.name === field.value[0]
+                            )?.value
+                          : `${field.value.length} ${t("selected")}`}
+                      </SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {listPartners.map((item) => (
+                      <SelectItem key={item.name} value={item.name}>
+                        <Checkbox checked={field.value.includes(item.name)} />
+                        {item.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
