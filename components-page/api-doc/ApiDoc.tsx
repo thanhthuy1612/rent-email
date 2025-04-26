@@ -6,7 +6,7 @@ import ApiDocItem from "./components/ApiDocItem";
 const ApiDoc: React.FC = () => {
   const listApi2 = [
     {
-      header: "Danh sách email mới",
+      header: "Thuê email mới",
       description: "",
       url: "https://ch-otp.top:50521/api/v1/key/request/get-new-email",
       success: `{
@@ -36,7 +36,7 @@ const ApiDoc: React.FC = () => {
       type: "POST",
     },
     {
-      header: "Thuê email",
+      header: "Lấy code",
       description:
         "Lưu ý: Code không tự đồng bộ từ email về. Bạn cần gọi API này nếu chưa nhận được code (đối với các email có trạng thái là Created). Nếu sau 1 tiếng vẫn chưa nhận code, hệ thống sẽ tự quét lần cuối, nếu không có code thì request sẽ timeout và hoàn tiền.",
       url: "https://ch-otp.top:50521/api/v1/key/request/get-email-code",
@@ -65,7 +65,7 @@ const ApiDoc: React.FC = () => {
       type: "POST",
     },
     {
-      header: "Lịch sử",
+      header: "Lịch sử thuê email",
       description: "",
       url: "https://ch-otp.top:50521/api/v1/key/request/get-history",
       success: `{
@@ -123,7 +123,7 @@ const ApiDoc: React.FC = () => {
       type: "POST",
     },
     {
-      header: "Số dư",
+      header: "Kiểm tra số dư",
       description: "",
       url: "https://ch-otp.top:50521/api/v1/key/user/balance",
       success: `{
@@ -142,7 +142,7 @@ const ApiDoc: React.FC = () => {
       type: "POST",
     },
     {
-      header: "Danh sách dịch vụ người dùng",
+      header: "Danh sách dịch vụ",
       description: "",
       url: "https://ch-otp.top:50521/api/v1/key/service/active-services",
       success: `{
@@ -172,7 +172,7 @@ const ApiDoc: React.FC = () => {
       type: "POST",
     },
     {
-      header: "Lich sử giao dịch",
+      header: "Lịch sử nạp",
       description: "",
       url: "https://ch-otp.top:50521/api/v1/key/transaction/get-history",
       success: `{

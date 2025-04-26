@@ -157,21 +157,21 @@ const Rent: React.FC = () => {
       accessorKey: "serviceName",
       header: "Dịch vụ",
     },
-    {
-      accessorKey: "originalPrice",
-      header: "Giá",
-      cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
-    },
+    // {
+    //   accessorKey: "originalPrice",
+    //   header: "Giá",
+    //   cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
+    // },
     // {
     //   accessorKey: "discount",
     //   header: "Giảm giá",
     //   cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     // },
-    // {
-    //   accessorKey: "finalPrice",
-    //   header: "Giá cuối",
-    //   cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
-    // },
+    {
+      accessorKey: "finalPrice",
+      header: "Giá",
+      cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
+    },
     {
       accessorKey: "code",
       header: "Code",

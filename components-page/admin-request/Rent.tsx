@@ -152,21 +152,21 @@ const AdminRequest: React.FC = () => {
       accessorKey: "serviceName",
       header: t("adminRequest.service"),
     },
-    {
-      accessorKey: "originalPrice",
-      header: t("adminRequest.price"),
-      cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
-    },
+    // {
+    //   accessorKey: "originalPrice",
+    //   header: t("adminRequest.price"),
+    //   cell: ({ row }) => <>{fNumber(row.getValue("originalPrice"), "vn")}</>,
+    // },
     // {
     //   accessorKey: "discount",
     //   header: t("adminRequest.discount"),
     //   cell: ({ row }) => <>{fNumber(row.getValue("discount"), "vn")}</>,
     // },
-    // {
-    //   accessorKey: "finalPrice",
-    //   header: t("adminRequest.finalPrice"),
-    //   cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
-    // },
+    {
+      accessorKey: "finalPrice",
+      header: "Giá",
+      cell: ({ row }) => <>{fNumber(row.getValue("finalPrice"), "vn")}</>,
+    },
     {
       accessorKey: "code",
       header: "Code",
