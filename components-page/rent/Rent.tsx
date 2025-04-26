@@ -57,6 +57,7 @@ const Rent: React.FC = () => {
     services: [],
     statuses: [],
   });
+  const [res, setRes] = React.useState<any>();
 
   const intervalIdRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -92,6 +93,7 @@ const Rent: React.FC = () => {
       if (!res.code) {
         setData(res.data.data);
         setTotal(res.data.total);
+        setRes(res.data);
       } else {
         toast({
           title: t("alert.error"),
