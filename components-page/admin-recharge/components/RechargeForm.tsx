@@ -165,7 +165,7 @@ const RechargeForm: React.FC<IRechargeFormProps> = ({
             name="dateTo"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>{t("recharge.fromDate")}</FormLabel>
+                <FormLabel>{t("recharge.toDate")}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
