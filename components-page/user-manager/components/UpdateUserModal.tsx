@@ -24,6 +24,8 @@ import {
 
 export interface IUpdateUserModalProps {
   userId: string;
+  userStatus: string,
+  userMaxEmail1H: number,
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void;
