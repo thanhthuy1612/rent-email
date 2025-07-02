@@ -23,7 +23,7 @@
     "discount": "Giảm giá",
     "description": "Mô tả",
     "partnerName": "Partner Name",
-    "isDeleted": "Is Deleted"
+    "isDeleted": "Dừng dịch vụ"
   },
   "login": {
     "title": "Đăng nhập",
@@ -257,6 +257,7 @@
     "creditBalance": "Số dư tín dụng",
     "debitBalance": "Số dư ghi nợ",
     "setStatus": "Đặt trạng thái",
+    "maxEmail1H": "Số email tối đa 1h",
     "submit": "Gửi"
   },
   "status": {

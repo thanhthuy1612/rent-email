@@ -31,6 +31,8 @@ export interface IUpdateUserModalProps {
 
 const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
   userId,
+  userStatus,
+  userMaxEmail1H,
   isOpen,
   onClose,
   onSubmit,
@@ -42,6 +44,7 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
     creditBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
     debitBalance: z.coerce.number().min(0, t("validation.min", { min: 0 })),
     setStatus: z.enum(["-1", "1"]),
+    maxEmail1H: z.coerce.number().min(0, t("validation.min", { min: 0 })),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,7 +53,8 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
       setPassword: "",
       creditBalance: 0,
       debitBalance: 0,
-      setStatus: "1",
+      setStatus: userStatus,
+      maxEmail1H: userMaxEmail1H,
     },
   });
 
@@ -110,6 +114,19 @@ const UpdateUserModal: React.FC<IUpdateUserModalProps> = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("updateUser.debitBalance")}</FormLabel>
+                  <FormControl>
+                    <Input type="number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="maxEmail1H"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("updateUser.maxEmail1H")}</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>

@@ -144,6 +144,8 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
       {selectedUser && (
         <UpdateUserModal
           userId={selectedUser.id}
+          userStatus={selectedUser.status === 'Active' ? '1' : '-1'}
+          userMaxEmail1H={selectedUser.maxEmail1H < 0 ? 0 : selectedUser.maxEmail1H}
           isOpen={isModalOpen}
           onClose={handleModalClose}
           onSubmit={handleModalSubmit}

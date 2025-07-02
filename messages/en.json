@@ -257,6 +257,7 @@
     "creditBalance": "Credit Balance",
     "debitBalance": "Debit Balance",
     "setStatus": "Set Status",
+    "maxEmail1H": "Max email in 1h",
     "submit": "Submit"
   },
   "status": {
