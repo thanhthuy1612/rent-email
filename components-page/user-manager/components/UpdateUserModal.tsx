@@ -24,7 +24,7 @@ import {
 
 export interface IUpdateUserModalProps {
   userId: string;
-  userStatus: string,
+  userStatus: '1' | '-1',
   userMaxEmail1H: number,
   isOpen: boolean;
   onClose: () => void;

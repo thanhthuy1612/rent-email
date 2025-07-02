@@ -15,6 +15,7 @@ interface User {
   apiToken: string;
   scopes: string;
   status: string;
+  maxEmail1H: number;
   creationDate: string;
   modificationDate: string;
   isDeleted: boolean;

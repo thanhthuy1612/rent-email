@@ -19,6 +19,7 @@ interface User {
   apiToken: string;
   scopes: string;
   status: string;
+  maxEmail1H: number;
   creationDate: string;
   modificationDate: string;
   isDeleted: boolean;
@@ -99,6 +100,10 @@ const ManagerUserTable: React.FC<ManagerUserTableProps> = ({
     {
       accessorKey: "scopes",
       header: t("global.scopes"),
+    },
+    {
+      accessorKey: "maxEmail1H",
+      header: t("updateUser.maxEmail1H"),
     },
     {
       accessorKey: "status",
